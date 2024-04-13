@@ -11,10 +11,9 @@ out Data {
 	vec3 tangent;
 } DataOut;
 
-void main()
-{
+void main() {
+
 	DataOut.normal = normal;
-	// DataOut.texCoord = texCoord;
 	DataOut.tangent = tangent;
 	gl_Position = position;
 } 

@@ -11,7 +11,7 @@
         
         <viewports>
             <viewport name="MainViewport" >
-                <CLEAR_COLOR r="0.9" b = "0.9" g = "0.9" />
+                <CLEAR_COLOR r="0" b = "0" g = "0" />
             </viewport>
         </viewports>
 
@@ -20,7 +20,7 @@
                 <viewport name="MainViewport" />
                 <POSITION x="0.402" y="0.974" z="1.341" />
                 <LOOK_AT_POINT x="0" y="0" z="0" />
-                <NEAR value="0.01" />
+                <NEAR value="0.0001" />
             </camera>
         </cameras>
 

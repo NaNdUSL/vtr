@@ -1,95 +1,68 @@
 # Function to generate a squared mesh of cloth
 def generate_cloth_mesh(size):
 
-	vert_front = []
-	vert_back = []
-	faces = []
-	tangents = []
+	vertices = []
+	tang_front = []
+	tang_back = []
+	faces_front = []
+	faces_back = []
 
 	# Generate vertices
-	for x in range(size):
+	for z in range(size):
 
-		for z in range(size):
+		for x in range(size):
 
-			vert_front.append([x, 0, z])
-			vert_back.append([x, 0, z])
+			vertices.append([x, 0, z])
+
+			# tang_front.append([1, 0, 0])
+			# tang_back.append([-1, 0, 0])
 	
-	vertices = vert_front + vert_back
+	vertices = vertices + vertices
+	normals = [[0, 1, 0], [0, -1, 0]]
+	tangents = tang_front + tang_back
 
 	# Generate faces and tangents
 	for x in range(size-1):
 
 		for z in range(size-1):
 
-			v1 = x * size + z
-			v2 = x * size + z + 1
-			v3 = (x + 1) * size + z
-			v4 = (x + 1) * size + z + 1
+			v1 = z * size + x
+			v2 = z * size + x + 1
+			v3 = (z + 1) * size + x
+			v4 = (z + 1) * size + x + 1
 
-			vert_front.append
+			faces_front.append([v1, v3, v2])
+			faces_front.append([v2, v3, v4])
 
-			normals.append([0, 1, 0])
-			faces.append([v1, v2, v3])
-			faces.append([v2, v4, v3])
-			faces.append([v3, v2, v1])
-			faces.append([v3, v4, v2])
+	for x in range(size-1):
 
-			normals.append([0, 1, 0])
+		for z in range(size - 1):
 
-			# Calculate tangents
-			deltaPos1 = [vertices[v2][i] - vertices[v1][i] for i in range(3)]
-			deltaPos2 = [vertices[v3][i] - vertices[v1][i] for i in range(3)]
-			deltaUV1 = [1, 0]  # Assuming horizontal texture mapping
-			deltaUV2 = [0, 1]  # Assuming vertical texture mapping
+			v1 = z * size + x
+			v2 = z * size + x + 1
+			v3 = (z + 1) * size + x
+			v4 = (z + 1) * size + x + 1
 
-			r = 1.0 / (deltaUV1[0] * deltaUV2[1] - deltaUV1[1] * deltaUV2[0])
-			tangent = [(deltaPos1[0] * deltaUV2[1] - deltaPos2[0] * deltaUV1[1]) * r,
-					   (deltaPos1[1] * deltaUV2[1] - deltaPos2[1] * deltaUV1[1]) * r,
-					   (deltaPos1[2] * deltaUV2[1] - deltaPos2[2] * deltaUV1[1]) * r]
-			tangents.append(tangent)
+			faces_back.append([v1 + size * 2, v2 + size * 2, v3 + size * 2])
+			faces_back.append([v2 + size * 2, v4 + size * 2, v3 + size * 2])
 
-		for x in range(size-1):
-			for z in range(size-1):
-				v1 = x*size + z
-				v2 = x*size + z + 1
-				v3 = (x+1)*size + z
-				v4 = (x+1)*size + z + 1
-
-				faces.append([v1, v2, v3])
-				faces.append([v2, v4, v3])
-				faces.append([v3, v2, v1])
-				faces.append([v3, v4, v2])
-
-				normals.append([0, 1, 0])
-				normals.append([0, 1, 0])
-
-				# Calculate tangents
-				deltaPos1 = [vertices[v2][i] - vertices[v1][i] for i in range(3)]
-				deltaPos2 = [vertices[v3][i] - vertices[v1][i] for i in range(3)]
-				deltaUV1 = [1, 0]  # Assuming horizontal texture mapping
-				deltaUV2 = [0, 1]  # Assuming vertical texture mapping
-
-				r = 1.0 / (deltaUV1[0] * deltaUV2[1] - deltaUV1[1] * deltaUV2[0])
-				tangent = [(deltaPos1[0] * deltaUV2[1] - deltaPos2[0] * deltaUV1[1]) * r,
-						(deltaPos1[1] * deltaUV2[1] - deltaPos2[1] * deltaUV1[1]) * r,
-						(deltaPos1[2] * deltaUV2[1] - deltaPos2[2] * deltaUV1[1]) * r]
-				tangents.append(tangent)
-
-	return vertices, faces, normals, tangents
+	return vertices, faces_front, faces_back, normals, tangents
 
 # Function to write a .obj file
-def write_obj_file(vertices, faces, normals, tangents, filepath):
+def write_obj_file(vertices, faces_front, faces_back, normals, tangents, filepath):
 	with open(filepath, 'w') as f:
 		for v in vertices:
-			f.write(f"v {v[0]} {v[1]} {v[2]}\n")
+			f.write(f"v {v[0]}.0 {v[1]}.0 {v[2]}.0\n")
 		for tan in tangents:
-			f.write(f"vt {tan[0]} {tan[1]} {tan[2]}\n")
+			f.write(f"vt {tan[0]}.0 {tan[1]}.0 {tan[2]}.0\n")
 		for norm in normals:
-			f.write(f"vn {norm[0]+1} {norm[1]+1} {norm[2]+1}\n")
-		for face in faces:
-			f.write(f"f {face[0]+1} {face[1]+1} {face[2]+1}\n")
+			f.write(f"vn {norm[0]}.0 {norm[1]}.0 {norm[2]}.0\n")
+		for face in faces_front:
+			f.write(f"f {face[0]+1}//0 {face[1]+1}//0 {face[2]+1}//0\n")
+		for face in faces_back:
+			f.write(f"f {face[0]+1}//1 {face[1]+1}//1 {face[2]+1}//1\n")
 
 # Generate cloth mesh and write .obj file
-size = 10
-vertices, faces, normals, tangents = generate_cloth_mesh(size)
-write_obj_file(vertices, faces, normals, tangents, 'cloth.obj')
+size = 3
+vertices, faces_front, faces_back, normals, tangents = generate_cloth_mesh(size)
+write_obj_file(vertices, faces_front, faces_back, normals, tangents, 'cloth.obj')

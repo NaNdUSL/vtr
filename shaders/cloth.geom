@@ -1,7 +1,7 @@
 #version 420
 
 layout(triangles) in;
-layout (line_strip, max_vertices=12) out;
+layout (line_strip, max_vertices=6) out;
 
 uniform mat4 m_pvm;
 
@@ -25,18 +25,20 @@ void main() {
         EmitVertex();
         gl_Position = m_pvm * (pos + vec4(normalize(DataIn[i].normal), 0.0) * 0.1);
         EmitVertex();
-
-		color = vec4(1.0, 0.0, 0.0, 1.0);
-        gl_Position = m_pvm * pos;
-        EmitVertex();
-        gl_Position = m_pvm * (pos + vec4(normalize(DataIn[i].tangent), 0.0) * 0.1);
-        EmitVertex();
-
-		color = vec4(0.0, 0.0, 1.0, 1.0);
-        gl_Position = m_pvm * pos;
-        EmitVertex();
-        gl_Position = m_pvm * (pos + vec4(normalize(b), 0.0) * 0.1);
-        EmitVertex();
         EndPrimitive();
+
+		// color = vec4(1.0, 0.0, 0.0, 1.0);
+        // gl_Position = m_pvm * pos;
+        // EmitVertex();
+        // gl_Position = m_pvm * (pos + vec4(normalize(DataIn[i].tangent), 0.0) * 0.1);
+        // EmitVertex();
+        // EndPrimitive();
+
+		// color = vec4(0.0, 0.0, 1.0, 1.0);
+        // gl_Position = m_pvm * pos;
+        // EmitVertex();
+        // gl_Position = m_pvm * (pos + vec4(normalize(b), 0.0) * 0.1);
+        // EmitVertex();
+        // EndPrimitive();
     }
 }
