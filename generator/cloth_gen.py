@@ -2,8 +2,8 @@
 def generate_cloth_mesh(size):
 
 	vertices = []
-	tang_front = []
-	tang_back = []
+	tex_coords_front = []
+	tex_coords_back = []
 	faces_front = []
 	faces_back = []
 
@@ -14,14 +14,13 @@ def generate_cloth_mesh(size):
 
 			vertices.append([x, 0, z])
 
-			# tang_front.append([1, 0, 0])
-			# tang_back.append([-1, 0, 0])
+			tex_coords_front.append([x / (size - 1), z / (size - 1)])
 	
 	vertices = vertices + vertices
 	normals = [[0, 1, 0], [0, -1, 0]]
-	tangents = tang_front + tang_back
+	tex_coords = tex_coords_front + tex_coords_front
 
-	# Generate faces and tangents
+	# Generate faces
 	for z in range(size - 1):
 
 		for x in range(size - 1):
@@ -46,23 +45,23 @@ def generate_cloth_mesh(size):
 			faces_back.append([v1 + size * size, v2 + size * size, v3 + size * size])
 			faces_back.append([v2 + size * size, v4 + size * size, v3 + size * size])
 
-	return vertices, faces_front, faces_back, normals, tangents
+	return vertices, faces_front, faces_back, normals, tex_coords
 
 # Function to write a .obj file
-def write_obj_file(vertices, faces_front, faces_back, normals, tangents, filepath):
+def write_obj_file(vertices, faces_front, faces_back, normals, tex_coords, filepath):
 	with open(filepath, 'w') as f:
 		for v in vertices:
 			f.write(f"v {v[0]}.0 {v[1]}.0 {v[2]}.0\n")
-		for tan in tangents:
-			f.write(f"vt {tan[0]}.0 {tan[1]}.0 {tan[2]}.0\n")
+		for tex in tex_coords:
+			f.write(f"vt {tex[0]} {tex[1]}\n")
 		for norm in normals:
 			f.write(f"vn {norm[0]}.0 {norm[1]}.0 {norm[2]}.0\n")
 		for face in faces_front:
-			f.write(f"f {face[0]+1}//1 {face[1]+1}//1 {face[2]+1}//1\n")
+			f.write(f"f {face[0]+1}/{face[0]+1}/1 {face[1]+1}/{face[1]+1}/1 {face[2]+1}/{face[2]+1}/1\n")
 		for face in faces_back:
-			f.write(f"f {face[0]+1}//2 {face[1]+1}//2 {face[2]+1}//2\n")
+			f.write(f"f {face[0]+1}/{face[0]+1}/2 {face[1]+1}/{face[1]+1}/2 {face[2]+1}/{face[2]+1}/2\n")
 
 # Generate cloth mesh and write .obj file
-size = 2
-vertices, faces_front, faces_back, normals, tangents = generate_cloth_mesh(size)
-write_obj_file(vertices, faces_front, faces_back, normals, tangents, 'cloth.obj')
+size = 5
+vertices, faces_front, faces_back, normals, tex_coords = generate_cloth_mesh(size)
+write_obj_file(vertices, faces_front, faces_back, normals, tex_coords, 'cloth.obj')
