@@ -63,6 +63,6 @@ def write_obj_file(vertices, faces_front, faces_back, normals, tangents, filepat
 			f.write(f"f {face[0]+1}//2 {face[1]+1}//2 {face[2]+1}//2\n")
 
 # Generate cloth mesh and write .obj file
-size = 10
+size = 2
 vertices, faces_front, faces_back, normals, tangents = generate_cloth_mesh(size)
 write_obj_file(vertices, faces_front, faces_back, normals, tangents, 'cloth.obj')
