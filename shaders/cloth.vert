@@ -15,6 +15,14 @@ out vec3 n; // normal in camera space
 void main() {
 
     n = normalize(m_normal * normal);
-    vec4 p = position + vec4(0, - timer * 0.000005, 0, 0);
-    gl_Position = m_pvm * p;
+    
+    if (position == vec4(0.0, 0, 0.0, 1) || position == vec4(0.0, 0, 9.0, 1)) {
+        
+        gl_Position = m_pvm * position;
+    }
+    else {
+
+        vec4 p = position + vec4(0, - timer * 0.000001, 0, 0);
+        gl_Position = m_pvm * p;
+    }
 }

@@ -1,42 +1,48 @@
 <?xml version="1.0" ?>
 <project name="Cloth" >
-
+    
     <assets>
-
-		<scenes>
-			<scene name="Cloth" param="UNITIZE">
-				<file name="cloth.obj"/>
-			</scene>
-		</scenes>        
+        
+        <scenes>
+            <scene name="Cloth">
+                <file name="cloth.obj"/>
+            </scene>
+            <scene name="Axis">
+                <geometry name = "axis" type = "AXIS"  >
+                    <SCALE x="5" y="5" z ="5" />
+                </geometry>
+            </scene>
+        </scenes>
         
         <viewports>
             <viewport name="MainViewport" >
                 <CLEAR_COLOR r="0" b = "0" g = "0" />
             </viewport>
         </viewports>
-
+        
         <cameras>
             <camera name="main" >
                 <viewport name="MainViewport" />
                 <POSITION x="0.402" y="0.974" z="1.341" />
                 <LOOK_AT_POINT x="0" y="0" z="0" />
+                <FOV value="100"/>
                 <NEAR value="0.01" />
             </camera>
         </cameras>
-
+        
         <lights>
             <light name="sun" >
                 <DIRECTION x="-5" y="-5" z = "-5" />
             </light>
-
+            
             <light name="lamp" >
                 <POSITION x="0" y="2" z = "0" />
                 <SPOT_DIRECTION x="0" y="-1" z="0" />
                 <SPOT_CUTOFF value="0.8" />
             </light>
-
+            
         </lights>
-    
+        
         <materialLibs>
             <materialLib filename="cloth.mlib" />
         </materialLibs>
@@ -57,27 +63,39 @@
                     </map>
                 </injectionMaps>
             </pass>
+            
+            <pass name="draw normals" class="default">
+                <COLOR_CLEAR value="false" />
+                <DEPTH_CLEAR value="false" />
+                <scenes>
+                    <scene name="Cloth" />
+                </scenes>
+                <camera name="main" />
+                <lights>
+                    <light name="sun" />
+                </lights>
+                <injectionMaps>
+                    <map toMaterial="*">
+                        <shader fromMaterial="draw_normals" fromLibrary="cloth" />
+                    </map>
+                </injectionMaps>
+            </pass>
 
             <pass name="draw normals" class="default">
-				<COLOR_CLEAR value="false" />
-				<DEPTH_CLEAR value="false" />
-				<scenes>
-					<scene name="Cloth" />
-				</scenes>
-				<camera name="main" />
-				<lights>
-					<light name="sun" />
-				</lights>
-				<injectionMaps>
-					<map toMaterial="*">
-						<shader fromMaterial="draw_normals" fromLibrary="cloth" />
-					</map>
-				</injectionMaps>
-			</pass>
+                <COLOR_CLEAR value="false" />
+                <DEPTH_CLEAR value="false" />
+                <scenes>
+                    <scene name="Axis" />
+                </scenes>
+                <camera name="main" />
+                <!-- <lights>
+                    <light name="sun" />
+                </lights> -->
+            </pass>
         </pipeline>
-
+        
     </pipelines>
-
+    
     <!-- <interface>
         <window label="Toon Effect">
             <pipelineList label="Mode" />
