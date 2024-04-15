@@ -1,47 +1,39 @@
 <?xml version="1.0" ?>
 <materialLib name="cloth" >
-
+    
     <shaders>
-        <shader name="lighting" 
-                        vs="shaders/lighting.vert"
-                        ps="shaders/lighting.frag" />
-
         <shader name="cloth" 
-                        vs="shaders/cloth.vert"
-                        gs="shaders/cloth.geom"
-                        ps="shaders/cloth.frag" />
+            vs="shaders/cloth.vert"
+            ps="shaders/cloth.frag" />
+        
+        <shader name="draw_normals" 
+            vs="shaders/draw_normals.vert"
+            gs="shaders/draw_normals.geom"
+            ps="shaders/draw_normals.frag" />
     </shaders>
-
+    
     <materials>
-        <material name="lighting" >
-            <shader name="lighting" >
+        <material name="cloth" >
+            <shader name="cloth" >
                 <values>
-                    <valueof uniform="l_dir" type="LIGHT"
-                            component="DIRECTION" id="0" />
-                    <valueof uniform="m_pvm" type="RENDERER"
-                            component="PROJECTION_VIEW_MODEL" />
-                    <valueof uniform="diffuse" type="COLOR"
-                            component = "DIFFUSE" />
-                    <valueof uniform="m_normal" type="RENDERER"
-                            component = "NORMAL" />
-                    <valueof uniform="m_view" type="RENDERER"
-                            component="VIEW" />
+                    <valueof uniform="timer" type="RENDERER" component="TIMER" />
+                    <valueof uniform="l_dir" type="LIGHT" component="DIRECTION" id="0" />
+                    <valueof uniform="m_pvm" type="RENDERER" component="PROJECTION_VIEW_MODEL" />
+                    <valueof uniform="diffuse" type="COLOR" component = "DIFFUSE" />
+                    <valueof uniform="m_normal" type="RENDERER" component = "NORMAL" />
+                    <valueof uniform="m_view" type="RENDERER" component="VIEW" />
                 </values>
             </shader>
         </material>
-
-        <material name="shine">
-            <color>
-                <SHININESS value="128" />
-            </color>
-        </material>
-
-        <material name="cloth">
-            <shader name="cloth" >
+        
+        <material name="draw_normals">
+            <shader name="draw_normals" >
                 <values>
+                    <valueof uniform="timer" type="RENDERER" component="TIMER" />
                     <valueof uniform="m_pvm" type="RENDERER" component="PROJECTION_VIEW_MODEL" />
                 </values>
             </shader>
         </material>
-  </materials>
-</materialLib>
+        </materials>
+    </materialLib>
+    

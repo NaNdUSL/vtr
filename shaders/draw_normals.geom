@@ -7,7 +7,6 @@ uniform mat4 m_pvm;
 
 in Data {
     vec3 normal;
-	// vec2 texCoord;
 	vec3 tangent;
 } DataIn[3];
 
