@@ -1,28 +1,28 @@
-#version 460
+#version 420
 
-// uniforms
-uniform mat4 m_pvm;
-uniform mat3 m_normal;
-uniform float timer;
+in vec4 position; // local space
+in vec3 normal; // local space
+in vec3 tangent; // local space
+// in vec2 texCoord;
 
-// input streams - local space
-in vec4 position;
-in vec3 normal;
+out Data {
 
-//output
-out vec3 n; // normal in camera space
+    // forces related variables
+    // vec3 gravity;
+    float M; // mass
+
+    // variables
+	vec3 normal; // local
+	vec3 tangent; // local
+
+} DataOut;
+
 
 void main() {
 
-    n = normalize(m_normal * normal);
-    
-    if (position == vec4(0.0, 0, 0.0, 1) || position == vec4(0.0, 0, 9.0, 1)) {
-        
-        gl_Position = m_pvm * position;
-    }
-    else {
-
-        vec4 p = position + vec4(0, - timer * 0.000001, 0, 0);
-        gl_Position = m_pvm * p;
-    }
+	DataOut.normal = normal;
+	DataOut.tangent = tangent;
+    DataOut.M = 0.23;
+    // DataOut.gravity = DataOut.M * vec3(0.0, -9.8, 0.0);
+    gl_Position = position;
 }

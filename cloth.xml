@@ -81,7 +81,7 @@
                 </injectionMaps>
             </pass>
 
-            <pass name="draw normals" class="default">
+            <pass name="axis" class="default">
                 <COLOR_CLEAR value="false" />
                 <DEPTH_CLEAR value="false" />
                 <scenes>

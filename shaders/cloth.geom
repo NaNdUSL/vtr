@@ -1,9 +1,10 @@
 #version 420
 
 layout(triangles) in;
-layout (line_strip, max_vertices=6) out;
+layout (triangle_strip, max_vertices=3) out;
 
 uniform mat4 m_pvm;
+uniform mat3 m_normal;
 uniform float timer;
 
 in Data {
@@ -15,9 +16,10 @@ in Data {
     // variables
 	vec3 normal; // local
 	vec3 tangent; // local
+
 } DataIn[3];
 
-out vec4 color;
+out vec3 n;
 
 vec4 calculate_position(vec4 position, float Mass, float time_interval, vec3 forces[1], int size) {
 
@@ -39,11 +41,6 @@ void main() {
     float time_interval = timer * 0.0001;
     
     vec4 triangle_vert[3];
-    
-    for (int i = 0; i  < 3; i++) {
-            
-            triangle_vert[i] = gl_in[i].gl_Position;
-    }
 
     vec3 forces[1];
     int size = 1;
@@ -52,42 +49,25 @@ void main() {
 
     for (int i = 0; i < 3; i++) {
 
-        if (triangle_vert[i] == vec4(0.0, 0.0, 0.0, 1) || triangle_vert[i] == vec4(0.0, 0, 9.0, 1)) {
+        if (gl_in[i].gl_Position == vec4(0.0, 0.0, 0.0, 1) || gl_in[i].gl_Position == vec4(0.0, 0, 9.0, 1)) {
         
-            triangle_vert[i] = triangle_vert[i];
+            triangle_vert[i] = gl_in[i].gl_Position;
         }
         else {
 
-            triangle_vert[i] = calculate_position(triangle_vert[i], DataIn[i].M, time_interval, forces, size);
-            gl_Position = triangle_vert[i];
+            triangle_vert[i] = calculate_position(gl_in[i].gl_Position, DataIn[i].M, time_interval, forces, size);
         }
     }
 
     vec3 edge1 = triangle_vert[1].xyz - triangle_vert[0].xyz;
     vec3 edge2 = triangle_vert[2].xyz - triangle_vert[0].xyz;
-    vec3 normal = normalize(cross(edge1, edge2));
+    vec3 nn = normalize(cross(edge1, edge2));
 
     for (int i = 0; i < 3; i++) {
 
-		color = vec4(0.0, 1.0, 0.0, 1.0);
         gl_Position = m_pvm * triangle_vert[i];
+        n = normalize(m_normal * nn);
         EmitVertex();
-        gl_Position = m_pvm * (triangle_vert[i] + vec4(normalize(normal), 0.0) * 0.1);
-        EmitVertex();
-        EndPrimitive();
     }
-
-    /*color = vec4(1.0, 0.0, 0.0, 1.0);
-    gl_Position = m_pvm * pos;
-    EmitVertex();
-    gl_Position = m_pvm * (pos + vec4(normalize(DataIn[i].tangent), 0.0) * 0.1);
-    EmitVertex();
     EndPrimitive();
-
-    color = vec4(0.0, 0.0, 1.0, 1.0);
-    gl_Position = m_pvm * pos;
-    EmitVertex();
-    gl_Position = m_pvm * (pos + vec4(normalize(b), 0.0) * 0.1);
-    EmitVertex();
-    EndPrimitive(); */
 }

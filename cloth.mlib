@@ -4,6 +4,7 @@
     <shaders>
         <shader name="cloth" 
             vs="shaders/cloth.vert"
+            gs="shaders/cloth.geom"
             ps="shaders/cloth.frag" />
         
         <shader name="draw_normals" 
@@ -31,6 +32,7 @@
                 <values>
                     <valueof uniform="timer" type="RENDERER" component="TIMER" />
                     <valueof uniform="m_pvm" type="RENDERER" component="PROJECTION_VIEW_MODEL" />
+                    <valueof uniform="m_normal" type="RENDERER" component = "NORMAL" />
                 </values>
             </shader>
         </material>
