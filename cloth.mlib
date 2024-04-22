@@ -2,7 +2,7 @@
 <materialLib name="cloth" >
     
     <shaders>
-        <shader name="cloth" 
+        <shader name="cloth"
             vs="shaders/cloth.vert"
             gs="shaders/cloth.geom"
             ps="shaders/cloth.frag" />
@@ -12,6 +12,16 @@
             gs="shaders/draw_normals.geom"
             ps="shaders/draw_normals.frag" />
     </shaders>
+
+    <buffers>
+        <buffer name="cloth">
+            <DIM x="" y="" z=""/>
+            <structures>
+                <field value="VEC4"/>
+            <structures/>
+            <file name="cloth_buffer_info.txt"/>
+        <buffer/>
+    </buffers>
     
     <materials>
         <material name="cloth" >

@@ -50,9 +50,9 @@ def generate_cloth_mesh(size):
 	return vertices, faces_front, faces_back, normals, tex_coords
 
 # Function to write a .obj file
-def write_obj_file(vertices, faces_front, faces_back, normals, tex_coords, filepath):
+def write_obj_file(vertices, faces_front, faces_back, normals, tex_coords, filepath_obj, filepath_buffer_info):
 
-	with open(filepath, 'w') as f:
+	with open(filepath_obj, 'w') as f:
 
 		for v in vertices:
 			f.write(f"v {v[0]}.0 {v[1]}.0 {v[2]}.0\n")
@@ -69,7 +69,13 @@ def write_obj_file(vertices, faces_front, faces_back, normals, tex_coords, filep
 		for face in faces_back:
 			f.write(f"f {face[0]+1}/{face[0]+1}/2 {face[1]+1}/{face[1]+1}/2 {face[2]+1}/{face[2]+1}/2\n")
 
+	with open(filepath_buffer_info, 'w') as f:
+
+		for v in vertices:
+
+			f.write(f"{v[0]}.0 {v[1]}.0 {v[2]}.0 1.0\n")
+
 # Generate cloth mesh and write .obj file
-size = 10
+size = 5
 vertices, faces_front, faces_back, normals, tex_coords = generate_cloth_mesh(size)
-write_obj_file(vertices, faces_front, faces_back, normals, tex_coords, 'cloth.obj')
+write_obj_file(vertices, faces_front, faces_back, normals, tex_coords, 'cloth.obj', 'cloth_buffer_info.txt')
