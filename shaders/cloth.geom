@@ -26,9 +26,9 @@ out vec3 n;
 
 vec3 hookes_law(vec3 p1, vec3 p2, int i, float stiffness, float edge_distance) {
 
-    vec3 v = p2 - p1; // vector from p1 to p2
+    vec3 v = p1 - p2; // vector from p1 to p2
     float l = length(v); // length of the vector
-    vec3 vec_dir = v; // normalized vector from p1 to p2 (direction)
+    vec3 vec_dir = normalize(v); // normalized vector from p1 to p2 (direction)
     vec3 x = (l - edge_distance) * vec_dir; // difference between the current length and the edge distance
     return - stiffness * x;
 }

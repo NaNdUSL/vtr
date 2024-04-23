@@ -50,9 +50,9 @@
     <pipelines>
         <pipeline name="cloth" >
             <pass name="cloth" class="default" >
-                <scenes>
+                <!-- <scenes>
                     <scene name="Cloth" />
-                </scenes>
+                </scenes> -->
                 <camera name="main" />
                 <lights>
                     <light name="sun" />

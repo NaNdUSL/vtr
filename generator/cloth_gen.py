@@ -1,11 +1,10 @@
-# note: texture coordinates are not correct, they are just a placeholder for now... they're just for making sure the shaders draw tangents and bitangents correctly 
+import xml.etree.ElementTree as ET
 
 # Function to generate a squared mesh of cloth
 def generate_cloth_mesh(size):
 
 	vertices = []
 	tex_coords_front = []
-	tex_coords_back = []
 	faces_front = []
 	faces_back = []
 
@@ -71,11 +70,24 @@ def write_obj_file(vertices, faces_front, faces_back, normals, tex_coords, filep
 
 	with open(filepath_buffer_info, 'w') as f:
 
+		elem_count = 0
+
 		for v in vertices:
 
-			f.write(f"{v[0]}.0 {v[1]}.0 {v[2]}.0 1.0\n")
+			f.write(f"({v[0]}.0,{v[1]}.0,{v[2]}.0,1.0) 0.33\n")
+			elem_count += 1
+
+		# Update the number of elements in the .mlib file
+
+		tree = ET.parse('cloth.mlib')
+		root = tree.getroot()
+		dim_element = root.find('.//DIM')
+		dim_element.set('x', str(elem_count))
+		dim_element.set('y', str(1))
+		dim_element.set('z', str(1))
+		tree.write('cloth.mlib')
 
 # Generate cloth mesh and write .obj file
-size = 5
+size = 2
 vertices, faces_front, faces_back, normals, tex_coords = generate_cloth_mesh(size)
 write_obj_file(vertices, faces_front, faces_back, normals, tex_coords, 'cloth.obj', 'cloth_buffer_info.txt')

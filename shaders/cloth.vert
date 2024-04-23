@@ -1,5 +1,9 @@
 #version 420
 
+layout(location = 2) buffer cloth_buffer {
+    float pos;
+};
+
 in vec4 position; // local space
 in vec3 normal; // local space
 in vec3 tangent; // local space
