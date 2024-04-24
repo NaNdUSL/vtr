@@ -1,36 +1,33 @@
-#version 420
+#version 430
 
-layout(location = 2) buffer cloth_buffer {
-    float pos;
+layout(std430, binding = 1) buffer clothBuffer {
+	vec4 pos[];
 };
 
-in vec4 position; // local space
-in vec3 normal; // local space
-in vec3 tangent; // local space
-// in vec2 texCoord;
 
-out Data {
+// out Data {
 
-    // forces related variables
-    // vec3 gravity;
-    float M; // mass
-    float stiffness; // string stiffness
-    float edge_distance;
+//     // forces related variables
+//     // vec3 gravity;
+//     float M; // mass
+//     float stiffness; // string stiffness
+//     float edge_distance;
 
-    // variables
-	vec3 normal; // local
-	vec3 tangent; // local
+//     // variables
+// 	vec3 normal; // local
+// 	vec3 tangent; // local
 
-} DataOut;
+// } DataOut;
 
 
 void main() {
 
-	DataOut.normal = normal;
-	DataOut.tangent = tangent;
-    DataOut.M = 0.23;
-    DataOut.stiffness = 0.5;
-    DataOut.edge_distance = 1.414;
+	// DataOut.normal = normal;
+	// DataOut.tangent = tangent;
+    // DataOut.M = pos[0].x;
+    // DataOut.stiffness = 0.5;
+    // DataOut.edge_distance = 1;
     // DataOut.gravity = DataOut.M * vec3(0.0, -9.8, 0.0);
-    gl_Position = position;
+    if (gl_VertexID == 1) gl_Position = vec4(1.0, 1.0, 1.0, 1.0);
+    else gl_Position = pos[gl_VertexID];
 }

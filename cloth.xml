@@ -49,19 +49,17 @@
     </assets>
     <pipelines>
         <pipeline name="cloth" >
-            <pass name="cloth" class="default" >
-                <!-- <scenes>
+            <pass name="cloth" class="default">
+                <scenes>
                     <scene name="Cloth" />
-                </scenes> -->
+                </scenes>
                 <camera name="main" />
                 <lights>
                     <light name="sun" />
                 </lights>
-                <injectionMaps>
-                    <map toMaterial="*">
-                        <shader fromMaterial ="cloth" fromLibrary="cloth" />
-                    </map>
-                </injectionMaps>
+                <materialMaps>
+                    <map fromMaterial="*" toMaterial="cloth" toLibrary="cloth" />
+                </materialMaps>
             </pass>
             
             <pass name="draw normals" class="default">
@@ -74,11 +72,9 @@
                 <lights>
                     <light name="sun" />
                 </lights>
-                <injectionMaps>
-                    <map toMaterial="*">
-                        <shader fromMaterial="draw_normals" fromLibrary="cloth" />
-                    </map>
-                </injectionMaps>
+                <materialMaps>
+                    <map fromMaterial="*" toMaterial="draw_normals" toLibrary="cloth" />
+                </materialMaps>
             </pass>
 
             <pass name="axis" class="default">

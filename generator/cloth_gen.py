@@ -74,7 +74,7 @@ def write_obj_file(vertices, faces_front, faces_back, normals, tex_coords, filep
 
 		for v in vertices:
 
-			f.write(f"({v[0]}.0,{v[1]}.0,{v[2]}.0,1.0) 0.33\n")
+			f.write(f"{v[0]}.0 {v[1]}.0 {v[2]}.0 1.0\n")
 			elem_count += 1
 
 		# Update the number of elements in the .mlib file
