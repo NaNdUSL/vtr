@@ -1,8 +1,8 @@
 #version 430
 
-// layout(std430, binding = 1) buffer clothBuffer {
-// 	float pos[];
-// };
+layout(std430, binding = 1) buffer clothBuffer {
+	vec4 pos[];
+};
 
 uniform mat4 m_pvm;
 
@@ -31,5 +31,7 @@ void main() {
     // DataOut.stiffness = 0.5;
     // DataOut.edge_distance = 1;
     // DataOut.gravity = DataOut.M * vec3(0.0, -9.8, 0.0);
-    gl_Position = m_pvm * position;
+    float index = position.y;
+    int i = int(index);
+    gl_Position = pos[i];
 }

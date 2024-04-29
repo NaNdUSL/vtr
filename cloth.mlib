@@ -1,7 +1,7 @@
 <materialLib name="cloth">
     
     <shaders>
-        <shader name="cloth" vs="shaders/cloth.vert" ps="shaders/cloth.frag" />
+        <shader name="cloth" vs="shaders/cloth.vert" gs="shaders/cloth.geom" ps="shaders/cloth.frag" />
         
         <shader name="draw_normals" vs="shaders/draw_normals.vert" gs="shaders/draw_normals.geom" ps="shaders/draw_normals.frag" />
     </shaders>
