@@ -1,5 +1,9 @@
 #version 430
 
+layout(std430, binding = 1) buffer clothBuffer {
+	vec4 rgb_values[];
+};
+
 //uniform
 // uniform vec4 diffuse;
 // uniform vec4 l_dir; // world space
@@ -18,5 +22,5 @@ void main() {
     // vec3 nn = normalize(n);
     // float i = max(0.0, dot(l,nn));
 
-    color = vec4(1,0,0,1);
+    color = vec4(rgb_values[7].x, rgb_values[7].y, rgb_values[7].z, 1.0);
 }

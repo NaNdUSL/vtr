@@ -62,7 +62,7 @@
                 </materialMaps>
             </pass>
             
-            <pass name="draw normals" class="default">
+            <!-- <pass name="draw normals" class="default">
                 <COLOR_CLEAR value="false" />
                 <DEPTH_CLEAR value="false" />
                 <scenes>
@@ -75,19 +75,16 @@
                 <materialMaps>
                     <map fromMaterial="*" toMaterial="draw_normals" toLibrary="cloth" />
                 </materialMaps>
-            </pass>
+            </pass> -->
 
-            <pass name="axis" class="default">
+            <!-- <pass name="axis" class="default">
                 <COLOR_CLEAR value="false" />
                 <DEPTH_CLEAR value="false" />
                 <scenes>
                     <scene name="Axis" />
                 </scenes>
                 <camera name="main" />
-                <!-- <lights>
-                    <light name="sun" />
-                </lights> -->
-            </pass>
+            </pass> -->
         </pipeline>
         
     </pipelines>
