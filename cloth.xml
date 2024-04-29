@@ -77,14 +77,14 @@
                 </materialMaps>
             </pass> -->
 
-            <!-- <pass name="axis" class="default">
+            <pass name="axis" class="default">
                 <COLOR_CLEAR value="false" />
                 <DEPTH_CLEAR value="false" />
                 <scenes>
                     <scene name="Axis" />
                 </scenes>
                 <camera name="main" />
-            </pass> -->
+            </pass>
         </pipeline>
         
     </pipelines>
