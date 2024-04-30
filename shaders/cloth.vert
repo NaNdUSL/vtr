@@ -30,7 +30,7 @@ void main() {
 
     int index = int(position.y);
     int size = int(info[0]);
-    float time_interval = timer * 0.00001;
+    float time_interval = timer * 0.000001;
 
     if (index == 0 || index == size - 1) {
 

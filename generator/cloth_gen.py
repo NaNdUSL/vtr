@@ -58,7 +58,7 @@ def generate_cloth_adj(size):
 		
 		mat.append(int_mat)
 
-	print(mat)
+	# print(mat)
 
 	for j in range(size):
 		
@@ -100,7 +100,7 @@ def generate_cloth_adj(size):
 
 		adj[i][i] = 0
 
-	print(adj)
+	# print(adj)
 	return adj
 
 # Function to write a .obj file
