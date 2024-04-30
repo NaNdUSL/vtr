@@ -1,31 +1,25 @@
 <materialLib name="cloth">
     
     <shaders>
-        <shader name="cloth"
-            vs="shaders/cloth.vert"
-            gs="shaders/cloth.geom"
-            ps="shaders/cloth.frag" />
+        <shader name="cloth" vs="shaders/cloth.vert" gs="shaders/cloth.geom" ps="shaders/cloth.frag" />
         
-        <shader name="draw_normals"
-            vs="shaders/draw_normals.vert"
-            gs="shaders/draw_normals.geom"
-            ps="shaders/draw_normals.frag" />
+        <shader name="draw_normals" vs="shaders/draw_normals.vert" gs="shaders/draw_normals.geom" ps="shaders/draw_normals.frag" />
     </shaders>
 
     <buffers>
         <buffer name="clothBuffer">
-            <DIM x="4" y="4" z="1" />
+            <DIM x="100" y="4" z="1" />
             <file name="cloth_buffer_info.txt" />
             <structure>
-                <field value="VEC4"/>
+                <field value="VEC4" />
             </structure>
         </buffer>
 
         <buffer name="adjBuffer">
-            <DIM x="16" y="1" z="1" />
+            <DIM x="10000" y="1" z="1" />
             <file name="cloth_adj_info.txt" />
             <structure>
-                <field value="FLOAT"/>
+                <field value="FLOAT" />
             </structure>
         </buffer>
 
@@ -33,7 +27,7 @@
             <DIM x="4" y="1" z="1" />
             <file name="cloth_vars_info.txt" />
             <structure>
-                <field value="FLOAT"/>
+                <field value="FLOAT" />
             </structure>
         </buffer>
     </buffers>
@@ -52,16 +46,16 @@
             </shader>
             <buffers>
                 <buffer name="clothBuffer">
-                    <TYPE value="SHADER_STORAGE"/>
-                    <BINDING_POINT value="1"/>
+                    <TYPE value="SHADER_STORAGE" />
+                    <BINDING_POINT value="1" />
                 </buffer>
                 <buffer name="adjBuffer">
-                    <TYPE value="SHADER_STORAGE"/>
-                    <BINDING_POINT value="2"/>
+                    <TYPE value="SHADER_STORAGE" />
+                    <BINDING_POINT value="2" />
                 </buffer>
                 <buffer name="infoBuffer">
-                    <TYPE value="SHADER_STORAGE"/>
-                    <BINDING_POINT value="3"/>
+                    <TYPE value="SHADER_STORAGE" />
+                    <BINDING_POINT value="3" />
                 </buffer>
             </buffers>
 		</material>
@@ -75,5 +69,5 @@
                 </values>
             </shader>
         </material>
-        </materials>
-    </materialLib>
+    </materials>
+</materialLib>

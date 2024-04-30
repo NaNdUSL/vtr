@@ -60,7 +60,7 @@
                 <scenes>
                     <scene name="Cloth" />
                 </scenes>
-                <camera name="side" />
+                <camera name="main" />
                 <lights>
                     <light name="sun" />
                 </lights>
@@ -90,7 +90,7 @@
                 <scenes>
                     <scene name="Axis" />
                 </scenes>
-                <camera name="side" />
+                <camera name="main" />
             </pass>
         </pipeline>
         

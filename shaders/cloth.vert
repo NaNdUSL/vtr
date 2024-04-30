@@ -48,9 +48,9 @@ void main() {
 
         for (int i = 0; i < max_adj; i++) {
 
-            if (adjacents[index * (size * 2) + i] > 0) {
+            if (adjacents[index * (size * size) + i] > 0) {
 
-                vec3 f = hookes_law(pos[index].xyz, pos[i].xyz, stiffness, adjacents[index * (size * 2) + i]);
+                vec3 f = hookes_law(pos[index].xyz, pos[i].xyz, stiffness, adjacents[index * (size * size) + i]);
                 force += f;
             }
         }
