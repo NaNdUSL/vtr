@@ -1,0 +1,22 @@
+Criar estruturas e ficheiros que permitam passar a informação dos vértices adjacentes para os buffers. -> working on it
+
+Automatizar isto com um script em python.
+
+Programar o vertex shader para calcular a posição com base nos vértices adjacentes.
+
+Add another buffer with the rest of the info about sise, mass, and other usefull stuff.
+
+Automatizar esta porra toda.
+
+Aplicar mais forças para tornar isto mais realista (ver artigos).
+
+Usar de alguma maneira um compute shader para meter concurrência nesta porra.
+
+
+Possíveis melhorias depois do trabalho base (se tivermos tempo para tal):
+
+	-> Iluminação
+	-> Texturas?
+	-> Diferentes ângulos de câmeras.
+	-> Mexer a cloth com o rato.
+	-> Adicionar thickness no tecido.

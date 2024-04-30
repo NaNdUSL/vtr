@@ -14,10 +14,18 @@
 
     <buffers>
         <buffer name="clothBuffer">
-            <DIM x="8" y="4" z="1" />
+            <DIM x="4" y="4" z="1" />
             <file name="cloth_buffer_info.txt" />
             <structure>
-                <field value="VEC4" />
+                <field value="VEC4"/>
+            </structure>
+        </buffer>
+
+        <buffer name="adjBuffer">
+            <DIM x="16" y="1" z="1" />
+            <file name="cloth_adj_info.txt" />
+            <structure>
+                <field value="FLOAT"/>
             </structure>
         </buffer>
     </buffers>
@@ -36,8 +44,12 @@
             </shader>
             <buffers>
                 <buffer name="clothBuffer">
-                    <TYPE value="SHADER_STORAGE" />
-                    <BINDING_POINT value="1" />
+                    <TYPE value="SHADER_STORAGE"/>
+                    <BINDING_POINT value="1"/>
+                </buffer>
+                <buffer name="adjBuffer">
+                    <TYPE value="SHADER_STORAGE"/>
+                    <BINDING_POINT value="2"/>
                 </buffer>
             </buffers>
 		</material>
