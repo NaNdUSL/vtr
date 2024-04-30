@@ -3,8 +3,13 @@
 layout(std430, binding = 1) buffer clothBuffer {
 	vec4 pos[]; // 1D array of positions
 };
+
 layout(std430, binding = 2) buffer adjBuffer {
     float adjacents[]; // 2D array of adjacents
+};
+
+layout(std430, binding = 3) buffer infoBuffer {
+    float info[]; // 2D array of adjacents
 };
 
 uniform mat4 m_pvm;
@@ -24,26 +29,28 @@ vec3 hookes_law(vec3 p1, vec3 p2, float stiffness, float edge_distance) {
 void main() {
 
     int index = int(position.y);
+    int size = int(info[0]);
+    float time_interval = timer * 0.00001;
 
-    if (index == 0 || index == 4 / 2 - 1) {
+    if (index == 0 || index == size - 1) {
 
         gl_Position = pos[index];
     }
     else {
 
-        float time_interval = timer * 0.000005;
-        float M = 0.23;
-        float stiffness = 2;
+        float M = info[1];
+        float stiffness = info[2];
+        int max_adj = int(info[3]);
 
         vec3 force = vec3(0.0, 0.0, 0.0);
 
         force += M * vec3(0.0, -9.8, 0.0);
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < max_adj; i++) {
 
-            if (adjacents[index * 4 + i] > 0) {
+            if (adjacents[index * (size * 2) + i] > 0) {
 
-                vec3 f = hookes_law(pos[index].xyz, pos[i].xyz, stiffness, adjacents[index * 4 + i]);
+                vec3 f = hookes_law(pos[index].xyz, pos[i].xyz, stiffness, adjacents[index * (size * 2) + i]);
                 force += f;
             }
         }

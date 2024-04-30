@@ -1,10 +1,10 @@
-Criar estruturas e ficheiros que permitam passar a informação dos vértices adjacentes para os buffers. -> working on it
+Criar estruturas e ficheiros que permitam passar a informação dos vértices adjacentes para os buffers. -> done
 
-Automatizar isto com um script em python.
+Programar o vertex shader para calcular a posição com base nos vértices adjacentes. -> done
 
-Programar o vertex shader para calcular a posição com base nos vértices adjacentes.
+Add another buffer with the rest of the info about size, mass, time and other usefull stuff. -> done
 
-Add another buffer with the rest of the info about sise, mass, and other usefull stuff.
+Automatizar isto com um script em python. -> worst part T_T
 
 Automatizar esta porra toda.
 

@@ -28,6 +28,13 @@
                 <FOV value="100"/>
                 <NEAR value="0.01" />
             </camera>
+            <camera name="side" >
+                <viewport name="MainViewport" />
+                <POSITION x="0.402" y="0.774" z="0" />
+                <LOOK_AT_POINT x="0" y="0" z="0" />
+                <FOV value="100"/>
+                <NEAR value="0.01" />
+            </camera>
         </cameras>
         
         <lights>
@@ -53,7 +60,7 @@
                 <scenes>
                     <scene name="Cloth" />
                 </scenes>
-                <camera name="main" />
+                <camera name="side" />
                 <lights>
                     <light name="sun" />
                 </lights>
@@ -83,7 +90,7 @@
                 <scenes>
                     <scene name="Axis" />
                 </scenes>
-                <camera name="main" />
+                <camera name="side" />
             </pass>
         </pipeline>
         
