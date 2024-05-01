@@ -12,7 +12,6 @@ layout(std430, binding = 3) buffer infoBuffer {
     float info[]; // 1D array of info
 };
 
-
 uniform mat4 m_pvm;
 uniform float timer;
 

@@ -1,4 +1,4 @@
-Mudar xml para melhor posicionamento e mais câmeras.
+Mais câmeras. (a parte das câmeras tá num processo de desenvolvimento rasca ainda)
 
 Alterar o generator para escalar o tamanho da cloth e mudar para width e height.
 Também conseguir definir quais os pontos fixos.
