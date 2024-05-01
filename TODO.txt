@@ -1,6 +1,8 @@
 Mudar xml para melhor posicionamento e mais câmeras.
 
 Alterar o generator para escalar o tamanho da cloth e mudar para width e height.
+Também conseguir definir quais os pontos fixos.
+Criar um .cfg file pra ser mais fácil que mudar no código.
 
 Aplicar mais forças para tornar isto mais realista (ver artigos).
 -> Interseções com objetos.

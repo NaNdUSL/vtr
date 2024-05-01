@@ -12,6 +12,7 @@ layout(std430, binding = 3) buffer infoBuffer {
     float info[]; // 1D array of info
 };
 
+
 uniform mat4 m_pvm;
 uniform float timer;
 
@@ -27,6 +28,20 @@ vec3 hookes_law(vec3 p1, vec3 p2, float stiffness, float edge_distance) {
     return - stiffness * x;
 }
 
+bool check_stuck(int index) {
+
+    int size = int(info[5]);
+    for (int i = 0; i < size; i++) {
+
+        if (index == int(info[6 + i])) {
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
 void main() {
 
     int index = int(position.y);
@@ -34,7 +49,7 @@ void main() {
     float time_interval = timer * 0.000001; //(timer - info[4]) * 0.000001;
     info[4] = timer;
 
-    if (index == 0 || index == size - 1) {
+    if (check_stuck(index)) {
 
         gl_Position = pos[index];
     }

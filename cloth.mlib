@@ -2,8 +2,6 @@
     
     <shaders>
         <shader name="cloth" vs="shaders/cloth.vert" gs="shaders/cloth.geom" ps="shaders/cloth.frag" />
-        
-        <shader name="draw_normals" vs="shaders/draw_normals.vert" gs="shaders/draw_normals.geom" ps="shaders/draw_normals.frag" />
     </shaders>
 
     <buffers>
@@ -24,7 +22,7 @@
         </buffer>
 
         <buffer name="infoBuffer">
-            <DIM x="5" y="1" z="1" />
+            <DIM x="10" y="1" z="1" />
             <file name="cloth_vars_info.txt" />
             <structure>
                 <field value="FLOAT" />
