@@ -29,8 +29,9 @@ in int v_index[3];
 
 void main() {
 
-    int size = int(info[0]);
-    int max_adj = int(info[3]);
+    int height = int(info[0]);
+    int width = int(info[1]);
+    int max_adj = int(info[4]);
 
     vec3 edge1 = gl_in[1].gl_Position.xyz - gl_in[0].gl_Position.xyz;
     vec3 edge2 = gl_in[2].gl_Position.xyz - gl_in[0].gl_Position.xyz;
@@ -42,7 +43,7 @@ void main() {
 
     for (int i = 0; i < max_adj; i++) {
 
-        if (adjacents[v_index[0] * (size * size) + i] > 0) {
+        if (adjacents[v_index[0] * (height * width) + i] > 0) {
 
             acc_normals_1 += normals[i];
         }
@@ -57,7 +58,7 @@ void main() {
 
     for (int i = 0; i < max_adj; i++) {
 
-        if (adjacents[v_index[1] * (size * size) + i] > 0) {
+        if (adjacents[v_index[1] * (height * width) + i] > 0) {
 
             acc_normals_2 += normals[i];
         }
@@ -72,7 +73,7 @@ void main() {
 
     for (int i = 0; i < max_adj; i++) {
 
-        if (adjacents[v_index[2] * (size * size) + i] > 0) {
+        if (adjacents[v_index[2] * (height * width) + i] > 0) {
 
             acc_normals_3 += normals[i];
         }

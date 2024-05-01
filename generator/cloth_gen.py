@@ -1,7 +1,7 @@
 import xml.etree.ElementTree as ET
 
 # Function to generate a squared mesh of cloth
-def generate_cloth_mesh(size):
+def generate_cloth_mesh(height, width):
 
 	vertices = []
 	tex_coords_front = []
@@ -9,49 +9,49 @@ def generate_cloth_mesh(size):
 	faces_back = []
 
 	# Generate vertices
-	for z in range(size):
+	for z in range(height):
 
-		for x in range(size):
+		for x in range(width):
 
 			vertices.append([x, 0, z])
 
-			tex_coords_front.append([x / (size - 1), z / (size - 1)])
+			tex_coords_front.append([x / (width - 1), z / (height - 1)])
 	
 	vertices = vertices
 	normals = [[0, 1, 0], [0, -1, 0]]
 	tex_coords = tex_coords_front
 
 	# Generate faces
-	for z in range(size - 1):
+	for z in range(height - 1):
 
-		for x in range(size - 1):
+		for x in range(width - 1):
 
-			v1 = z * size + x
-			v2 = z * size + x + 1
-			v3 = (z + 1) * size + x
-			v4 = (z + 1) * size + x + 1
+			v1 = z * width + x
+			v2 = z * width + x + 1
+			v3 = (z + 1) * width + x
+			v4 = (z + 1) * width + x + 1
 
 			faces_front.append([v1, v3, v2])
 			faces_front.append([v2, v3, v4])
 
 	return vertices, faces_front, faces_back, normals, tex_coords
 
-def generate_cloth_adj(size):
+def generate_cloth_adj(height, width):
 
 	adj = {}
 
-	for i in range(size*size):
+	for i in range(height*width):
 
-		adj[i] = [-1 for _ in range(size*size)]
+		adj[i] = [-1 for _ in range(height*width)]
 	
 	counter = 0
 	mat = []
 
-	for _ in range(size):
+	for _ in range(height):
 
 		int_mat = []
 
-		for _ in range(size):
+		for _ in range(width):
 
 			int_mat.append(counter)
 			counter += 1
@@ -60,43 +60,43 @@ def generate_cloth_adj(size):
 
 	# print(mat)
 
-	for j in range(size):
+	for j in range(height):
 		
-		for i in range(size):
+		for i in range(width):
 
 			if i - 1 >= 0 and j - 1 >= 0:
 
-				adj[mat[i][j]][(i - 1) * size + (j - 1)] = 1.414
+				adj[mat[i][j]][(i - 1) * height + (j - 1)] = 1.414
 			
 			if i - 1 >= 0:
 
-				adj[mat[i][j]][(i - 1) * size + j] = 1.0
+				adj[mat[i][j]][(i - 1) * height + j] = 1.0
 			
-			if i - 1 >= 0 and j + 1 < size:
+			if i - 1 >= 0 and j + 1 < height:
 
-				adj[mat[i][j]][(i - 1) * size + (j + 1)] = 1.414
+				adj[mat[i][j]][(i - 1) * height + (j + 1)] = 1.414
 			
 			if j - 1 >= 0:
 
-				adj[mat[i][j]][i * size + (j - 1)] = 1.0
+				adj[mat[i][j]][i * height + (j - 1)] = 1.0
 			
-			if j + 1 < size:
+			if j + 1 < height:
 
-				adj[mat[i][j]][i * size + (j + 1)] = 1.0
+				adj[mat[i][j]][i * height + (j + 1)] = 1.0
 			
-			if i + 1 < size and j - 1 >= 0:
+			if i + 1 < width and j - 1 >= 0:
 
-				adj[mat[i][j]][(i + 1) * size + (j - 1)] = 1.414
+				adj[mat[i][j]][(i + 1) * height + (j - 1)] = 1.414
 			
-			if i + 1 < size:
+			if i + 1 < width:
 
-				adj[mat[i][j]][(i + 1) * size + j] = 1.0
+				adj[mat[i][j]][(i + 1) * height + j] = 1.0
 			
-			if i + 1 < size and j + 1 < size:
+			if i + 1 < width and j + 1 < height:
 
-				adj[mat[i][j]][(i + 1) * size + (j + 1)] = 1.414
+				adj[mat[i][j]][(i + 1) * height + (j + 1)] = 1.414
 
-	for i in range(size*size):
+	for i in range(height*width):
 
 		adj[i][i] = 0
 
@@ -104,9 +104,9 @@ def generate_cloth_adj(size):
 	return adj
 
 # Function to write a .obj file
-def write_obj_file(size, vertices, faces_front, faces_back, normals, tex_coords, filepath_obj):
+def write_obj_file(height, width, vertices, faces_front, faces_back, normals, tex_coords, filepath_obj):
 
-	vert_stuck = [0, size - 1, (size * size) - 1, (size * size) - size];
+	vert_stuck = [0, width - 1, (height * width) - 1, (height * width) - width]
 
 	with open(filepath_obj, 'w') as f:
 
@@ -138,7 +138,7 @@ def write_obj_file(size, vertices, faces_front, faces_back, normals, tex_coords,
 
 	with open('cloth_adj_info.txt', 'w') as f:
 
-		adj = generate_cloth_adj(size)
+		adj = generate_cloth_adj(height, width)
 
 		for elem in adj:
 
@@ -148,7 +148,7 @@ def write_obj_file(size, vertices, faces_front, faces_back, normals, tex_coords,
 	
 	with open('cloth_vars_info.txt', 'w') as f:
 
-		f.write(f"{size}\n{1.0}\n{100.0}\n{size*size}\n0.0\n")
+		f.write(f"{height}\n{width}\n{0.3}\n{10.0}\n{height*width}\n0.0\n")
 
 		f.write(f"{len(vert_stuck)}\n")
 
@@ -166,7 +166,7 @@ def write_obj_file(size, vertices, faces_front, faces_back, normals, tex_coords,
 	tree = ET.parse('cloth.mlib')
 	root = tree.getroot()
 
-	values = {'clothBuffer': {'x': str(size * size), 'y': '4', 'z': '1'}, 'adjBuffer': {'x': str(size ** 4), 'y': '1', 'z': '1'}, 'infoBuffer': {'x': str(6 + len(vert_stuck)), 'y': '1', 'z': '1'}, 'normalsBuffer': {'x': str(size * size), 'y': '3', 'z': '1'}}
+	values = {'clothBuffer': {'x': str(height * width), 'y': '4', 'z': '1'}, 'adjBuffer': {'x': str(height * width * height * width), 'y': '1', 'z': '1'}, 'infoBuffer': {'x': str(7 + len(vert_stuck)), 'y': '1', 'z': '1'}, 'normalsBuffer': {'x': str(height * width), 'y': '3', 'z': '1'}}
 
 	# Find the buffers element
 	buffers = root.find('buffers')
@@ -185,6 +185,7 @@ def write_obj_file(size, vertices, faces_front, faces_back, normals, tex_coords,
 	tree.write('cloth.mlib')
 
 # Generate cloth mesh and write .obj file
-size = 10
-vertices, faces_front, faces_back, normals, tex_coords = generate_cloth_mesh(size)
-write_obj_file(size, vertices, faces_front, faces_back, normals, tex_coords, 'cloth.obj')
+height = 10
+width = 10
+vertices, faces_front, faces_back, normals, tex_coords = generate_cloth_mesh(height, width)
+write_obj_file(height, width, vertices, faces_front, faces_back, normals, tex_coords, 'cloth.obj')

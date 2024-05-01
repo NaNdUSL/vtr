@@ -1,8 +1,9 @@
-Mais câmeras. (a parte das câmeras tá num processo de desenvolvimento rasca ainda)
-
-Alterar o generator para escalar o tamanho da cloth e mudar para width e height.
-Também conseguir definir quais os pontos fixos.
 Criar um .cfg file pra ser mais fácil que mudar no código.
+
+
+
+
+
 
 Aplicar mais forças para tornar isto mais realista (ver artigos).
 -> Interseções com objetos.
@@ -12,5 +13,6 @@ Usar de alguma maneira um compute shader para meter concurrência nesta porra. (
 
 Possíveis melhorias depois do trabalho base (se tivermos tempo para tal):
 
+	-> Novos view ports
 	-> Texturas? (duvido que pegue nisto sequer, mas mais provável que a seguinte)
 	-> Mexer a cloth com o rato. (probably not)

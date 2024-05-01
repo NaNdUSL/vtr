@@ -24,15 +24,21 @@ vec3 hookes_law(vec3 p1, vec3 p2, float stiffness, float edge_distance) {
     float l = length(v); // length of the vector
     vec3 vec_dir = normalize(v); // normalized vector from p1 to p2 (direction)
     vec3 x = (l - edge_distance) * vec_dir; // difference between the current length and the resting edge distance
+
+    // if (length(x) < 0.1 || length(x) > 10)
+
+    //     return vec3(0.0);
+
     return - stiffness * x;
 }
 
 bool check_stuck(int index) {
 
-    int size = int(info[5]);
+    int size = int(info[6]);
+
     for (int i = 0; i < size; i++) {
 
-        if (index == int(info[6 + i])) {
+        if (index == int(info[7 + i])) {
 
             return true;
         }
@@ -44,9 +50,10 @@ bool check_stuck(int index) {
 void main() {
 
     int index = int(position.y);
-    int size = int(info[0]);
-    float time_interval = timer * 0.000001; //(timer - info[4]) * 0.000001;
-    info[4] = timer;
+    int height = int(info[0]);
+    int width = int(info[1]);
+    float time_interval = timer *  0.00001; //(timer - info[4]) * 0.000001;
+    info[5] = timer;
 
     if (check_stuck(index)) {
 
@@ -54,9 +61,9 @@ void main() {
     }
     else {
 
-        float M = info[1];
-        float stiffness = info[2];
-        int max_adj = int(info[3]);
+        float M = info[2];
+        float stiffness = info[3];
+        int max_adj = int(info[4]);
 
         vec3 force = vec3(0.0);
 
@@ -64,9 +71,9 @@ void main() {
 
         for (int i = 0; i < max_adj; i++) {
 
-            if (adjacents[index * (size * size) + i] > 0) {
+            if (adjacents[index * (height * width) + i] > 0) {
 
-                vec3 f = hookes_law(pos[index].xyz, pos[i].xyz, stiffness, adjacents[index * (size * size) + i]);
+                vec3 f = hookes_law(pos[index].xyz, pos[i].xyz, stiffness, adjacents[index * (height * width) + i]);
                 force += f;
             }
         }
@@ -76,7 +83,6 @@ void main() {
 
         pos[index] = new_pos;
 
-        // v_index = index;
         gl_Position = pos[index];
     }
 }
