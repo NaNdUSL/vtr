@@ -24,7 +24,7 @@
         </buffer>
 
         <buffer name="infoBuffer">
-            <DIM x="4" y="1" z="1" />
+            <DIM x="5" y="1" z="1" />
             <file name="cloth_vars_info.txt" />
             <structure>
                 <field value="FLOAT" />

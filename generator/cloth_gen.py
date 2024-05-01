@@ -146,13 +146,13 @@ def write_obj_file(size, vertices, faces_front, faces_back, normals, tex_coords,
 	
 	with open('cloth_vars_info.txt', 'w') as f:
 
-		f.write(f"{size}\n{0.33}\n{100.0}\n{size*size}\n")
+		f.write(f"{size}\n{0.033}\n{100.0}\n{size*size}\n0.0\n")
 
 	# Update the number of elements in the .mlib file
 	tree = ET.parse('cloth.mlib')
 	root = tree.getroot()
 
-	values = {'clothBuffer': {'x': str(size * size), 'y': '4', 'z': '1'}, 'adjBuffer': {'x': str(size ** 4), 'y': '1', 'z': '1'}, 'infoBuffer': {'x': '4', 'y': '1', 'z': '1'}}
+	values = {'clothBuffer': {'x': str(size * size), 'y': '4', 'z': '1'}, 'adjBuffer': {'x': str(size ** 4), 'y': '1', 'z': '1'}, 'infoBuffer': {'x': '5', 'y': '1', 'z': '1'}}
 
 	# Find the buffers element
 	buffers = root.find('buffers')

@@ -16,6 +16,7 @@ uniform mat4 m_pvm;
 uniform float timer;
 
 in vec4 position;
+// out int v_index;
 
 vec3 hookes_law(vec3 p1, vec3 p2, float stiffness, float edge_distance) {
 
@@ -30,7 +31,8 @@ void main() {
 
     int index = int(position.y);
     int size = int(info[0]);
-    float time_interval = timer * 0.000001;
+    float time_interval = timer * 0.00001; //(timer - info[4]) * 0.000001;
+    info[4] = timer;
 
     if (index == 0 || index == size - 1) {
 
@@ -60,6 +62,7 @@ void main() {
 
         pos[index] = new_pos;
 
+        // v_index = index;
         gl_Position = pos[index];
     }
 }

@@ -4,19 +4,22 @@ Programar o vertex shader para calcular a posição com base nos vértices adjac
 
 Add another buffer with the rest of the info about size, mass, time and other usefull stuff. -> done
 
-Automatizar isto com um script em python. -> worst part T_T
+Automatizar isto com um script em python. -> done
 
-Automatizar esta porra toda.
+Automatizar esta porra toda. -> done
 
 Aplicar mais forças para tornar isto mais realista (ver artigos).
 
-Usar de alguma maneira um compute shader para meter concurrência nesta porra.
+Interseções com objetos.
 
+Interseções com a própria cloth.
+
+Usar de alguma maneira um compute shader para meter concurrência nesta porra. (Isto é um maybe muito grande)
 
 Possíveis melhorias depois do trabalho base (se tivermos tempo para tal):
 
-	-> Iluminação
-	-> Texturas?
+	-> Iluminação (temos de recalcular normais)
+	-> Texturas? (duvido que pegue nisto sequer)
 	-> Diferentes ângulos de câmeras.
 	-> Mexer a cloth com o rato.
 	-> Adicionar thickness no tecido.

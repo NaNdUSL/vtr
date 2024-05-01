@@ -5,7 +5,15 @@ layout(triangles) in;
 layout (triangle_strip, max_vertices=6) out;
 
 // layout(std430, binding = 1) buffer clothBuffer {
-// 	vec4 pos[];
+// 	vec4 pos[]; // 1D array of positions
+// };
+
+// layout(std430, binding = 2) buffer adjBuffer {
+//     float adjacents[]; // 2D array of adjacents
+// };
+
+// layout(std430, binding = 3) buffer infoBuffer {
+//     float info[]; // 2D array of adjacents
 // };
 
 uniform mat4 m_pvm;
