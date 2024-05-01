@@ -30,6 +30,14 @@
                 <field value="FLOAT" />
             </structure>
         </buffer>
+
+        <buffer name="normalsBuffer">
+            <DIM x="100" y="3" z="1" />
+            <file name="cloth_normals_info.txt" />
+            <structure>
+                <field value="VEC3" />
+            </structure>
+        </buffer>
     </buffers>
 
     <materials>
@@ -57,17 +65,11 @@
                     <TYPE value="SHADER_STORAGE" />
                     <BINDING_POINT value="3" />
                 </buffer>
+                <buffer name="normalsBuffer">
+                    <TYPE value="SHADER_STORAGE" />
+                    <BINDING_POINT value="4" />
+                </buffer>
             </buffers>
 		</material>
-        
-        <material name="draw_normals">
-            <shader name="draw_normals">
-                <values>
-                    <valueof uniform="timer" type="RENDERER" component="TIMER" />
-                    <valueof uniform="m_pvm" type="RENDERER" component="PROJECTION_VIEW_MODEL" />
-                    <valueof uniform="m_normal" type="RENDERER" component="NORMAL" />
-                </values>
-            </shader>
-        </material>
     </materials>
 </materialLib>

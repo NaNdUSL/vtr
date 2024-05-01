@@ -1,25 +1,14 @@
-Criar estruturas e ficheiros que permitam passar a informação dos vértices adjacentes para os buffers. -> done
+Mudar xml para melhor posicionamento e mais câmeras.
 
-Programar o vertex shader para calcular a posição com base nos vértices adjacentes. -> done
-
-Add another buffer with the rest of the info about size, mass, time and other usefull stuff. -> done
-
-Automatizar isto com um script em python. -> done
-
-Automatizar esta porra toda. -> done
+Alterar o generator para escalar o tamanho da cloth e mudar para width e height.
 
 Aplicar mais forças para tornar isto mais realista (ver artigos).
+-> Interseções com objetos.
+-> Interseções com a própria cloth.
 
-Interseções com objetos.
-
-Interseções com a própria cloth.
-
-Usar de alguma maneira um compute shader para meter concurrência nesta porra. (Isto é um maybe muito grande)
+Usar de alguma maneira um compute shader para meter concurrência nesta porra. (Isto é um maybe muito grande)??????????
 
 Possíveis melhorias depois do trabalho base (se tivermos tempo para tal):
 
-	-> Iluminação (temos de recalcular normais)
-	-> Texturas? (duvido que pegue nisto sequer)
-	-> Diferentes ângulos de câmeras.
-	-> Mexer a cloth com o rato.
-	-> Adicionar thickness no tecido.
+	-> Texturas? (duvido que pegue nisto sequer, mas mais provável que a seguinte)
+	-> Mexer a cloth com o rato. (probably not)

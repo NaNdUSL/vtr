@@ -9,14 +9,14 @@ layout(std430, binding = 2) buffer adjBuffer {
 };
 
 layout(std430, binding = 3) buffer infoBuffer {
-    float info[]; // 2D array of adjacents
+    float info[]; // 1D array of info
 };
 
 uniform mat4 m_pvm;
 uniform float timer;
 
 in vec4 position;
-// out int v_index;
+out int v_index;
 
 vec3 hookes_law(vec3 p1, vec3 p2, float stiffness, float edge_distance) {
 
@@ -31,7 +31,7 @@ void main() {
 
     int index = int(position.y);
     int size = int(info[0]);
-    float time_interval = timer * 0.00001; //(timer - info[4]) * 0.000001;
+    float time_interval = timer * 0.000001; //(timer - info[4]) * 0.000001;
     info[4] = timer;
 
     if (index == 0 || index == size - 1) {
@@ -44,7 +44,7 @@ void main() {
         float stiffness = info[2];
         int max_adj = int(info[3]);
 
-        vec3 force = vec3(0.0, 0.0, 0.0);
+        vec3 force = vec3(0.0);
 
         force += M * vec3(0.0, -9.8, 0.0);
 
