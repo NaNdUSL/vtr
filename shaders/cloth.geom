@@ -50,6 +50,7 @@ void main() {
     }
 
     acc_normals_1 += normal;
+    normals[v_index[0]] = normalize(acc_normals_1);
 
     n = normalize(m_normal * normalize(acc_normals_1));
 
@@ -65,6 +66,7 @@ void main() {
     }
 
     acc_normals_2 += normal;
+    normals[v_index[1]] = normalize(acc_normals_2);
 
     n = normalize(m_normal * normalize(acc_normals_2));
 
@@ -80,6 +82,7 @@ void main() {
     }
 
     acc_normals_3 += normal;
+    normals[v_index[2]] = normalize(acc_normals_3);
 
     n = normalize(m_normal * normalize(acc_normals_3));
 

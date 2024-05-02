@@ -43,8 +43,7 @@ def generate_cloth_adj(height, width):
 	for i in range(height*width):
 
 		adj[i] = [-1 for _ in range(height*width)]
-	
-	
+
 	counter = 0
 	mat = []
 
@@ -56,7 +55,7 @@ def generate_cloth_adj(height, width):
 
 			int_mat.append(counter)
 			counter += 1
-		
+
 		mat.append(int_mat)
 
 	# print(mat)
@@ -118,20 +117,26 @@ def write_obj_file(height, width, vertices, faces_front, faces_back, normals, te
 	with open(filepath_obj, 'w') as f:
 
 		index = 0
+
 		for v in vertices:
+
 			f.write(f"v {v[0]}.0 {index}.0 {v[2]}.0\n")
 			index += 1
 
 		for tex in tex_coords:
+
 			f.write(f"vt {tex[0]} {tex[1]}\n")
 
 		for norm in normals:
+
 			f.write(f"vn {norm[0]}.0 {norm[1]}.0 {norm[2]}.0\n")
 
 		for face in faces_front:
+
 			f.write(f"f {face[0]+1}/{face[0]+1}/1 {face[1]+1}/{face[1]+1}/1 {face[2]+1}/{face[2]+1}/1\n")
 
 		for face in faces_back:
+
 			f.write(f"f {face[0]+1}/{face[0]+1}/2 {face[1]+1}/{face[1]+1}/2 {face[2]+1}/{face[2]+1}/2\n")
 
 	with open('cloth_buffer_info.txt', 'w') as f:
@@ -183,6 +188,7 @@ def write_obj_file(height, width, vertices, faces_front, faces_back, normals, te
 		name = buffer.get('name')
 		# If the name is in the values dictionary, update the DIM values
 		if name in values:
+
 			dim = buffer.find('DIM')
 			dim.set('x', values[name]['x'])
 			dim.set('y', values[name]['y'])

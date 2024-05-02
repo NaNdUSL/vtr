@@ -52,7 +52,7 @@ void main() {
     int index = int(position.y);
     int height = int(info[0]);
     int width = int(info[1]);
-    float time_interval = timer *  0.00001; //(timer - info[4]) * 0.000001;
+    float time_interval = timer *  0.000001; //(timer - info[4]) * 0.000001;
     info[5] = timer;
 
     if (check_stuck(index)) {
@@ -82,6 +82,7 @@ void main() {
         vec4 new_pos = pos[index] + vec4(0.5 * a * time_interval * time_interval, 0.0);
 
         pos[index] = new_pos;
+        v_index = index;
 
         gl_Position = pos[index];
     }
