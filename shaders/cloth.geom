@@ -21,7 +21,7 @@ layout(std430, binding = 3) buffer infoBuffer {
 };
 
 layout(std430, binding = 4) buffer normalsBuffer {
-    float normals[]; // 1D array of normals
+    vec3 normals[]; // 1D array of normals
 };
 
 out vec3 n;

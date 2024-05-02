@@ -44,6 +44,7 @@ def generate_cloth_adj(height, width):
 
 		adj[i] = [-1 for _ in range(height*width)]
 	
+	
 	counter = 0
 	mat = []
 
@@ -60,47 +61,53 @@ def generate_cloth_adj(height, width):
 
 	# print(mat)
 
+	adj_list = []
+
 	for j in range(height):
 		
 		for i in range(width):
 
-			if i - 1 >= 0 and j - 1 >= 0:
+			above = []
+			same_line = []
+			under = []
 
-				adj[mat[i][j]][(i - 1) * height + (j - 1)] = 1.414
+			for x in range(-1, 2):
+
+				if i + x >= 0 and i + x < width and j - 1 >= 0 and 0 != x:
+
+					above.append((i + x, j - 1, 1.414))
+
+				elif i + x >= 0 and i + x < width and j - 1 >= 0:
+
+					above.append((i + x, j - 1, 1))
+
+				if i + x >= 0 and i + x < width and 0 != x:
+
+					same_line.append((i + x, j, 1))
+
+				if i + x >= 0 and i + x < width and j + 1 < height and 0 != x:
+
+					above.append((i + x, j + 1, 1.414))
+
+				elif i + x >= 0 and i + x < width and j + 1 < height:
+
+					above.append((i + x, j + 1, 1))
+
+			indices = above + same_line + under
+			indices.sort(key=lambda x: (x[1], x[0]))
 			
-			if i - 1 >= 0:
+			adj_list.append(indices)
+		
+	for i in range(len(adj_list)):
 
-				adj[mat[i][j]][(i - 1) * height + j] = 1.0
-			
-			if i - 1 >= 0 and j + 1 < height:
+		for tuple in adj_list[i]:
 
-				adj[mat[i][j]][(i - 1) * height + (j + 1)] = 1.414
-			
-			if j - 1 >= 0:
-
-				adj[mat[i][j]][i * height + (j - 1)] = 1.0
-			
-			if j + 1 < height:
-
-				adj[mat[i][j]][i * height + (j + 1)] = 1.0
-			
-			if i + 1 < width and j - 1 >= 0:
-
-				adj[mat[i][j]][(i + 1) * height + (j - 1)] = 1.414
-			
-			if i + 1 < width:
-
-				adj[mat[i][j]][(i + 1) * height + j] = 1.0
-			
-			if i + 1 < width and j + 1 < height:
-
-				adj[mat[i][j]][(i + 1) * height + (j + 1)] = 1.414
+			adj[i][tuple[1] * width + tuple[0]] = tuple[2]
 
 	for i in range(height*width):
 
 		adj[i][i] = 0
 
-	# print(adj)
 	return adj
 
 # Function to write a .obj file
@@ -186,6 +193,6 @@ def write_obj_file(height, width, vertices, faces_front, faces_back, normals, te
 
 # Generate cloth mesh and write .obj file
 height = 10
-width = 10
+width = 5
 vertices, faces_front, faces_back, normals, tex_coords = generate_cloth_mesh(height, width)
 write_obj_file(height, width, vertices, faces_front, faces_back, normals, tex_coords, 'cloth.obj')
