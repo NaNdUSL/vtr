@@ -52,8 +52,7 @@ void main() {
     int index = int(position.y);
     int height = int(info[0]);
     int width = int(info[1]);
-    float time_interval = timer *  0.000001; //(timer - info[4]) * 0.000001;
-    info[5] = timer;
+    float time_interval = timer *  0.00001;
 
     if (check_stuck(index)) {
 

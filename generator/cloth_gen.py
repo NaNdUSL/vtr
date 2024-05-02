@@ -112,7 +112,7 @@ def generate_cloth_adj(height, width):
 # Function to write a .obj file
 def write_obj_file(height, width, vertices, faces_front, faces_back, normals, tex_coords, filepath_obj):
 
-	vert_stuck = [0, width - 1, (height * width) - 1, (height * width) - width]
+	vert_stuck = [0, width - 1]
 
 	with open(filepath_obj, 'w') as f:
 
@@ -160,7 +160,7 @@ def write_obj_file(height, width, vertices, faces_front, faces_back, normals, te
 	
 	with open('cloth_vars_info.txt', 'w') as f:
 
-		f.write(f"{height}\n{width}\n{0.3}\n{10.0}\n{height*width}\n0.0\n")
+		f.write(f"{height}\n{width}\n{0.80}\n{100.0}\n{height*width}\n0.0\n")
 
 		f.write(f"{len(vert_stuck)}\n")
 
@@ -199,6 +199,6 @@ def write_obj_file(height, width, vertices, faces_front, faces_back, normals, te
 
 # Generate cloth mesh and write .obj file
 height = 10
-width = 5
+width = 10
 vertices, faces_front, faces_back, normals, tex_coords = generate_cloth_mesh(height, width)
 write_obj_file(height, width, vertices, faces_front, faces_back, normals, tex_coords, 'cloth.obj')
