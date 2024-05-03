@@ -1,6 +1,3 @@
-Criar um .cfg file pra ser mais fácil que mudar no código.
-
-
 
 
 

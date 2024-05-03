@@ -52,7 +52,7 @@ void main() {
     int index = int(position.y);
     int height = int(info[0]);
     int width = int(info[1]);
-    float time_interval = timer *  0.00001;
+    float time_interval = timer *  0.000001;
 
     if (check_stuck(index)) {
 
@@ -62,18 +62,37 @@ void main() {
 
         float M = info[2];
         float stiffness = info[3];
-        int max_adj = int(info[4]);
 
         vec3 force = vec3(0.0);
 
         force += M * vec3(0.0, -9.8, 0.0);
 
-        for (int i = 0; i < max_adj; i++) {
+        int x = 0;
+        int z = 0;
+        bool found = false;
 
-            if (adjacents[index * (height * width) + i] > 0) {
+        for (int j = 0; !found && j < height; j++) {
+            
+            for (int i = 0; !found && i < width; i++) {
 
-                vec3 f = hookes_law(pos[index].xyz, pos[i].xyz, stiffness, adjacents[index * (height * width) + i]);
-                force += f;
+                if (j * width + i == index) {
+
+                    x = i;
+                    z = j;
+                    found = true;
+                }
+            }
+        }
+
+        for (int j = 0; j < 3; j++) {
+
+            for (int i = 0; i < 3; i++) {
+
+                if (adjacents[(index * 9) + i + j * 3] > 0) {
+
+                    vec3 f = hookes_law(pos[index].xyz, pos[x + i - 1 + ((z + j - 1) * width)].xyz, stiffness, adjacents[(index * 9) + i + j * 3]);
+                    force += f;
+                }
             }
         }
 

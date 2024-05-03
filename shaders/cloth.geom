@@ -31,7 +31,6 @@ void main() {
 
     int height = int(info[0]);
     int width = int(info[1]);
-    int max_adj = int(info[4]);
 
     vec3 edge1 = gl_in[1].gl_Position.xyz - gl_in[0].gl_Position.xyz;
     vec3 edge2 = gl_in[2].gl_Position.xyz - gl_in[0].gl_Position.xyz;
@@ -41,9 +40,9 @@ void main() {
     vec3 acc_normals_2 = vec3(0.0);
     vec3 acc_normals_3 = vec3(0.0);
 
-    for (int i = 0; i < max_adj; i++) {
+    for (int i = 0; i < 9; i++) {
 
-        if (adjacents[v_index[0] * (height * width) + i] > 0) {
+        if (adjacents[(v_index[0] * 9) + i] > 0) {
 
             acc_normals_1 += normals[i];
         }
@@ -57,9 +56,9 @@ void main() {
     gl_Position = m_pvm * gl_in[0].gl_Position;
     EmitVertex();
 
-    for (int i = 0; i < max_adj; i++) {
+    for (int i = 0; i < 9; i++) {
 
-        if (adjacents[v_index[1] * (height * width) + i] > 0) {
+        if (adjacents[(v_index[1] * 9) + i] > 0) {
 
             acc_normals_2 += normals[i];
         }
@@ -73,9 +72,9 @@ void main() {
     gl_Position = m_pvm * gl_in[1].gl_Position;
     EmitVertex();
 
-    for (int i = 0; i < max_adj; i++) {
+    for (int i = 0; i < 9; i++) {
 
-        if (adjacents[v_index[2] * (height * width) + i] > 0) {
+        if (adjacents[(v_index[2] * 9) + i] > 0) {
 
             acc_normals_3 += normals[i];
         }
