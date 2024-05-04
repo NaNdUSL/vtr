@@ -9,7 +9,7 @@ class ClothGenerator:
 		self.mass = mass
 		self.stiffness = stiffness
 		self.vertices = []
-		self.tex_coords_front = []
+		self.text_coords = []
 		self.normals = []
 		self.faces_front = []
 		self.faces_back = []
@@ -18,6 +18,9 @@ class ClothGenerator:
 	# Generate a mesh of cloth into a .obj file (we only use the vertices from the generated file)
 	def generate_cloth_mesh(self):
 
+		text_coords_front = []
+		text_coords_back = []
+
 		# Generate vertices
 		for z in range(self.height):
 
@@ -25,8 +28,10 @@ class ClothGenerator:
 
 				self.vertices.append([x, 0, z])
 
-				self.tex_coords_front.append([x / (self.width - 1), z / (self.height - 1)])
+				text_coords_front.append([x / (self.width - 1), z / (self.height - 1)])
+				text_coords_back.append([((-x - 1) % self.width) / (self.width - 1), ((-z - 1) % self.height) / (self.height - 1)])
 
+		self.text_coords = text_coords_front + text_coords_back
 		self.normals = [[0, 1, 0], [0, -1, 0]]
 
 		# Generate faces
@@ -112,7 +117,7 @@ class ClothGenerator:
 				f.write(f"v {v[0]}.0 {index}.0 {v[2]}.0\n")
 				index += 1
 
-			for tex in self.tex_coords_front:
+			for tex in self.text_coords:
 
 				f.write(f"vt {tex[0]} {tex[1]}\n")
 
@@ -167,11 +172,17 @@ class ClothGenerator:
 
 				f.write(f"0.0 1.0 0.0\n")
 
+		with open('cloth_texture_coords_info.txt', 'w') as f:
+
+			for tex in self.text_coords:
+
+				f.write(f"{tex[0]} {tex[1]}\n")
+
 		# Update the number of elements in the .mlib file
 		tree = ET.parse('cloth.mlib')
 		root = tree.getroot()
 
-		values = {'clothBuffer': {'x': str(self.height * self.width), 'y': '4', 'z': '1'}, 'adjBuffer': {'x': str(self.height * self.width * 9), 'y': '1', 'z': '1'}, 'infoBuffer': {'x': str(7 + len(self.vert_stuck)), 'y': '1', 'z': '1'}, 'normalsBuffer': {'x': str(self.height * self.width), 'y': '3', 'z': '1'}}
+		values = {'clothBuffer': {'x': str(self.height * self.width), 'y': '1', 'z': '1'}, 'adjBuffer': {'x': str(self.height * self.width * 9), 'y': '1', 'z': '1'}, 'infoBuffer': {'x': str(7 + len(self.vert_stuck)), 'y': '1', 'z': '1'}, 'normalsBuffer': {'x': str(self.height * self.width), 'y': '1', 'z': '1'}, 'textureBuffer': {'x': str(self.height * self.width), 'y': '1', 'z': '1'}}
 
 		# Find the buffers element
 		buffers = root.find('buffers')

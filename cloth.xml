@@ -7,7 +7,7 @@
         </atributes> -->
         <scenes>
             <scene name="Cloth">
-                <SCALE x="0.14" y="0.14" z ="0.14" />
+                <!-- <SCALE x="0.14" y="0.14" z ="0.14" /> -->
                 <file name="cloth.obj"/>
             </scene>
             <scene name="Axis">

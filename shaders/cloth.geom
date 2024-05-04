@@ -25,6 +25,8 @@ layout(std430, binding = 4) buffer normalsBuffer {
 };
 
 out vec3 n;
+out flat int vert_index;
+
 in int v_index[3];
 
 void main() {
@@ -52,6 +54,7 @@ void main() {
     normals[v_index[0]] = normalize(acc_normals_1);
 
     n = normalize(m_normal * normalize(acc_normals_1));
+    vert_index = v_index[0];
 
     gl_Position = m_pvm * gl_in[0].gl_Position;
     EmitVertex();
@@ -68,6 +71,7 @@ void main() {
     normals[v_index[1]] = normalize(acc_normals_2);
 
     n = normalize(m_normal * normalize(acc_normals_2));
+    vert_index = v_index[1];
 
     gl_Position = m_pvm * gl_in[1].gl_Position;
     EmitVertex();
@@ -84,22 +88,26 @@ void main() {
     normals[v_index[2]] = normalize(acc_normals_3);
 
     n = normalize(m_normal * normalize(acc_normals_3));
+    vert_index = v_index[2];
 
     gl_Position = m_pvm * gl_in[2].gl_Position;
     EmitVertex();
     EndPrimitive();
 
     n = normalize(m_normal * normalize(-acc_normals_1));
+    vert_index = v_index[0];
 
     gl_Position = m_pvm * gl_in[1].gl_Position;
     EmitVertex();
 
     n = normalize(m_normal * normalize(-acc_normals_2));
+    vert_index = v_index[1];
 
     gl_Position = m_pvm * gl_in[0].gl_Position;
     EmitVertex();
 
     n = normalize(m_normal * normalize(-acc_normals_3));
+    vert_index = v_index[2];
 
     gl_Position = m_pvm * gl_in[2].gl_Position;
     EmitVertex();

@@ -1,6 +1,10 @@
+-> Texturas
 
+-> Criar shaders para representar as forças nos vértices (com buffers partilhados).
 
+-> Corrigir a explosão.
 
+-> Organizar isto em pastas
 
 Aplicar mais forças para tornar isto mais realista (ver artigos).
 -> Interseções com objetos.
@@ -11,5 +15,4 @@ Usar de alguma maneira um compute shader para meter concurrência nesta porra. (
 Possíveis melhorias depois do trabalho base (se tivermos tempo para tal):
 
 	-> Novos view ports
-	-> Texturas? (duvido que pegue nisto sequer, mas mais provável que a seguinte)
 	-> Mexer a cloth com o rato. (probably not)

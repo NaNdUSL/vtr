@@ -25,10 +25,6 @@ vec3 hookes_law(vec3 p1, vec3 p2, float stiffness, float edge_distance) {
     vec3 vec_dir = normalize(v); // normalized vector from p1 to p2 (direction)
     vec3 x = (l - edge_distance) * vec_dir; // difference between the current length and the resting edge distance
 
-    // if (length(x) < 0.1 || length(x) > 10)
-
-    //     return vec3(0.0);
-
     return - stiffness * x;
 }
 
@@ -52,7 +48,9 @@ void main() {
     int index = int(position.y);
     int height = int(info[0]);
     int width = int(info[1]);
-    float time_interval = timer *  0.000001;
+    float time_interval = (timer - info[5]) *  0.01;
+    info[4] = (timer - info[5]);
+    info[5] = timer;
 
     if (check_stuck(index)) {
 

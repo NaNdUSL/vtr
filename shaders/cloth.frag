@@ -1,12 +1,18 @@
 #version 430
 
+layout(std430, binding = 5) buffer textureBuffer {
+    vec2 text_coords[]; // 1D array of normals
+};
+
 //uniform
-uniform vec4 diffuse;
+// uniform vec4 diffuse;
 uniform vec4 l_dir; // world space
 uniform mat4 m_view;
+uniform sampler2D tex;
 
 // // input
 in vec3 n;
+in flat int vert_index;
 
 // output
 out vec4 color;
@@ -18,5 +24,5 @@ void main() {
     vec3 nn = normalize(n);
     float i = max(0.0, dot(l,nn));
 
-    color = max(0.25, i) * diffuse;
+    color = texture(tex, text_coords[vert_index]);
 }
