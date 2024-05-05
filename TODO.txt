@@ -1,14 +1,13 @@
--> Texturas
+-> Interseções com objetos. -> working on it
+	-> buffers partilhados (acesso e update dos valores)
+	-> implementação básica de interseções????
 
--> Criar shaders para representar as forças nos vértices (com buffers partilhados).
-
--> Corrigir a explosão.
-
--> Organizar isto em pastas
+-> Corrigir a explosão (kinda done).
 
 Aplicar mais forças para tornar isto mais realista (ver artigos).
--> Interseções com objetos.
 -> Interseções com a própria cloth.
+
+-> Organizar isto em pastas
 
 Usar de alguma maneira um compute shader para meter concurrência nesta porra. (Isto é um maybe muito grande)??????????
 

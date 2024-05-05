@@ -24,5 +24,5 @@ void main() {
     vec3 nn = normalize(n);
     float i = max(0.0, dot(l,nn));
 
-    color = texture(tex, text_coords[vert_index]);
+    color = max(0.25, i) * texture(tex, fract(text_coords[vert_index]));
 }

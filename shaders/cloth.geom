@@ -94,22 +94,22 @@ void main() {
     EmitVertex();
     EndPrimitive();
 
-    // n = normalize(m_normal * normalize(-acc_normals_1));
-    // vert_index = v_index[0];
+    n = normalize(m_normal * normalize(-acc_normals_1));
+    vert_index = v_index[0];
 
-    // gl_Position = m_pvm * gl_in[1].gl_Position;
-    // EmitVertex();
+    gl_Position = m_pvm * gl_in[1].gl_Position;
+    EmitVertex();
 
-    // n = normalize(m_normal * normalize(-acc_normals_2));
-    // vert_index = v_index[1];
+    n = normalize(m_normal * normalize(-acc_normals_2));
+    vert_index = v_index[1];
 
-    // gl_Position = m_pvm * gl_in[0].gl_Position;
-    // EmitVertex();
+    gl_Position = m_pvm * gl_in[0].gl_Position;
+    EmitVertex();
 
-    // n = normalize(m_normal * normalize(-acc_normals_3));
-    // vert_index = v_index[2];
+    n = normalize(m_normal * normalize(-acc_normals_3));
+    vert_index = v_index[2];
 
-    // gl_Position = m_pvm * gl_in[2].gl_Position;
-    // EmitVertex();
-    // EndPrimitive();
+    gl_Position = m_pvm * gl_in[2].gl_Position;
+    EmitVertex();
+    EndPrimitive();
 }

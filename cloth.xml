@@ -7,7 +7,7 @@
         </atributes> -->
         <scenes>
             <scene name="Cloth">
-                <!-- <SCALE x="0.14" y="0.14" z ="0.14" /> -->
+                <SCALE x="0.14" y="0.14" z ="0.14" />
                 <file name="cloth.obj"/>
             </scene>
             <scene name="Axis">
@@ -41,7 +41,7 @@
                 <NEAR value="0.01" />
             </camera>
         </cameras>
-        
+
         <lights>
             <light name="sun" >
                 <DIRECTION x="-5" y="-5" z = "-5" />
@@ -52,7 +52,6 @@
                 <SPOT_DIRECTION x="0" y="-1" z="0" />
                 <SPOT_CUTOFF value="0.8" />
             </light>
-            
         </lights>
         
         <materialLibs>
@@ -80,14 +79,21 @@
                     <scene name="Cloth" />
                 </scenes>
                 <camera name="main" />
-                <!-- <lights>
-                    <light name="sun" />
-                </lights> -->
                 <materialMaps>
                     <map fromMaterial="*" toMaterial="drawForces" toLibrary="cloth" />
                 </materialMaps>
             </pass>
-
+            <!-- <pass name="drawGravity" class="default">
+                <COLOR_CLEAR value="false" />
+                <DEPTH_CLEAR value="false" />
+                <scenes>
+                    <scene name="Cloth" />
+                </scenes>
+                <camera name="main" />
+                <materialMaps>
+                    <map fromMaterial="*" toMaterial="drawGravity" toLibrary="cloth" />
+                </materialMaps>
+            </pass> -->
             <pass name="axis" class="default">
                 <COLOR_CLEAR value="false" />
                 <DEPTH_CLEAR value="false" />
@@ -101,7 +107,7 @@
     </pipelines>
     
     <!-- <interface>
-        <window label="Toon Effect">
+        <window label="IDK">
             <pipelineList label="Mode" />
         </window> 
     </interface> -->

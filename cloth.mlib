@@ -6,7 +6,7 @@
     </shaders>
 
     <textures>
-		<texture name="teapot" filename="teapot.jpg" mipmap="true" />
+		<texture name="teapot" filename="crate.jpg" mipmap="true" />
 	</textures>
 
     <buffers>
