@@ -28,8 +28,8 @@ class ClothGenerator:
 
 				self.vertices.append([x, 0, z])
 
-				text_coords_front.append([x / (self.width - 1), z / (self.height - 1)])
-				text_coords_back.append([((-x - 1) % self.width) / (self.width - 1), ((-z - 1) % self.height) / (self.height - 1)])
+				text_coords_front.append([z / (self.height - 1), x / (self.width - 1)])
+				text_coords_back.append([((-z - 1) % self.height) / (self.height - 1), ((-x - 1) % self.width) / (self.width - 1)])
 
 		self.text_coords = text_coords_front + text_coords_back
 		self.normals = [[0, 1, 0], [0, -1, 0]]

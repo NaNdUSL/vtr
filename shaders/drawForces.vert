@@ -17,6 +17,7 @@ uniform float timer;
 
 in vec4 position;
 out int v_index;
+out vec3 sum_force;
 
 vec3 hookes_law(vec3 p1, vec3 p2, float stiffness, float edge_distance) {
 
@@ -100,10 +101,11 @@ void main() {
         if (length(force) < 0.001) force = vec3(0.0);
 
         vec3 a = force / M;
-        vec4 new_pos = pos[index] + vec4(0.5 * a * time_interval * time_interval, 0.0);
+        vec4 new_pos = pos[index] + vec4(1 * a * time_interval * time_interval, 0.0);
 
         pos[index] = new_pos;
         v_index = index;
+        sum_force = force;
 
         gl_Position = pos[index];
     }

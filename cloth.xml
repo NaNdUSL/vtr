@@ -73,6 +73,20 @@
                     <map fromMaterial="*" toMaterial="cloth" toLibrary="cloth" />
                 </materialMaps>
             </pass>
+            <pass name="drawForces" class="default">
+                <COLOR_CLEAR value="false" />
+                <DEPTH_CLEAR value="false" />
+                <scenes>
+                    <scene name="Cloth" />
+                </scenes>
+                <camera name="main" />
+                <!-- <lights>
+                    <light name="sun" />
+                </lights> -->
+                <materialMaps>
+                    <map fromMaterial="*" toMaterial="drawForces" toLibrary="cloth" />
+                </materialMaps>
+            </pass>
 
             <pass name="axis" class="default">
                 <COLOR_CLEAR value="false" />
