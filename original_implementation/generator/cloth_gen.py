@@ -108,6 +108,8 @@ class ClothGenerator:
 	# Function to write a .obj file
 	def write_obj_file(self, filepath_obj):
 
+		# print(f"Writing .obj file to {filepath_obj}")
+
 		with open(filepath_obj, 'w') as f:
 
 			index = 0
@@ -133,7 +135,7 @@ class ClothGenerator:
 
 				f.write(f"f {face[0]+1}/{face[0]+1}/2 {face[1]+1}/{face[1]+1}/2 {face[2]+1}/{face[2]+1}/2\n")
 
-		with open('cloth_buffer_info.txt', 'w') as f:
+		with open('../buffers/cloth_buffer_info.txt', 'w') as f:
 
 			elem_count = 0
 
@@ -142,7 +144,7 @@ class ClothGenerator:
 				f.write(f"{v[0]}.0 {v[1]}.0 {v[2]}.0 1.0\n")
 				elem_count += 1
 
-		with open('cloth_adj_info.txt', 'w') as f:
+		with open('../buffers/cloth_adj_info.txt', 'w') as f:
 
 			adj = self.generate_cloth_adj()
 
@@ -156,7 +158,7 @@ class ClothGenerator:
 				
 				# f.write(f"\n")
 
-		with open('cloth_vars_info.txt', 'w') as f:
+		with open('../buffers/cloth_vars_info.txt', 'w') as f:
 
 			f.write(f"{self.height}\n{self.width}\n{self.mass}\n{self.stiffness}\n{self.height * self.width}\n0.0\n")
 
@@ -166,23 +168,29 @@ class ClothGenerator:
 
 				f.write(f"{ind}\n")
 		
-		with open('cloth_normals_info.txt', 'w') as f:
+		with open('../buffers/cloth_normals_info.txt', 'w') as f:
 
 			for _ in self.vertices:
 
 				f.write(f"0.0 1.0 0.0\n")
 
-		with open('cloth_texture_coords_info.txt', 'w') as f:
+		with open('../buffers/cloth_texture_coords_info.txt', 'w') as f:
 
 			for tex in self.text_coords:
 
 				f.write(f"{tex[0]} {tex[1]}\n")
 
+		with open('../buffers/cloth_forces_buffer.txt', 'w') as f:
+
+			for _ in self.vertices:
+
+				f.write(f"0.0 0.0 0.0 0.0\n")
+
 		# Update the number of elements in the .mlib file
-		tree = ET.parse('cloth.mlib')
+		tree = ET.parse('../cloth.mlib')
 		root = tree.getroot()
 
-		values = {'clothBuffer': {'x': str(self.height * self.width), 'y': '1', 'z': '1'}, 'adjBuffer': {'x': str(self.height * self.width * 9), 'y': '1', 'z': '1'}, 'infoBuffer': {'x': str(7 + len(self.vert_stuck)), 'y': '1', 'z': '1'}, 'normalsBuffer': {'x': str(self.height * self.width), 'y': '1', 'z': '1'}, 'textureBuffer': {'x': str(self.height * self.width), 'y': '1', 'z': '1'}}
+		values = {'clothBuffer': {'x': str(self.height * self.width), 'y': '1', 'z': '1'}, 'adjBuffer': {'x': str(self.height * self.width * 9), 'y': '1', 'z': '1'}, 'infoBuffer': {'x': str(7 + len(self.vert_stuck)), 'y': '1', 'z': '1'}, 'normalsBuffer': {'x': str(self.height * self.width), 'y': '1', 'z': '1'}, 'textureBuffer': {'x': str(self.height * self.width), 'y': '1', 'z': '1'}, 'forcesBuffer': {'x': str(self.height * self.width), 'y': '1', 'z': '1'}}
 
 		# Find the buffers element
 		buffers = root.find('buffers')
@@ -199,13 +207,13 @@ class ClothGenerator:
 				dim.set('z', values[name]['z'])
 
 		# Write the changes back to the file
-		tree.write('cloth.mlib')
+		tree.write('../cloth.mlib')
 
 # Generate cloth mesh and write .obj file
-height = 10
-width = 10
-mass = 0.33
+height = 20
+width = 20
+mass = 0.23
 stiffness = 100.0
 cloth_gen = ClothGenerator(height, width, mass, stiffness, [0, width - 1])
 cloth_gen.generate_cloth_mesh()
-cloth_gen.write_obj_file('cloth.obj')
+cloth_gen.write_obj_file('..\\objects\\cloth.obj')
