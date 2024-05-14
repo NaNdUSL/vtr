@@ -212,8 +212,8 @@ class ClothGenerator:
 # Generate cloth mesh and write .obj file
 height = 10
 width = 10
-mass = 2
-stiffness = 1000.0
+mass = 0.23
+stiffness = 100.0
 cloth_gen = ClothGenerator(height, width, mass, stiffness, [0, width - 1])
 cloth_gen.generate_cloth_mesh()
 cloth_gen.write_obj_file('../objects/cloth.obj')
