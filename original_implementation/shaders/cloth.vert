@@ -16,6 +16,10 @@ layout(std430, binding = 6) buffer forcesBuffer {
 	vec4 forces[]; // 1D array of forces
 };
 
+layout(std430, binding = 7) buffer velocitiesBuffer {
+	vec4 vel[]; // 1D array of forces
+};
+
 uniform mat4 m_pvm;
 uniform float timer;
 
@@ -65,7 +69,7 @@ void main() {
 	int height = int(info[0]);
 	int width = int(info[1]);
 	info[4] = (timer - info[5]);
-	float time_interval = 0.02;
+	float time_interval = 0.0002;
 
 	info[5] = timer;
 
@@ -116,7 +120,8 @@ void main() {
 		if (length(force) < 0.001) force = vec3(0.0);
 
 		vec3 a = force / M;
-		vec4 new_pos = pos[index] + vec4(0.5 * a * time_interval * time_interval, 0.0);
+		vec3 new_vel = vel[index].xyz + a * time_interval;
+		vec4 new_pos = pos[index] + vec4(new_vel * time_interval, 0.0);
 
 		// if (isPointInSphere(new_pos.xyz, sphereCenter, sphereRadius)) {
 
@@ -127,6 +132,7 @@ void main() {
 
 		forces[index] = vec4(force, length(force));
 		pos[index] = new_pos;
+		vel[index] = vec4(new_vel, 0.0);
 		v_index = index;
 
 		gl_Position = pos[index];

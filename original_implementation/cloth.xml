@@ -7,7 +7,7 @@
 		</atributes> -->
 		<scenes>
 			<scene name="Cloth">
-				<!-- <SCALE x="0.04" y="0.04" z ="0.04" /> -->
+				<SCALE x="0.2" y="0.2" z ="0.2" />
 				<file name="objects/cloth.obj"/>
 			</scene>
 			<scene name="Axis">
@@ -29,7 +29,7 @@
 				<viewport name="MainViewport" />
 				<POSITION x="1.4" y="0.5" z="1.4" />
 				<LOOK_AT_POINT x="0" y="0" z="0" />
-				<FOV value="90"/>
+				<FOV value="70"/>
 				<NEAR value="0.01" />
 			</camera>
 
@@ -83,17 +83,6 @@
 					<map fromMaterial="*" toMaterial="drawForces" toLibrary="cloth" />
 				</materialMaps>
 			</pass>
-			<!-- <pass name="drawGravity" class="default">
-				<COLOR_CLEAR value="false" />
-				<DEPTH_CLEAR value="false" />
-				<scenes>
-					<scene name="Cloth" />
-				</scenes>
-				<camera name="main" />
-				<materialMaps>
-					<map fromMaterial="*" toMaterial="drawGravity" toLibrary="cloth" />
-				</materialMaps>
-			</pass> -->
 			<pass name="axis" class="default">
 				<COLOR_CLEAR value="false" />
 				<DEPTH_CLEAR value="false" />

@@ -27,7 +27,7 @@
 		</buffer>
 
 		<buffer name="infoBuffer">
-			<DIM x="9" y="1" z="1" />
+			<DIM x="11" y="1" z="1" />
 			<file name="buffers/cloth_vars_info.txt" />
 			<structure>
 				<field value="FLOAT" />
@@ -53,6 +53,14 @@
 		<buffer name="forcesBuffer">
 			<DIM x="100" y="1" z="1" />
 			<file name="buffers/cloth_forces_buffer.txt" />
+			<structure>
+				<field value="VEC4" />
+			</structure>
+		</buffer>
+
+		<buffer name="velocitiesBuffer">
+			<DIM x="100" y="1" z="1" />
+			<file name="buffers/cloth_velocities_buffer.txt" />
 			<structure>
 				<field value="VEC4" />
 			</structure>
@@ -99,6 +107,10 @@
 					<TYPE value="SHADER_STORAGE" />
 					<BINDING_POINT value="6" />
 				</buffer>
+				<buffer name="velocitiesBuffer">
+					<TYPE value="SHADER_STORAGE" />
+					<BINDING_POINT value="7" />
+				</buffer>
 			</buffers>
 		</material>
 
@@ -118,21 +130,9 @@
 					<TYPE value="SHADER_STORAGE" />
 					<BINDING_POINT value="1" />
 				</buffer>
-				<buffer name="adjBuffer">
-					<TYPE value="SHADER_STORAGE" />
-					<BINDING_POINT value="2" />
-				</buffer>
 				<buffer name="infoBuffer">
 					<TYPE value="SHADER_STORAGE" />
 					<BINDING_POINT value="3" />
-				</buffer>
-				<buffer name="normalsBuffer">
-					<TYPE value="SHADER_STORAGE" />
-					<BINDING_POINT value="4" />
-				</buffer>
-				<buffer name="textureBuffer">
-					<TYPE value="SHADER_STORAGE" />
-					<BINDING_POINT value="5" />
 				</buffer>
 				<buffer name="forcesBuffer">
 					<TYPE value="SHADER_STORAGE" />
