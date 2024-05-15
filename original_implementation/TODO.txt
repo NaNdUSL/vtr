@@ -1,13 +1,9 @@
 -> Interseções com objetos. -> working on it
 	-> buffers partilhados (acesso e update dos valores)
 	-> implementação básica de interseções????
+	-> Interseções com a própria cloth.
 
--> Corrigir a explosão (kinda done).
-
-Aplicar mais forças para tornar isto mais realista (ver artigos).
--> Interseções com a própria cloth.
-
--> Organizar isto em pastas
+Aplicar mais forças para tornar isto mais realista (ver artigos). (working on it)
 
 Usar de alguma maneira um compute shader para meter concurrência nesta porra. (Isto é um maybe muito grande)??????????
 

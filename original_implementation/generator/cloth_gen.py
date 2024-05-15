@@ -2,12 +2,13 @@ import xml.etree.ElementTree as ET
 
 class ClothGenerator:
 
-	def __init__(self, height=0, width=0, mass=0.33, stiffness = 10.0, vert_stuck=[]):
+	def __init__(self, height=0, width=0, mass=0.33, stiffness = 10.0, damping_coeff = 10.0, vert_stuck=[]):
 
 		self.height = height
 		self.width = width
 		self.mass = mass
 		self.stiffness = stiffness
+		self.damping_coeff = damping_coeff
 		self.vertices = []
 		self.text_coords = []
 		self.normals = []
@@ -218,8 +219,11 @@ class ClothGenerator:
 # Generate cloth mesh and write .obj file
 height = 10
 width = 10
-mass = 2
+mass = 0.33
 stiffness = 1000.0
-cloth_gen = ClothGenerator(height, width, mass, stiffness, [0, width - 1, (height * width) - 1, (height * width) - width])
+damping_coeff = 10.0
+cloth_gen = ClothGenerator(height, width, mass, stiffness, damping_coeff, [0, width - 1])
 cloth_gen.generate_cloth_mesh()
 cloth_gen.write_obj_file('../objects/cloth.obj')
+
+# [0, width - 1, (height * width) - 1, (height * width) - width]

@@ -43,6 +43,16 @@ vec3 hookes_law(vec3 p1, vec3 p2, float stiffness, float edge_distance) {
 	return - stiffness * x;
 }
 
+vec3 damping_force(vec3 p1, vec3 p2, vec4 vel1, vec4 vel2, float damping_coeff) {
+
+	vec3 vec = p1 - p2; // vector from p1 to p2
+	vec3 vel = vel1.xyz - vel2.xyz; // velocity difference
+	vec3 vec_dir = normalize(vec); // normalized vector from p1 to p2 (direction)
+	vec3 x = ((vel * vec) / length(vec)) * vec_dir; // difference between the current length and the resting edge distance
+
+	return - damping_coeff * x;
+}
+
 bool check_stuck(int index) {
 
 	int size = int(info[6]);
@@ -69,7 +79,7 @@ void main() {
 	int height = int(info[0]);
 	int width = int(info[1]);
 	info[4] = (timer - info[5]);
-	float time_interval = 0.0002;
+	float time_interval = 0.0003 * info[4];
 
 	info[5] = timer;
 
@@ -111,7 +121,7 @@ void main() {
 
 				if (adjacents[(index * 9) + i + j * 3] > 0) {
 
-					vec3 f = hookes_law(pos[index].xyz, pos[x + i - 1 + ((z + j - 1) * width)].xyz, stiffness, adjacents[(index * 9) + i + j * 3]);
+					vec3 f = hookes_law(pos[index].xyz, pos[x + i - 1 + ((z + j - 1) * width)].xyz, stiffness, adjacents[(index * 9) + i + j * 3]) + damping_force(pos[index].xyz, pos[x + i - 1 + ((z + j - 1) * width)].xyz, vel[index], vel[x + i - 1 + ((z + j - 1) * width)], 10);
 					force += f;
 				}
 			}

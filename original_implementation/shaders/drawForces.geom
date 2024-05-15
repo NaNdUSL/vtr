@@ -32,19 +32,19 @@ void main() {
 
 	gl_Position = m_pvm * pos[v_index[0]];
 	EmitVertex();
-	gl_Position = m_pvm * (pos[v_index[0]] + vec4(forces[v_index[0]].xyz, 0.0) * 0.0005);
+	gl_Position = m_pvm * (pos[v_index[0]] + vec4(forces[v_index[0]].xyz, 0.0) * 0.09);
 	EmitVertex();
 	EndPrimitive();
 
 	gl_Position = m_pvm * pos[v_index[1]];
 	EmitVertex();
-	gl_Position = m_pvm * (pos[v_index[1]] + vec4(forces[v_index[1]].xyz, 0.0) * 0.0005);
+	gl_Position = m_pvm * (pos[v_index[1]] + vec4(forces[v_index[1]].xyz, 0.0) * 0.09);
 	EmitVertex();
 	EndPrimitive();
 
 	gl_Position = m_pvm * pos[v_index[2]];
 	EmitVertex();
-	gl_Position = m_pvm * (pos[v_index[2]] + vec4(forces[v_index[2]].xyz, 0.0) * 0.0005);
+	gl_Position = m_pvm * (pos[v_index[2]] + vec4(forces[v_index[2]].xyz, 0.0) * 0.09);
 	EmitVertex();
 	EndPrimitive();
 }
