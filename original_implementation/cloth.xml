@@ -2,9 +2,12 @@
 <project name="Cloth" width="900" height="900">
 		
 	<assets>
-		<!-- <atributes>
-			esta porra permite que eu defina atributos que podem ser usados nos shaders i think
-		</atributes> -->
+		<attributes>
+			<attribute type="COLOR" name="width" data="INT" value="10" />
+			<attribute type="COLOR" name="height" data="INT" value="10" />
+			<attribute type="COLOR" name="stiffness" data="FLOAT" value="100.0" />
+			<attribute type="COLOR" name="damping_coeff" data="FLOAT" value="10.0" />
+		</attributes>
 		<scenes>
 			<scene name="Cloth">
 				<SCALE x="0.2" y="0.2" z ="0.2" />
@@ -95,9 +98,11 @@
 		
 	</pipelines>
 		
-	<!-- <interface>
-		<window label="IDK">
-			<pipelineList label="Mode" />
-		</window> 
-	</interface> -->
+	<interface>
+		<window label="Main Window">
+			<var label="stiffness" type="COLOR" context="cloth::cloth" component="stiffness" def="min=1 max=100 step=10"/>
+			<var label="damping_coeff" type="COLOR" context="cloth::cloth" component="damping_coeff" def="min=1 max=100 step=10"/>
+		</window>
+		
+	</interface>
 </project>

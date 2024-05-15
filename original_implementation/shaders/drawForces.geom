@@ -5,7 +5,6 @@ layout(triangles) in;
 layout (line_strip, max_vertices=6) out;
 
 uniform mat4 m_pvm;
-// uniform float timer;
 
 layout(std430, binding = 1) buffer clothBuffer {
 	vec4 pos[]; // 1D array of positions
@@ -24,9 +23,6 @@ out vec4 colour;
 in int v_index[3];
 
 void main() {
-
-	int height = int(info[0]);
-	int width = int(info[1]);
 
 	colour = vec4(0.0, 1.0, 0.0, 1.0);
 

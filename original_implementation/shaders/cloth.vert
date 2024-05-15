@@ -22,6 +22,10 @@ layout(std430, binding = 7) buffer velocitiesBuffer {
 
 uniform mat4 m_pvm;
 uniform float timer;
+uniform int width;
+uniform int height;
+uniform float stiffness;
+uniform float damping_coeff;
 
 in vec4 position;
 out int v_index;
@@ -72,14 +76,13 @@ void main() {
 
 	// Sphere information
 
-	vec3 sphereCenter = vec3(2.0, -7.0, 1.0);
+	vec3 sphereCenter = vec3(2.0, -7.0, 3.0);
 	float sphereRadius = 5;
 
 	int index = int(position.y);
-	int height = int(info[0]);
-	int width = int(info[1]);
 	info[4] = (timer - info[5]);
-	float time_interval = 0.0003 * info[4];
+	float time_interval = 0.0006;
+	// float time_interval = 0.0004 * info[4];
 
 	info[5] = timer;
 
@@ -92,7 +95,6 @@ void main() {
 	else {
 
 		float M = info[2];
-		float stiffness = info[3];
 
 		vec3 force = vec3(0);
 
@@ -121,7 +123,7 @@ void main() {
 
 				if (adjacents[(index * 9) + i + j * 3] > 0) {
 
-					vec3 f = hookes_law(pos[index].xyz, pos[x + i - 1 + ((z + j - 1) * width)].xyz, stiffness, adjacents[(index * 9) + i + j * 3]) + damping_force(pos[index].xyz, pos[x + i - 1 + ((z + j - 1) * width)].xyz, vel[index], vel[x + i - 1 + ((z + j - 1) * width)], 10);
+					vec3 f = hookes_law(pos[index].xyz, pos[x + i - 1 + ((z + j - 1) * width)].xyz, stiffness, adjacents[(index * 9) + i + j * 3]) + damping_force(pos[index].xyz, pos[x + i - 1 + ((z + j - 1) * width)].xyz, vel[index], vel[x + i - 1 + ((z + j - 1) * width)], damping_coeff);
 					force += f;
 				}
 			}

@@ -219,8 +219,8 @@ class ClothGenerator:
 # Generate cloth mesh and write .obj file
 height = 10
 width = 10
-mass = 0.33
-stiffness = 1000.0
+mass = 0.5
+stiffness = 100.0
 damping_coeff = 10.0
 cloth_gen = ClothGenerator(height, width, mass, stiffness, damping_coeff, [0, width - 1])
 cloth_gen.generate_cloth_mesh()
