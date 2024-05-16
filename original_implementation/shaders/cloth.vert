@@ -28,6 +28,9 @@ uniform float stiffness;
 uniform float damping_coeff;
 uniform float M;
 uniform float time_interval;
+uniform sampler2D noise;
+
+uniform float windScale;
 
 in vec4 position;
 out int v_index;
@@ -123,6 +126,12 @@ void main() {
 				}
 			}
 		}
+
+		vec2 winDir2 = vec2(texture(noise, pos[index].xz * 0.0025 + timer * 0.00001).x * 2 - 1, texture(noise, pos[index].zx * 0.0047 + timer*0.00001).x * 2 - 1);
+		// // vec winDir is a normalized 3D direction, where windScale controls the weight of the Y component
+		vec3 winDir = normalize(vec3(winDir2.x, 1.0/windScale, winDir2.y));
+
+		force += winDir;
 
 		if (length(force) < 0.001) force = vec3(0.0);
 

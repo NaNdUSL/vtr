@@ -7,6 +7,7 @@
 
 	<textures>
 		<texture name="teapot" filename="Textures/crate.jpg" mipmap="true" />
+		<texture name="noise" filename="Textures/fractalNoise.jpg" mipmap="false" />
 	</textures>
 
 	<buffers>
@@ -83,10 +84,14 @@
 					<valueof uniform="damping_coeff" type="COLOR" component="damping_coeff" />
 					<valueof uniform="M" type="COLOR" component="M" />
 					<valueof uniform="time_interval" type="COLOR" component="time_interval" />
+					<valueof uniform="wind_x" type="COLOR" component="wind_x" />
+					<valueof uniform="wind_y" type="COLOR" component="wind_y" />
+					<valueof uniform="wind_z" type="COLOR" component="wind_z" />
 				</values>
 			</shader>
 			<textures>
 				<texture name="teapot" UNIT="0" />
+				<texture name="noise" UNIT="0" />
 			</textures>
 			<buffers>
 				<buffer name="clothBuffer">
@@ -136,6 +141,17 @@
 					<BINDING_POINT value="6" />
 				</buffer>
 			</buffers>
+		</material>
+
+		<material name="drawWind">
+			<shader name="drawWind">
+				<values>
+					<valueof uniform="m_pvm" type="RENDERER" component="PROJECTION_VIEW_MODEL" />
+					<valueof uniform="wind_x" type="COLOR" component="wind_x" />
+					<valueof uniform="wind_y" type="COLOR" component="wind_y" />
+					<valueof uniform="wind_z" type="COLOR" component="wind_z" />
+				</values>
+			</shader>
 		</material>
 	</materials>
 </materialLib>
