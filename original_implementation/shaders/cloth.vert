@@ -8,7 +8,7 @@ layout(std430, binding = 2) buffer adjBuffer {
 	float adjacents[]; // 2D array of adjacents
 };
 
-layout(std430, binding = 3) buffer infoBuffer {
+layout(std430, binding = 3) buffer stuckVertBuffer {
 	float info[]; // 1D array of info
 };
 
@@ -26,6 +26,8 @@ uniform int width;
 uniform int height;
 uniform float stiffness;
 uniform float damping_coeff;
+uniform float M;
+uniform float time_interval;
 
 in vec4 position;
 out int v_index;
@@ -59,11 +61,11 @@ vec3 damping_force(vec3 p1, vec3 p2, vec4 vel1, vec4 vel2, float damping_coeff) 
 
 bool check_stuck(int index) {
 
-	int size = int(info[6]);
+	int size = int(info[0]);
 
 	for (int i = 0; i < size; i++) {
 
-		if (index == int(info[7 + i])) {
+		if (index == int(info[1 + i])) {
 
 			return true;
 		}
@@ -80,11 +82,6 @@ void main() {
 	float sphereRadius = 5;
 
 	int index = int(position.y);
-	info[4] = (timer - info[5]);
-	float time_interval = 0.0006;
-	// float time_interval = 0.0004 * info[4];
-
-	info[5] = timer;
 
 	if (check_stuck(index)) {
 
@@ -93,8 +90,6 @@ void main() {
 		forces[index] = vec4(0.0, 0.0, 0.0, 0.0);
 	}
 	else {
-
-		float M = info[2];
 
 		vec3 force = vec3(0);
 

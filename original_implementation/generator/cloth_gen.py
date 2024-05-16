@@ -2,13 +2,10 @@ import xml.etree.ElementTree as ET
 
 class ClothGenerator:
 
-	def __init__(self, height=0, width=0, mass=0.33, stiffness = 10.0, damping_coeff = 10.0, vert_stuck=[]):
+	def __init__(self, height=0, width=0, vert_stuck=[]):
 
 		self.height = height
 		self.width = width
-		self.mass = mass
-		self.stiffness = stiffness
-		self.damping_coeff = damping_coeff
 		self.vertices = []
 		self.text_coords = []
 		self.normals = []
@@ -159,16 +156,7 @@ class ClothGenerator:
 				
 				# f.write(f"\n")
 
-		with open('../buffers/cloth_vars_info.txt', 'w') as f:
-
-			f.write(f"{self.height}\n{self.width}\n{self.mass}\n{self.stiffness}\n{self.height * self.width}\n0.0\n")
-
-			f.write(f"{len(self.vert_stuck)}\n")
-
-			for ind in self.vert_stuck:
-
-				f.write(f"{ind}\n")
-		
+	
 		with open('../buffers/cloth_normals_info.txt', 'w') as f:
 
 			for _ in self.vertices:
@@ -192,12 +180,20 @@ class ClothGenerator:
 			for _ in self.vertices:
 
 				f.write(f"0.0 0.0 0.0 0.0\n")
+		
+		with open('../buffers/cloth_stuck_vert.txt', 'w') as f:
+
+			f.write(f"{len(self.vert_stuck)}\n")
+
+			for ind in self.vert_stuck:
+
+				f.write(f"{ind}\n")
 
 		# Update the number of elements in the .mlib file
 		tree = ET.parse('../cloth.mlib')
 		root = tree.getroot()
 
-		values = {'clothBuffer': {'x': str(self.height * self.width), 'y': '1', 'z': '1'}, 'adjBuffer': {'x': str(self.height * self.width * 9), 'y': '1', 'z': '1'}, 'infoBuffer': {'x': str(7 + len(self.vert_stuck)), 'y': '1', 'z': '1'}, 'normalsBuffer': {'x': str(self.height * self.width), 'y': '1', 'z': '1'}, 'textureBuffer': {'x': str(self.height * self.width), 'y': '1', 'z': '1'}, 'forcesBuffer': {'x': str(self.height * self.width), 'y': '1', 'z': '1'}, 'velocitiesBuffer': {'x': str(self.height * self.width), 'y': '1', 'z': '1'}}
+		values = {'clothBuffer': {'x': str(self.height * self.width), 'y': '1', 'z': '1'}, 'adjBuffer': {'x': str(self.height * self.width * 9), 'y': '1', 'z': '1'}, 'infoBuffer': {'x': str(1 + len(self.vert_stuck)), 'y': '1', 'z': '1'}, 'normalsBuffer': {'x': str(self.height * self.width), 'y': '1', 'z': '1'}, 'textureBuffer': {'x': str(self.height * self.width), 'y': '1', 'z': '1'}, 'forcesBuffer': {'x': str(self.height * self.width), 'y': '1', 'z': '1'}, 'velocitiesBuffer': {'x': str(self.height * self.width), 'y': '1', 'z': '1'}}
 
 		# Find the buffers element
 		buffers = root.find('buffers')
@@ -219,10 +215,7 @@ class ClothGenerator:
 # Generate cloth mesh and write .obj file
 height = 10
 width = 10
-mass = 0.5
-stiffness = 100.0
-damping_coeff = 10.0
-cloth_gen = ClothGenerator(height, width, mass, stiffness, damping_coeff, [0, width - 1])
+cloth_gen = ClothGenerator(height, width, [0, width - 1])
 cloth_gen.generate_cloth_mesh()
 cloth_gen.write_obj_file('../objects/cloth.obj')
 

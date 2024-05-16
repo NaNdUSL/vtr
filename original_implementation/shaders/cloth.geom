@@ -16,13 +16,12 @@ layout(std430, binding = 2) buffer adjBuffer {
 	float adjacents[]; // 2D array of adjacents
 };
 
-layout(std430, binding = 3) buffer infoBuffer {
-	float info[]; // 1D array of info
-};
-
 layout(std430, binding = 4) buffer normalsBuffer {
 	vec3 normals[]; // 1D array of normals
 };
+
+uniform int width;
+uniform int height;
 
 out vec3 n;
 out flat int vert_index;
@@ -30,9 +29,6 @@ out flat int vert_index;
 in int v_index[3];
 
 void main() {
-
-	int height = int(info[0]);
-	int width = int(info[1]);
 
 	vec3 edge1 = gl_in[1].gl_Position.xyz - gl_in[0].gl_Position.xyz;
 	vec3 edge2 = gl_in[2].gl_Position.xyz - gl_in[0].gl_Position.xyz;

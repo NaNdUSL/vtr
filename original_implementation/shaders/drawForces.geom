@@ -10,10 +10,6 @@ layout(std430, binding = 1) buffer clothBuffer {
 	vec4 pos[]; // 1D array of positions
 };
 
-layout(std430, binding = 3) buffer infoBuffer {
-	float info[]; // 1D array of info
-};
-
 layout(std430, binding = 6) buffer forcesBuffer {
 	vec4 forces[]; // 1D array of forces
 };
