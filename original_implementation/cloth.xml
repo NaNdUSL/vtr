@@ -9,9 +9,9 @@
 			<attribute type="COLOR" name="damping_coeff" data="FLOAT" value="10.0" />
 			<attribute type="COLOR" name="M" data="FLOAT" value="0.5" />
 			<attribute type="COLOR" name="time_interval" data="FLOAT" value="0.0" />
-			<attribute type="COLOR" name="wind_x" data="FLOAT" value="0.0" />
-			<attribute type="COLOR" name="wind_y" data="FLOAT" value="0.0" />
-			<attribute type="COLOR" name="wind_z" data="FLOAT" value="0.0" />
+			<attribute type="RENDERER" name="wind_x" data="FLOAT" value="0.1" />
+			<attribute type="RENDERER" name="wind_y" data="FLOAT" value="0.1" />
+			<attribute type="RENDERER" name="wind_z" data="FLOAT" value="0.1" />
 		</attributes>
 		<scenes>
 			<scene name="Cloth">
@@ -91,6 +91,17 @@
 					<map fromMaterial="*" toMaterial="drawForces" toLibrary="cloth" />
 				</materialMaps>
 			</pass>
+			<pass name="drawWind" class="default">
+				<COLOR_CLEAR value="false" />
+				<DEPTH_CLEAR value="false" />
+				<scenes>
+					<scene name="Cloth" />
+				</scenes>
+				<camera name="main" />
+				<materialMaps>
+					<map fromMaterial="*" toMaterial="drawWind" toLibrary="cloth" />
+				</materialMaps>
+			</pass>
 			<pass name="axis" class="default">
 				<COLOR_CLEAR value="false" />
 				<DEPTH_CLEAR value="false" />
@@ -100,19 +111,17 @@
 				<camera name="main" />
 			</pass>
 		</pipeline>
-		
 	</pipelines>
-		
+
 	<interface>
 		<window label="Main Window">
 			<var label="stiffness" type="COLOR" context="cloth::cloth" component="stiffness" def="min=1 max=1000 step=10"/>
 			<var label="Damping" type="COLOR" context="cloth::cloth" component="damping_coeff" def="min=1 max=1000 step=10"/>
 			<var label="M" type="COLOR" context="cloth::cloth" component="M" def="min=0.01 max=10 step=0.01"/>
 			<var label="Timer" type="COLOR" context="cloth::cloth" component="time_interval" def="min=0 max=0.01 step=0.0001"/>
-			<var label="WindX" type="COLOR" context="cloth::cloth" component="wind_x" def="min=0 max=10 step=0.01"/>
-			<var label="WindY" type="COLOR" context="cloth::cloth" component="wind_y" def="min=0 max=10 step=0.01"/>
-			<var label="WindZ" type="COLOR" context="cloth::cloth" component="wind_z" def="min=0 max=10 step=0.01"/>
+			<var label="WindX" type="RENDERER" context="cloth::cloth" component="wind_x" def="min=-10 max=10 step=0.01"/>
+			<var label="WindY" type="RENDERER" context="cloth::cloth" component="wind_y" def="min=-10 max=10 step=0.01"/>
+			<var label="WindZ" type="RENDERER" context="cloth::cloth" component="wind_z" def="min=-10 max=10 step=0.01"/>
 		</window>
-		
 	</interface>
 </project>

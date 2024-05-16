@@ -12,6 +12,10 @@ layout(std430, binding = 3) buffer stuckVertBuffer {
 	float info[]; // 1D array of info
 };
 
+layout(std430, binding = 5) buffer textureBuffer {
+	vec2 text_coords[]; // 1D array of normals
+};
+
 layout(std430, binding = 6) buffer forcesBuffer {
 	vec4 forces[]; // 1D array of forces
 };
@@ -19,6 +23,10 @@ layout(std430, binding = 6) buffer forcesBuffer {
 layout(std430, binding = 7) buffer velocitiesBuffer {
 	vec4 vel[]; // 1D array of forces
 };
+
+uniform float wind_x;
+uniform float wind_y;
+uniform float wind_z;
 
 uniform mat4 m_pvm;
 uniform float timer;
@@ -30,7 +38,7 @@ uniform float M;
 uniform float time_interval;
 uniform sampler2D noise;
 
-uniform float windScale;
+// uniform float windScale;
 
 in vec4 position;
 out int v_index;
@@ -127,11 +135,9 @@ void main() {
 			}
 		}
 
-		vec2 winDir2 = vec2(texture(noise, pos[index].xz * 0.0025 + timer * 0.00001).x * 2 - 1, texture(noise, pos[index].zx * 0.0047 + timer*0.00001).x * 2 - 1);
-		// // vec winDir is a normalized 3D direction, where windScale controls the weight of the Y component
-		vec3 winDir = normalize(vec3(winDir2.x, 1.0/windScale, winDir2.y));
+		float wind_intensity = length(texture(noise, text_coords[index] + int(timer * 0.0001) % 1024));
 
-		force += winDir;
+		force += normalize(vec3(wind_x, wind_y, wind_z)) * wind_intensity * 2;
 
 		if (length(force) < 0.001) force = vec3(0.0);
 

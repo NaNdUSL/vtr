@@ -3,6 +3,7 @@
 	<shaders>
 		<shader name="cloth" vs="shaders/cloth.vert" gs="shaders/cloth.geom" ps="shaders/cloth.frag" />
 		<shader name="drawForces" vs="shaders/drawForces.vert" gs="shaders/drawForces.geom" ps="shaders/drawForces.frag" />
+		<shader name="drawWind" vs="shaders/drawWind.vert" gs="shaders/drawWind.geom" ps="shaders/drawWind.frag" />
 	</shaders>
 
 	<textures>
@@ -84,9 +85,9 @@
 					<valueof uniform="damping_coeff" type="COLOR" component="damping_coeff" />
 					<valueof uniform="M" type="COLOR" component="M" />
 					<valueof uniform="time_interval" type="COLOR" component="time_interval" />
-					<valueof uniform="wind_x" type="COLOR" component="wind_x" />
-					<valueof uniform="wind_y" type="COLOR" component="wind_y" />
-					<valueof uniform="wind_z" type="COLOR" component="wind_z" />
+					<valueof uniform="wind_x" type="RENDERER" component="wind_x" />
+					<valueof uniform="wind_y" type="RENDERER" component="wind_y" />
+					<valueof uniform="wind_z" type="RENDERER" component="wind_z" />
 				</values>
 			</shader>
 			<textures>
@@ -147,11 +148,17 @@
 			<shader name="drawWind">
 				<values>
 					<valueof uniform="m_pvm" type="RENDERER" component="PROJECTION_VIEW_MODEL" />
-					<valueof uniform="wind_x" type="COLOR" component="wind_x" />
-					<valueof uniform="wind_y" type="COLOR" component="wind_y" />
-					<valueof uniform="wind_z" type="COLOR" component="wind_z" />
+					<valueof uniform="wind_x" type="RENDERER" component="wind_x" context="CURRENT" />
+					<valueof uniform="wind_y" type="RENDERER" component="wind_y" context="CURRENT"/>
+					<valueof uniform="wind_z" type="RENDERER" component="wind_z" context="CURRENT"/>
 				</values>
 			</shader>
+			<buffers>
+				<buffer name="clothBuffer">
+					<TYPE value="SHADER_STORAGE" />
+					<BINDING_POINT value="1" />
+				</buffer>
+			</buffers>
 		</material>
 	</materials>
 </materialLib>

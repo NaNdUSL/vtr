@@ -1,6 +1,16 @@
 #version 430
 
+layout(std430, binding = 1) buffer clothBuffer {
+	vec4 pos[]; // 1D array of positions
+};
+
+in vec4 position;
+out int v_index;
+
 void main() {
 
-	gl_Position = vec4(0.0, 0.0, 0.0, 1.0);
+	int index = int(position.y);
+	v_index = index;
+
+	gl_Position = pos[index];
 }
