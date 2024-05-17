@@ -135,9 +135,10 @@ void main() {
 			}
 		}
 
-		float wind_intensity = length(texture(noise, text_coords[index] + int(timer * 0.0001) % 1024));
+		float wind_intensity = (sin(length(texture(noise, vec2(1 / (pos[index].x + timer * 0.0001), 1 / (pos[index].y + timer * 0.0001))))) * 2 - 1) * 2;
 
-		force += normalize(vec3(wind_x, wind_y, wind_z)) * wind_intensity * 2;
+
+		force += normalize(vec3(wind_x, wind_y, wind_z)) * wind_intensity;
 
 		if (length(force) < 0.001) force = vec3(0.0);
 
@@ -160,3 +161,19 @@ void main() {
 		gl_Position = pos[index];
 	}
 }
+
+
+
+// #version 330
+
+// in vec4 position;
+
+// void main () {
+
+// 	vec4 pos;
+// 	pos.x = gl_InstanceID / 1000;
+// 	pos.z = gl_InstanceID % 1000;
+// 	pos.y = 0; pos.w = 1;	
+// 	pos.xyz = pos.xyz * 0.15;
+// 	gl_Position = pos;	
+// }

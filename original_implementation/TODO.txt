@@ -1,5 +1,7 @@
 Aplicar mais forças para tornar isto mais realista (ver artigos). (working on it)
 
+-> Criar buffer para o vento para ser representado
+
 -> Interseções com objetos. -> working on it
 	-> buffers partilhados (acesso e update dos valores)
 	-> implementação básica de interseções????

@@ -147,6 +147,7 @@
 		<material name="drawWind">
 			<shader name="drawWind">
 				<values>
+					<valueof uniform="timer" type="RENDERER" component="TIMER" />
 					<valueof uniform="m_pvm" type="RENDERER" component="PROJECTION_VIEW_MODEL" />
 					<valueof uniform="wind_x" type="RENDERER" component="wind_x" context="CURRENT" />
 					<valueof uniform="wind_y" type="RENDERER" component="wind_y" context="CURRENT"/>
@@ -159,6 +160,9 @@
 					<BINDING_POINT value="1" />
 				</buffer>
 			</buffers>
+			<textures>
+				<texture name="noise" UNIT="0" />
+			</textures>
 		</material>
 	</materials>
 </materialLib>
