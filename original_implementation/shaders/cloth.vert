@@ -135,10 +135,12 @@ void main() {
 			}
 		}
 
-		float wind_intensity = (sin(length(texture(noise, vec2(1 / (pos[index].x + timer * 0.0001), 1 / (pos[index].y + timer * 0.0001))))) * 2 - 1) * 2;
+		if (length(vec3(wind_x, wind_y, wind_z)) != 0) {
 
+			float wind_intensity = length(texture(noise, vec2(text_coords[index].x + timer * 0.00001, text_coords[index].y + timer * 0.00001)));
 
-		force += normalize(vec3(wind_x, wind_y, wind_z)) * wind_intensity;
+			force += normalize(vec3(wind_x, wind_y, wind_z)) * wind_intensity * wind_intensity;
+		}
 
 		if (length(force) < 0.001) force = vec3(0.0);
 

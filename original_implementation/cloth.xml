@@ -9,9 +9,9 @@
 			<attribute type="COLOR" name="damping_coeff" data="FLOAT" value="10.0" />
 			<attribute type="COLOR" name="M" data="FLOAT" value="0.5" />
 			<attribute type="COLOR" name="time_interval" data="FLOAT" value="0.0" />
-			<attribute type="RENDERER" name="wind_x" data="FLOAT" value="0.1" />
-			<attribute type="RENDERER" name="wind_y" data="FLOAT" value="0.1" />
-			<attribute type="RENDERER" name="wind_z" data="FLOAT" value="0.1" />
+			<attribute type="RENDERER" name="wind_x" data="FLOAT" value="0.01" />
+			<attribute type="RENDERER" name="wind_y" data="FLOAT" value="0.01" />
+			<attribute type="RENDERER" name="wind_z" data="FLOAT" value="0.01" />
 		</attributes>
 		<scenes>
 			<scene name="Cloth">
