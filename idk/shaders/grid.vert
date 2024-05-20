@@ -1,27 +1,7 @@
 #version 430
 
-layout(std430, binding = 1) buffer clothBuffer {
+layout(std430, binding = 1) buffer cloth::clothBuffer {
 	vec4 pos[]; // 1D array of positions
-};
-
-layout(std430, binding = 2) buffer adjBuffer {
-	float adjacents[]; // 2D array of adjacents
-};
-
-layout(std430, binding = 3) buffer stuckVertBuffer {
-	float info[]; // 1D array of info
-};
-
-layout(std430, binding = 5) buffer textureBuffer {
-	vec2 text_coords[]; // 1D array of normals
-};
-
-layout(std430, binding = 6) buffer forcesBuffer {
-	vec4 forces[]; // 1D array of forces
-};
-
-layout(std430, binding = 7) buffer velocitiesBuffer {
-	vec4 vel[]; // 1D array of forces
 };
 
 uniform float wind_x;

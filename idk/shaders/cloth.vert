@@ -38,6 +38,7 @@ uniform float M;
 uniform float time_interval;
 uniform sampler2D noise;
 
+
 // uniform float windScale;
 
 in vec4 position;
@@ -80,12 +81,12 @@ bool check_stuck(int index) {
 
 void main() {
 
-	// Sphere information
+	int index = gl_VertexID;
 
-	vec3 sphereCenter = vec3(2.0, -7.0, 3.0);
-	float sphereRadius = 5;
-
-	int index = int(position.y);
+	vec4 triangle[3];
+	triangle[0] = vec4(1.0, -1.0, 1.0, 1.0);
+	triangle[1] = vec4(1.0, -1.0, 1.5, 1.0);
+	triangle[2] = vec4(1.5, -1.0, 1.0, 1.0);
 
 	if (check_stuck(index)) {
 
@@ -149,19 +150,3 @@ void main() {
 		gl_Position = pos[index];
 	}
 }
-
-
-
-// #version 330
-
-// in vec4 position;
-
-// void main () {
-
-// 	vec4 pos;
-// 	pos.x = gl_InstanceID / 1000;
-// 	pos.z = gl_InstanceID % 1000;
-// 	pos.y = 0; pos.w = 1;	
-// 	pos.xyz = pos.xyz * 0.15;
-// 	gl_Position = pos;	
-// }

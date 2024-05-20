@@ -3,21 +3,28 @@
 		
 	<assets>
 		<attributes>
-			<attribute type="COLOR" name="width" data="INT" value="10" />
-			<attribute type="COLOR" name="height" data="INT" value="10" />
-			<attribute type="COLOR" name="stiffness" data="FLOAT" value="100.0" />
-			<attribute type="COLOR" name="damping_coeff" data="FLOAT" value="10.0" />
+			<attribute type="COLOR" name="width" data="INT" value="3" />
+			<attribute type="COLOR" name="height" data="INT" value="3" />
+			<attribute type="COLOR" name="stiffness" data="FLOAT" value="10.0" />
+			<attribute type="COLOR" name="damping_coeff" data="FLOAT" value="1.0" />
 			<attribute type="COLOR" name="M" data="FLOAT" value="0.5" />
 			<attribute type="COLOR" name="time_interval" data="FLOAT" value="0.0" />
-			<attribute type="RENDERER" name="wind_x" data="FLOAT" value="0.01" />
-			<attribute type="RENDERER" name="wind_y" data="FLOAT" value="0.01" />
-			<attribute type="RENDERER" name="wind_z" data="FLOAT" value="0.01" />
+			<attribute type="RENDERER" name="wind_x" data="FLOAT" value="0.0" />
+			<attribute type="RENDERER" name="wind_y" data="FLOAT" value="0.0" />
+			<attribute type="RENDERER" name="wind_z" data="FLOAT" value="0.0" />
 		</attributes>
 		<scenes>
-			<scene name="Cloth">
+			<scene name="Cloth" param="SWAP_XZ">
+				<geometry name = "Grid" type = "GRID" LENGTH="2" DIVISIONS="2">
+					<TRANSLATE x="1" y="0" z="1" />
+					<ROTATE x="0" y="1" z="0" w="-90" />
+				</geometry>
+				<SCALE x="0.1" y="0.1" z ="0.1" />
+			</scene>
+			<!-- <scene name="Cloth" >
 				<SCALE x="0.1" y="0.1" z ="0.1" />
 				<file name="objects/cloth.obj"/>
-			</scene>
+			</scene> -->
 			<scene name="Axis">
 				<geometry name = "axis" type = "AXIS"  >
 					<SCALE x="5" y="5" z ="5" />
@@ -27,7 +34,6 @@
 		
 		<viewports>
 			<viewport name="MainViewport" >
-				<!-- <SIZE width="1280" height= "1024" /> -->
 				<CLEAR_COLOR r="0.4" b = "0.2" g = "0.1" />
 			</viewport>
 		</viewports>
@@ -35,7 +41,7 @@
 		<cameras>
 			<camera name="main" >
 				<viewport name="MainViewport" />
-				<POSITION x="1.4" y="0.5" z="1.4" />
+				<POSITION x="1.4" y="1" z="1.4" />
 				<LOOK_AT_POINT x="0" y="0" z="0" />
 				<FOV value="70"/>
 				<NEAR value="0.01" />
@@ -80,7 +86,7 @@
 					<map fromMaterial="*" toMaterial="cloth" toLibrary="cloth" />
 				</materialMaps>
 			</pass>
-			<!-- <pass name="drawForces" class="default">
+			<pass name="drawForces" class="default">
 				<COLOR_CLEAR value="false" />
 				<DEPTH_CLEAR value="false" />
 				<scenes>
@@ -101,7 +107,7 @@
 				<materialMaps>
 					<map fromMaterial="*" toMaterial="drawWind" toLibrary="cloth" />
 				</materialMaps>
-			</pass> -->
+			</pass>
 			<pass name="axis" class="default">
 				<COLOR_CLEAR value="false" />
 				<DEPTH_CLEAR value="false" />
