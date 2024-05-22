@@ -88,6 +88,7 @@
 					<valueof uniform="wind_x" type="RENDERER" component="wind_x" />
 					<valueof uniform="wind_y" type="RENDERER" component="wind_y" />
 					<valueof uniform="wind_z" type="RENDERER" component="wind_z" />
+					<valueof uniform="marbel_radius" type="RENDERER" component="marbel_radius" />
 				</values>
 			</shader>
 			<textures>
@@ -151,8 +152,8 @@
 					<valueof uniform="m_pvm" type="RENDERER" component="PROJECTION_VIEW_MODEL" />
 					<valueof uniform="noise" type="TEXTURE_BINDING" component="UNIT" id="4" />
 					<valueof uniform="wind_x" type="RENDERER" component="wind_x" context="CURRENT" />
-					<valueof uniform="wind_y" type="RENDERER" component="wind_y" context="CURRENT"/>
-					<valueof uniform="wind_z" type="RENDERER" component="wind_z" context="CURRENT"/>
+					<valueof uniform="wind_y" type="RENDERER" component="wind_y" context="CURRENT" />
+					<valueof uniform="wind_z" type="RENDERER" component="wind_z" context="CURRENT" />
 				</values>
 			</shader>
 			<buffers>

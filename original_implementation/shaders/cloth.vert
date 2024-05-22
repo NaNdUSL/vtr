@@ -38,6 +38,8 @@ uniform float M;
 uniform float time_interval;
 uniform sampler2D noise;
 
+uniform float marbel_radius;
+
 // uniform float windScale;
 
 in vec4 position;
@@ -78,6 +80,25 @@ bool check_stuck(int index) {
 	return false;
 }
 
+bool is_adjacent(int index, int is_adj) {
+
+	int x = index % width;
+	int z = index / width;
+
+	for (int j = 0; j < 3; j++) {
+
+		for (int i = 0; i < 3; i++) {
+
+			if (adjacents[(index * 9) + i + j * 3] > 0 && x + i - 1 + ((z + j - 1) * width) == is_adj) {
+
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
 void main() {
 
 	// Sphere information
@@ -99,22 +120,9 @@ void main() {
 
 		force += vec3(0.0, -9.8, 0.0) * M;
 
-		int x = 0;
-		int z = 0;
+		int x = index % width;
+		int z = index / width;
 		bool found = false;
-
-		for (int j = 0; !found && j < height; j++) {
-			
-			for (int i = 0; !found && i < width; i++) {
-
-				if (j * width + i == index) {
-
-					x = i;
-					z = j;
-					found = true;
-				}
-			}
-		}
 
 		for (int j = 0; j < 3; j++) {
 
@@ -140,6 +148,16 @@ void main() {
 		vec3 a = force / M;
 		vec3 new_vel = vel[index].xyz + a * time_interval;
 		vec4 new_pos = pos[index] + vec4(new_vel * time_interval, 0.0);
+
+		for (int i = 0; i < height * width; i++) {
+
+			if (i != index && !is_adjacent(index, i) && length(new_pos.xyz - pos[i].xyz) < 2 * marbel_radius) {
+
+				vec3 n = normalize(new_pos.xyz - pos[i].xyz);
+				new_pos.xyz = pos[i].xyz + n * 2 * marbel_radius;
+				new_vel = vec3(0.0);
+			}
+		}
 
 		forces[index] = vec4(force, length(force));
 		pos[index] = new_pos;
