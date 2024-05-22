@@ -212,10 +212,31 @@ class ClothGenerator:
 		# Write the changes back to the file
 		tree.write('../cloth.mlib')
 
+		with open('../cloth.xml', 'r') as f:
+			
+			lines = f.readlines()
+			xml_content = "".join(lines)
+
+			root_1 = ET.fromstring(xml_content)
+			tree_1 = ET.ElementTree(root_1)  # Create an ElementTree object
+			# Find and update width and height attributes
+			for attribute in tree_1.iter('attribute'):
+
+				if attribute.attrib['name'] == 'width':
+
+					attribute.attrib['value'] = str(self.width)
+
+				elif attribute.attrib['name'] == 'height':
+
+					attribute.attrib['value'] = str(self.height)
+
+			# Write changes back to the XML file
+			tree_1.write('../cloth.xml')
+
 # Generate cloth mesh and write .obj file
-height = 10
-width = 10
-cloth_gen = ClothGenerator(height, width, [(width * height - 1) / 2])
+height = 20
+width = 20
+cloth_gen = ClothGenerator(height, width, [(width * height - 1) / 2 - (width / 2)])
 cloth_gen.generate_cloth_mesh()
 cloth_gen.write_obj_file('../objects/cloth.obj')
 

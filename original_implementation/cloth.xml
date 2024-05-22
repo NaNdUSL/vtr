@@ -1,62 +1,61 @@
-<?xml version="1.0" ?>
 <project name="Cloth" width="900" height="900">
 
 	<assets>
 		<attributes>
-			<attribute type="COLOR" name="width" data="INT" value="10" />
-			<attribute type="COLOR" name="height" data="INT" value="10" />
+			<attribute type="COLOR" name="width" data="INT" value="50" />
+			<attribute type="COLOR" name="height" data="INT" value="50" />
 			<attribute type="COLOR" name="stiffness" data="FLOAT" value="100.0" />
 			<attribute type="COLOR" name="damping_coeff" data="FLOAT" value="10.0" />
 			<attribute type="COLOR" name="M" data="FLOAT" value="0.5" />
 			<attribute type="COLOR" name="time_interval" data="FLOAT" value="0.0" />
-			<attribute type="RENDERER" name="wind_x" data="FLOAT" value="0.01" />
-			<attribute type="RENDERER" name="wind_y" data="FLOAT" value="0.01" />
-			<attribute type="RENDERER" name="wind_z" data="FLOAT" value="0.01" />
+			<attribute type="RENDERER" name="wind_x" data="FLOAT" value="0.0" />
+			<attribute type="RENDERER" name="wind_y" data="FLOAT" value="0.0" />
+			<attribute type="RENDERER" name="wind_z" data="FLOAT" value="0.0" />
 			<attribute type="RENDERER" name="marbel_radius" data="FLOAT" value="0.1" />
 		</attributes>
 		<scenes>
 			<scene name="Cloth">
-				<SCALE x="0.1" y="0.1" z ="0.1" />
-				<file name="objects/cloth.obj"/>
+				<SCALE x="0.1" y="0.1" z="0.1" />
+				<file name="objects/cloth.obj" />
 			</scene>
 			<scene name="Axis">
-				<geometry name = "axis" type = "AXIS"  >
-					<SCALE x="5" y="5" z ="5" />
+				<geometry name="axis" type="AXIS">
+					<SCALE x="5" y="5" z="5" />
 				</geometry>
 			</scene>
 		</scenes>
 
 		<viewports>
-			<viewport name="MainViewport" >
-				<CLEAR_COLOR r="0.4" b = "0.2" g = "0.1" />
+			<viewport name="MainViewport">
+				<CLEAR_COLOR r="0.4" b="0.2" g="0.1" />
 			</viewport>
 		</viewports>
 
 		<cameras>
-			<camera name="main" >
+			<camera name="main">
 				<viewport name="MainViewport" />
 				<POSITION x="1.4" y="0.5" z="1.4" />
 				<LOOK_AT_POINT x="0" y="0" z="0" />
-				<FOV value="70"/>
+				<FOV value="70" />
 				<NEAR value="0.01" />
 			</camera>
 
-			<camera name="side" >
+			<camera name="side">
 				<viewport name="MainViewport" />
 				<POSITION x="0.402" y="0.774" z="0" />
 				<LOOK_AT_POINT x="0" y="0" z="0" />
-				<FOV value="100"/>
+				<FOV value="100" />
 				<NEAR value="0.01" />
 			</camera>
 		</cameras>
 
 		<lights>
-			<light name="sun" >
-				<DIRECTION x="-5" y="-5" z = "-5" />
+			<light name="sun">
+				<DIRECTION x="-5" y="-5" z="-5" />
 			</light>
 			
-			<light name="lamp" >
-				<POSITION x="0" y="2" z = "0" />
+			<light name="lamp">
+				<POSITION x="0" y="2" z="0" />
 				<SPOT_DIRECTION x="0" y="-1" z="0" />
 				<SPOT_CUTOFF value="0.8" />
 			</light>
@@ -67,7 +66,7 @@
 		</materialLibs>
 	</assets>
 	<pipelines>
-		<pipeline name="cloth" >
+		<pipeline name="cloth">
 			<pass name="cloth" class="default">
 				<scenes>
 					<scene name="Cloth" />
@@ -80,7 +79,7 @@
 					<map fromMaterial="*" toMaterial="cloth" toLibrary="cloth" />
 				</materialMaps>
 			</pass>
-			<pass name="drawForces" class="default">
+			<!-- <pass name="drawForces" class="default">
 				<COLOR_CLEAR value="false" />
 				<DEPTH_CLEAR value="false" />
 				<scenes>
@@ -101,7 +100,7 @@
 				<materialMaps>
 					<map fromMaterial="*" toMaterial="drawWind" toLibrary="cloth" />
 				</materialMaps>
-			</pass>
+			</pass> -->
 			<pass name="axis" class="default">
 				<COLOR_CLEAR value="false" />
 				<DEPTH_CLEAR value="false" />
@@ -115,14 +114,14 @@
 
 	<interface>
 		<window label="Main Window">
-			<var label="stiffness" type="COLOR" context="cloth::cloth" component="stiffness" def="min=1 max=1000 step=10"/>
-			<var label="Damping" type="COLOR" context="cloth::cloth" component="damping_coeff" def="min=1 max=1000 step=10"/>
-			<var label="M" type="COLOR" context="cloth::cloth" component="M" def="min=0.01 max=10 step=0.01"/>
-			<var label="Timer" type="COLOR" context="cloth::cloth" component="time_interval" def="min=0 max=0.01 step=0.0001"/>
-			<var label="WindX" type="RENDERER" context="cloth::cloth" component="wind_x" def="min=-10 max=10 step=0.01"/>
-			<var label="WindY" type="RENDERER" context="cloth::cloth" component="wind_y" def="min=-10 max=10 step=0.01"/>
-			<var label="WindZ" type="RENDERER" context="cloth::cloth" component="wind_z" def="min=-10 max=10 step=0.01"/>
-			<var label="Marbel" type="RENDERER" context="cloth::cloth" component="marbel_radius" def="min=0 max=10 step=0.01"/>
+			<var label="stiffness" type="COLOR" context="cloth::cloth" component="stiffness" def="min=1 max=1000 step=10" />
+			<var label="Damping" type="COLOR" context="cloth::cloth" component="damping_coeff" def="min=1 max=1000 step=10" />
+			<var label="M" type="COLOR" context="cloth::cloth" component="M" def="min=0.01 max=10 step=0.01" />
+			<var label="Timer" type="COLOR" context="cloth::cloth" component="time_interval" def="min=0 max=0.01 step=0.0001" />
+			<var label="WindX" type="RENDERER" context="cloth::cloth" component="wind_x" def="min=-10 max=10 step=0.01" />
+			<var label="WindY" type="RENDERER" context="cloth::cloth" component="wind_y" def="min=-10 max=10 step=0.01" />
+			<var label="WindZ" type="RENDERER" context="cloth::cloth" component="wind_z" def="min=-10 max=10 step=0.01" />
+			<var label="Marbel" type="RENDERER" context="cloth::cloth" component="marbel_radius" def="min=0 max=10 step=0.01" />
 		</window>
 	</interface>
 </project>
