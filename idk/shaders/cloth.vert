@@ -83,11 +83,6 @@ void main() {
 
 	int index = gl_VertexID;
 
-	vec4 triangle[3];
-	triangle[0] = vec4(1.0, -1.0, 1.0, 1.0);
-	triangle[1] = vec4(1.0, -1.0, 1.5, 1.0);
-	triangle[2] = vec4(1.5, -1.0, 1.0, 1.0);
-
 	if (check_stuck(index)) {
 
 		v_index = index;

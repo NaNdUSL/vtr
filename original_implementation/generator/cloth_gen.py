@@ -161,7 +161,7 @@ class ClothGenerator:
 
 			for _ in self.vertices:
 
-				f.write(f"0.0 1.0 0.0\n")
+				f.write(f"0.0 0.0 0.0 0.0\n")
 
 		with open('../buffers/cloth_texture_coords_info.txt', 'w') as f:
 
@@ -234,8 +234,8 @@ class ClothGenerator:
 			tree_1.write('../cloth.xml')
 
 # Generate cloth mesh and write .obj file
-height = 20
-width = 20
+height = 10
+width = 10
 cloth_gen = ClothGenerator(height, width, [(width * height - 1) / 2 - (width / 2)])
 cloth_gen.generate_cloth_mesh()
 cloth_gen.write_obj_file('../objects/cloth.obj')

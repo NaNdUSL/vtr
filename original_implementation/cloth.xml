@@ -2,8 +2,8 @@
 
 	<assets>
 		<attributes>
-			<attribute type="COLOR" name="width" data="INT" value="50" />
-			<attribute type="COLOR" name="height" data="INT" value="50" />
+			<attribute type="COLOR" name="width" data="INT" value="10" />
+			<attribute type="COLOR" name="height" data="INT" value="10" />
 			<attribute type="COLOR" name="stiffness" data="FLOAT" value="100.0" />
 			<attribute type="COLOR" name="damping_coeff" data="FLOAT" value="10.0" />
 			<attribute type="COLOR" name="M" data="FLOAT" value="0.5" />
@@ -14,7 +14,7 @@
 			<attribute type="RENDERER" name="marbel_radius" data="FLOAT" value="0.1" />
 		</attributes>
 		<scenes>
-			<scene name="Cloth">
+			<scene name="Cloth" params="SWAP_XY">
 				<SCALE x="0.1" y="0.1" z="0.1" />
 				<file name="objects/cloth.obj" />
 			</scene>
@@ -79,7 +79,8 @@
 					<map fromMaterial="*" toMaterial="cloth" toLibrary="cloth" />
 				</materialMaps>
 			</pass>
-			<!-- <pass name="drawForces" class="default">
+			
+			<pass name="drawNormals" class="default">
 				<COLOR_CLEAR value="false" />
 				<DEPTH_CLEAR value="false" />
 				<scenes>
@@ -87,20 +88,9 @@
 				</scenes>
 				<camera name="main" />
 				<materialMaps>
-					<map fromMaterial="*" toMaterial="drawForces" toLibrary="cloth" />
+					<map fromMaterial="*" toMaterial="drawNormals" toLibrary="cloth" />
 				</materialMaps>
 			</pass>
-			<pass name="drawWind" class="default">
-				<COLOR_CLEAR value="false" />
-				<DEPTH_CLEAR value="false" />
-				<scenes>
-					<scene name="Cloth" />
-				</scenes>
-				<camera name="main" />
-				<materialMaps>
-					<map fromMaterial="*" toMaterial="drawWind" toLibrary="cloth" />
-				</materialMaps>
-			</pass> -->
 			<pass name="axis" class="default">
 				<COLOR_CLEAR value="false" />
 				<DEPTH_CLEAR value="false" />

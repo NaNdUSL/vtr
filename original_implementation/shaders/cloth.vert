@@ -124,12 +124,15 @@ void main() {
 		int z = index / width;
 		bool found = false;
 
+		// normals[index] = vec3(0.0);
+
 		for (int j = 0; j < 3; j++) {
 
 			for (int i = 0; i < 3; i++) {
 
 				if (adjacents[(index * 9) + i + j * 3] > 0) {
 
+					// normals[index] += normalize(normals[x + i - 1 + ((z + j - 1) * width)]);
 					vec3 f = hookes_law(pos[index].xyz, pos[x + i - 1 + ((z + j - 1) * width)].xyz, stiffness, adjacents[(index * 9) + i + j * 3]) + damping_force(pos[index].xyz, pos[x + i - 1 + ((z + j - 1) * width)].xyz, vel[index], vel[x + i - 1 + ((z + j - 1) * width)], damping_coeff);
 					force += f;
 				}
