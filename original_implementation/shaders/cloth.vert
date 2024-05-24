@@ -158,7 +158,7 @@ void main() {
 
 				vec3 n = normalize(new_pos.xyz - pos[i].xyz);
 				new_pos.xyz = pos[i].xyz + n * 2 * marbel_radius;
-				new_vel = vec3(0.0);
+				new_vel = -vel[index].xyz;
 			}
 		}
 

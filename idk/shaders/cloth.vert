@@ -38,7 +38,6 @@ uniform float M;
 uniform float time_interval;
 uniform sampler2D noise;
 
-
 // uniform float windScale;
 
 in vec4 position;

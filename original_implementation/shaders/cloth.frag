@@ -26,6 +26,7 @@ void main() {
 
 	// compute light direction in camera space
 	vec3 l = normalize(vec3(m_view * -l_dir));
+	normals[vert_index] = vec4(0.0, 1.0, 0.0, 0.0);
 	vec3 nn = normalize(m_normal * normalize(normals[vert_index]).xyz);
 	float i = max(0.0, dot(l,nn));
 	normals[vert_index] = vec4(0.0);

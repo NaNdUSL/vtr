@@ -14,7 +14,7 @@
 
 	<buffers>
 		<buffer name="clothBuffer">
-			<DIM x="100" y="1" z="1" />
+			<DIM x="625" y="1" z="1" />
 			<file name="buffers/cloth_buffer_info.txt" />
 			<structure>
 				<field value="VEC4" />
@@ -22,7 +22,7 @@
 		</buffer>
 
 		<buffer name="adjBuffer">
-			<DIM x="900" y="1" z="1" />
+			<DIM x="5625" y="1" z="1" />
 			<file name="buffers/cloth_adj_info.txt" />
 			<structure>
 				<field value="FLOAT" />
@@ -30,7 +30,7 @@
 		</buffer>
 
 		<buffer name="stuckVertBuffer">
-			<DIM x="3" y="1" z="1" />
+			<DIM x="5" y="1" z="1" />
 			<file name="buffers/cloth_stuck_vert.txt" />
 			<structure>
 				<field value="FLOAT" />
@@ -38,7 +38,7 @@
 		</buffer>
 
 		<buffer name="normalsBuffer">
-			<DIM x="100" y="1" z="1" />
+			<DIM x="625" y="1" z="1" />
 			<file name="buffers/cloth_normals_info.txt" />
 			<structure>
 				<field value="VEC4" />
@@ -46,7 +46,7 @@
 		</buffer>
 
 		<buffer name="textureBuffer">
-			<DIM x="100" y="1" z="1" />
+			<DIM x="625" y="1" z="1" />
 			<file name="buffers/cloth_texture_coords_info.txt" />
 			<structure>
 				<field value="VEC2" />
@@ -54,7 +54,7 @@
 		</buffer>
 		
 		<buffer name="forcesBuffer">
-			<DIM x="100" y="1" z="1" />
+			<DIM x="625" y="1" z="1" />
 			<file name="buffers/cloth_forces_buffer.txt" />
 			<structure>
 				<field value="VEC4" />
@@ -62,7 +62,7 @@
 		</buffer>
 
 		<buffer name="velocitiesBuffer">
-			<DIM x="100" y="1" z="1" />
+			<DIM x="625" y="1" z="1" />
 			<file name="buffers/cloth_velocities_buffer.txt" />
 			<structure>
 				<field value="VEC4" />

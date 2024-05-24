@@ -2,8 +2,8 @@
 
 	<assets>
 		<attributes>
-			<attribute type="COLOR" name="width" data="INT" value="10" />
-			<attribute type="COLOR" name="height" data="INT" value="10" />
+			<attribute type="COLOR" name="width" data="INT" value="25" />
+			<attribute type="COLOR" name="height" data="INT" value="25" />
 			<attribute type="COLOR" name="stiffness" data="FLOAT" value="100.0" />
 			<attribute type="COLOR" name="damping_coeff" data="FLOAT" value="10.0" />
 			<attribute type="COLOR" name="M" data="FLOAT" value="0.5" />
@@ -11,11 +11,10 @@
 			<attribute type="RENDERER" name="wind_x" data="FLOAT" value="0.0" />
 			<attribute type="RENDERER" name="wind_y" data="FLOAT" value="0.0" />
 			<attribute type="RENDERER" name="wind_z" data="FLOAT" value="0.0" />
-			<attribute type="RENDERER" name="marbel_radius" data="FLOAT" value="0.1" />
+			<attribute type="RENDERER" name="marbel_radius" data="FLOAT" value="0.0" />
 		</attributes>
 		<scenes>
 			<scene name="Cloth" params="SWAP_XY">
-				<SCALE x="0.1" y="0.1" z="0.1" />
 				<file name="objects/cloth.obj" />
 			</scene>
 			<scene name="Axis">
@@ -80,17 +79,7 @@
 				</materialMaps>
 			</pass>
 			
-			<pass name="drawNormals" class="default">
-				<COLOR_CLEAR value="false" />
-				<DEPTH_CLEAR value="false" />
-				<scenes>
-					<scene name="Cloth" />
-				</scenes>
-				<camera name="main" />
-				<materialMaps>
-					<map fromMaterial="*" toMaterial="drawNormals" toLibrary="cloth" />
-				</materialMaps>
-			</pass>
+			
 			<pass name="axis" class="default">
 				<COLOR_CLEAR value="false" />
 				<DEPTH_CLEAR value="false" />
@@ -105,13 +94,13 @@
 	<interface>
 		<window label="Main Window">
 			<var label="stiffness" type="COLOR" context="cloth::cloth" component="stiffness" def="min=1 max=1000 step=10" />
-			<var label="Damping" type="COLOR" context="cloth::cloth" component="damping_coeff" def="min=1 max=1000 step=10" />
+			<var label="Damping" type="COLOR" context="cloth::cloth" component="damping_coeff" def="min=0.01 max=20 step=0.01" />
 			<var label="M" type="COLOR" context="cloth::cloth" component="M" def="min=0.01 max=10 step=0.01" />
 			<var label="Timer" type="COLOR" context="cloth::cloth" component="time_interval" def="min=0 max=0.01 step=0.0001" />
 			<var label="WindX" type="RENDERER" context="cloth::cloth" component="wind_x" def="min=-10 max=10 step=0.01" />
 			<var label="WindY" type="RENDERER" context="cloth::cloth" component="wind_y" def="min=-10 max=10 step=0.01" />
 			<var label="WindZ" type="RENDERER" context="cloth::cloth" component="wind_z" def="min=-10 max=10 step=0.01" />
-			<var label="Marbel" type="RENDERER" context="cloth::cloth" component="marbel_radius" def="min=0 max=10 step=0.01" />
+			<var label="Marbel" type="RENDERER" context="cloth::cloth" component="marbel_radius" def="min=0 max=0.2 step=0.01" />
 		</window>
 	</interface>
 </project>
