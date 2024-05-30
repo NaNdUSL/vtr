@@ -12,6 +12,10 @@ layout(std430, binding = 3) buffer stuckVertBuffer {
 	float info[]; // 1D array of info
 };
 
+layout(std430, binding = 4) buffer normalsBuffer {
+	vec4 normals[]; // 1D array of normals
+};
+
 layout(std430, binding = 5) buffer textureBuffer {
 	vec2 text_coords[]; // 1D array of normals
 };
@@ -43,6 +47,8 @@ uniform float marbel_radius;
 // uniform float windScale;
 
 in vec4 position;
+
+out vec3 normal;
 out int v_index;
 
 vec3 hookes_law(vec3 p1, vec3 p2, float stiffness, float edge_distance) {
@@ -108,81 +114,56 @@ void main() {
 
 	int index = int(position.y);
 
-	if (check_stuck(index)) {
+	vec3 force = vec3(0.0);
+	vec3 norm = vec3(0.0);
 
-		v_index = index;
-		gl_Position = pos[index];
-		forces[index] = vec4(0.0, 0.0, 0.0, 0.0);
-	}
-	else {
+	force += vec3(0.0, -9.8, 0.0) * M;
 
-		vec3 force = vec3(0);
+	int x = index % width;
+	int z = index / width;
+	bool found = false;
 
-		force += vec3(0.0, -9.8, 0.0) * M;
+	for (int j = 0; j < 3; j++) {
 
-		int x = index % width;
-		int z = index / width;
-		bool found = false;
+		for (int i = 0; i < 3; i++) {
 
-		// normals[index] = vec3(0.0);
+			if (adjacents[(index * 9) + i + j * 3] > 0) {
 
-		for (int j = 0; j < 3; j++) {
-
-			for (int i = 0; i < 3; i++) {
-
-				if (adjacents[(index * 9) + i + j * 3] > 0) {
-
-					// normals[index] += normalize(normals[x + i - 1 + ((z + j - 1) * width)]);
-					vec3 f = hookes_law(pos[index].xyz, pos[x + i - 1 + ((z + j - 1) * width)].xyz, stiffness, adjacents[(index * 9) + i + j * 3]) + damping_force(pos[index].xyz, pos[x + i - 1 + ((z + j - 1) * width)].xyz, vel[index], vel[x + i - 1 + ((z + j - 1) * width)], damping_coeff);
-					force += f;
-				}
+				norm += normals[x + i - 1 + ((z + j - 1) * width)].xyz;
+				vec3 f = hookes_law(pos[index].xyz, pos[x + i - 1 + ((z + j - 1) * width)].xyz, stiffness, adjacents[(index * 9) + i + j * 3]) + damping_force(pos[index].xyz, pos[x + i - 1 + ((z + j - 1) * width)].xyz, vel[index], vel[x + i - 1 + ((z + j - 1) * width)], damping_coeff);
+				force += f;
 			}
 		}
-
-		if (length(vec3(wind_x, wind_y, wind_z)) != 0) {
-
-			float wind_intensity = length(texture(noise, vec2(text_coords[index].x + timer * 0.00001, text_coords[index].y + timer * 0.00001)));
-
-			force += normalize(vec3(wind_x, wind_y, wind_z)) * wind_intensity * wind_intensity;
-		}
-
-		if (length(force) < 0.001) force = vec3(0.0);
-
-		vec3 a = force / M;
-		vec3 new_vel = vel[index].xyz + a * time_interval;
-		vec4 new_pos = pos[index] + vec4(new_vel * time_interval, 0.0);
-
-		for (int i = 0; i < height * width; i++) {
-
-			if (i != index && !is_adjacent(index, i) && length(new_pos.xyz - pos[i].xyz) < 2 * marbel_radius) {
-
-				vec3 n = normalize(new_pos.xyz - pos[i].xyz);
-				new_pos.xyz = pos[i].xyz + n * 2 * marbel_radius;
-				new_vel = -vel[index].xyz;
-			}
-		}
-
-		forces[index] = vec4(force, length(force));
-		pos[index] = new_pos;
-		vel[index] = vec4(new_vel, 0.0);
-		v_index = index;
-
-		gl_Position = pos[index];
 	}
+
+	if (length(vec3(wind_x, wind_y, wind_z)) != 0) {
+
+		float wind_intensity = length(texture(noise, vec2(text_coords[index].x + timer * 0.00001, text_coords[index].y + timer * 0.00001)));
+
+		force += normalize(vec3(wind_x, wind_y, wind_z)) * wind_intensity * wind_intensity;
+	}
+
+	if (length(force) < 0.001 || check_stuck(index)) force = vec3(0.0);
+
+	vec3 a = force / M;
+	vec3 new_vel = vel[index].xyz + a * time_interval;
+	vec4 new_pos = pos[index] + vec4(new_vel * time_interval, 0.0);
+
+	for (int i = 0; i < height * width; i++) {
+
+		if (i != index && !is_adjacent(index, i) && length(new_pos.xyz - pos[i].xyz) < 2 * marbel_radius) {
+
+			vec3 n = normalize(new_pos.xyz - pos[i].xyz);
+			new_pos.xyz = pos[i].xyz + n * 2 * marbel_radius;
+			new_vel = -vel[index].xyz;
+		}
+	}
+
+	forces[index] = vec4(force, length(force));
+	pos[index] = new_pos;
+	vel[index] = vec4(new_vel, 0.0);
+	normals[index] = vec4(0.0);
+	normal = normalize(norm);
+	v_index = index;
+	gl_Position = pos[index];
 }
-
-
-
-// #version 330
-
-// in vec4 position;
-
-// void main () {
-
-// 	vec4 pos;
-// 	pos.x = gl_InstanceID / 1000;
-// 	pos.z = gl_InstanceID % 1000;
-// 	pos.y = 0; pos.w = 1;	
-// 	pos.xyz = pos.xyz * 0.15;
-// 	gl_Position = pos;	
-// }

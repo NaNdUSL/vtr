@@ -1,28 +1,5 @@
-Aplicar mais forças para tornar isto mais realista (ver artigos). (working on it)
-
--> Criar buffer para o vento para ser representado
-
 -> Interseções com objetos. -> working on it
-	-> buffers partilhados (acesso e update dos valores)
-	-> implementação básica de interseções????
-	-> Interseções com a própria cloth.
 
--> representar vetores (vento, forças...)
-
-Possíveis melhorias depois do trabalho base (se tivermos tempo para tal):
-
-	-> Novos view ports (lazy to write yet)
-	-> Usar de alguma maneira um compute shader para meter concurrência nesta porra. (Isto é um maybe muito grande)?????????? (yeah i think not)
-	-> Mexer a cloth com o rato. (probably not) (jorget this one no cap)
-
-
-
-
-
-->>>>>>>>>>>>>>>>>>>>>>>>>>
-
-
-
-adicionar mais info no buffer para não estar a fazer fors desnecessários
-mexer no generator
-tratar das normais que preciso da resposta do stor...
+	-> implementação básica de interseções (vai ser só esferas, o reste envolve mais trabalho e complicação e não temos tempo pra isso)
+	-> Interseções com a própria cloth. (a implementação simples das marbels do mano) done
+	-> adicionar um chão e calcular as forças corretamente quando intersetar

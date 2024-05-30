@@ -14,17 +14,17 @@
 			<attribute type="RENDERER" name="wind_z" data="FLOAT" value="0.0" />
 		</attributes>
 		<scenes>
-			<scene name="Cloth" param="SWAP_XZ">
+			<scene name="Grid" param="SWAP_XZ">
 				<geometry name = "Grid" type = "GRID" LENGTH="2" DIVISIONS="2">
 					<TRANSLATE x="1" y="0" z="1" />
 					<ROTATE x="0" y="1" z="0" w="-90" />
 				</geometry>
 				<SCALE x="0.1" y="0.1" z ="0.1" />
 			</scene>
-			<!-- <scene name="Cloth" >
+			<scene name="Cloth" >
 				<SCALE x="0.1" y="0.1" z ="0.1" />
 				<file name="objects/cloth.obj"/>
-			</scene> -->
+			</scene>
 			<scene name="Axis">
 				<geometry name = "axis" type = "AXIS"  >
 					<SCALE x="5" y="5" z ="5" />
@@ -131,3 +131,11 @@
 		</window>
 	</interface>
 </project>
+
+<!-- caderneta pedial??? -> portal das financas
+declaração do irs -> portal das financas
+declaracao sobre compromisso de honra (titulo)
+eu fernando ... pg50002, declaro sobre compromisso de honra que o valor total do patrimonio mobiliario, em nome do todo o meu agregado familiar, à data de 31 de dezembro de 2022 era de x euros. 28 maio
+soma do saldo de todas as contas em 31 de dezembro de 2022
+comprovativo do ano de 2022 da bolsa de doutoramento
+contrato/recivos -->

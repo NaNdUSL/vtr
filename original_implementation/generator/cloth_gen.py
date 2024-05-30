@@ -26,7 +26,7 @@ class ClothGenerator:
 
 			for x in range(self.divisions_v):
 
-				self.vertices.append([x * self.width / self.divisions_h, 0, z * self.height / self.divisions_v])
+				self.vertices.append([x * self.width / (self.divisions_h - 1), 0, z * self.height / (self.divisions_v - 1)])
 
 				text_coords_front.append([z / (self.divisions_v - 1), x / (self.divisions_h - 1)])
 				text_coords_back.append([((-z - 1) % self.divisions_v) / (self.divisions_v - 1), ((-x - 1) % self.divisions_h) / (self.divisions_h - 1)])
@@ -202,14 +202,14 @@ class ClothGenerator:
 
 		# Find the buffers element
 		buffers = root.find('buffers')
-		print(values['stuckVertBuffer'])
+		# print(values['stuckVertBuffer'])
 
 		for buffer in buffers.findall('buffer'):
 			# Get the name of the buffer
 			name = buffer.get('name')
 			# If the name is in the values dictionary, update the DIM values
 			if name in values:
-				print(name)
+				# print(name)
 				dim = buffer.find('DIM')
 				dim.set('x', values[name]['x'])
 				dim.set('y', values[name]['y'])
@@ -236,14 +236,27 @@ class ClothGenerator:
 
 					attribute.attrib['value'] = str(self.divisions_v)
 
+			for geometry in tree_1.iter('geometry'):
+
+				if geometry.attrib['name'] == 'Grid':
+
+					geometry.attrib['LENGTH'] = str(self.width)
+					geometry.attrib['DIVISIONS'] = str(self.divisions_h - 1)
+
+					new_translate = {'x': str(self.width/2), 'y': str(self.width/2), 'z': str(self.width/2)}
+
+					for translate in geometry.iter('TRANSLATE'):
+						translate.attrib.update(new_translate)
+
 			# Write changes back to the XML file
 			tree_1.write('../cloth.xml')
 
 # Generate cloth mesh and write .obj file
 divisions_h = 25
 divisions_v = 25
-height = 1
-width = 1
-cloth_gen = ClothGenerator(height, width, divisions_h, divisions_v, [0, divisions_h - 1, (divisions_v * divisions_h) - divisions_h, (divisions_v * divisions_h) - 1])
+height = 1.0
+width = 1.0
+cloth_gen = ClothGenerator(height, width, divisions_h, divisions_v, [0, 24])
+# cloth_gen = ClothGenerator(height, width, divisions_h, divisions_v, [0, divisions_h - 1, (divisions_v * divisions_h) - divisions_h, (divisions_v * divisions_h) - 1])
 cloth_gen.generate_cloth_mesh()
 cloth_gen.write_obj_file('../objects/cloth.obj')

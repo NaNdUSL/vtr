@@ -30,7 +30,7 @@
 		</buffer>
 
 		<buffer name="stuckVertBuffer">
-			<DIM x="5" y="1" z="1" />
+			<DIM x="3" y="1" z="1" />
 			<file name="buffers/cloth_stuck_vert.txt" />
 			<structure>
 				<field value="FLOAT" />
@@ -94,7 +94,6 @@
 			</shader>
 			<textures>
 				<texture name="teapot" UNIT="0" />
-				<texture name="noise" UNIT="0" />
 			</textures>
 			<buffers>
 				<buffer name="clothBuffer">
@@ -176,7 +175,6 @@
 			<shader name="drawNormals">
 				<values>
 					<valueof uniform="m_pvm" type="RENDERER" component="PROJECTION_VIEW_MODEL" />
-					<valueof uniform="m_normal" type="RENDERER" component="NORMAL" />
 				</values>
 			</shader>
 			<buffers>
