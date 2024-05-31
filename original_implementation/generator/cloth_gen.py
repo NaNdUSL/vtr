@@ -1,3 +1,4 @@
+from lxml import etree
 import xml.etree.ElementTree as ET
 
 class ClothGenerator:
@@ -218,38 +219,29 @@ class ClothGenerator:
 		# Write the changes back to the file
 		tree.write('../cloth.mlib')
 
-		with open('../cloth.xml', 'r') as f:
-			
-			lines = f.readlines()
-			xml_content = "".join(lines)
+		parser = etree.XMLParser(remove_blank_text=True)
+		tree_1 = etree.parse('../cloth.xml', parser)
 
-			root_1 = ET.fromstring(xml_content)
-			tree_1 = ET.ElementTree(root_1) # Create an ElementTree object
-			# Find and update width and height attributes
-			for attribute in tree_1.iter('attribute'):
+		for attribute in tree_1.iter('attribute'):
+			if attribute.attrib['name'] == 'width':
+				attribute.attrib['value'] = str(self.divisions_h)
+			elif attribute.attrib['name'] == 'height':
+				attribute.attrib['value'] = str(self.divisions_v)
 
-				if attribute.attrib['name'] == 'width':
+		for geometry in tree_1.iter('geometry'):
 
-					attribute.attrib['value'] = str(self.divisions_h)
+			if geometry.attrib['name'] == 'Grid':
 
-				elif attribute.attrib['name'] == 'height':
+				geometry.attrib['LENGTH'] = str(self.width)
+				geometry.attrib['DIVISIONS'] = str(self.divisions_h - 1)
 
-					attribute.attrib['value'] = str(self.divisions_v)
+				new_translate = {'x': str(self.width/2), 'y': str(self.width/2), 'z': str(self.width/2)}
 
-			for geometry in tree_1.iter('geometry'):
+				for translate in geometry.iter('TRANSLATE'):
+					translate.attrib.update(new_translate)
 
-				if geometry.attrib['name'] == 'Grid':
-
-					geometry.attrib['LENGTH'] = str(self.width)
-					geometry.attrib['DIVISIONS'] = str(self.divisions_h - 1)
-
-					new_translate = {'x': str(self.width/2), 'y': str(self.width/2), 'z': str(self.width/2)}
-
-					for translate in geometry.iter('TRANSLATE'):
-						translate.attrib.update(new_translate)
-
-			# Write changes back to the XML file
-			tree_1.write('../cloth.xml')
+		# Write changes back to the XML file
+		tree_1.write('../cloth.xml', pretty_print=True)
 
 # Generate cloth mesh and write .obj file
 divisions_h = 25

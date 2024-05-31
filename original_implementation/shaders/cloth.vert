@@ -41,10 +41,8 @@ uniform float damping_coeff;
 uniform float M;
 uniform float time_interval;
 uniform sampler2D noise;
-
 uniform float marbel_radius;
-
-// uniform float windScale;
+uniform float wind_scale;
 
 in vec4 position;
 
@@ -109,8 +107,8 @@ void main() {
 
 	// Sphere information
 
-	vec3 sphereCenter = vec3(2.0, -7.0, 3.0);
-	float sphereRadius = 5;
+	vec3 sphereCenter = vec3(0.3, -1, 0.3);
+	float sphereRadius = 0.3;
 
 	int index = int(position.y);
 
@@ -140,7 +138,7 @@ void main() {
 
 		float wind_intensity = length(texture(noise, vec2(text_coords[index].x + timer * 0.00001, text_coords[index].y + timer * 0.00001)));
 
-		force += normalize(vec3(wind_x, wind_y, wind_z)) * wind_intensity * wind_intensity;
+		force += normalize(vec3(wind_x, wind_y, wind_z)) * wind_intensity * wind_scale;
 	}
 
 	if (length(force) < 0.001 || check_stuck(index)) force = vec3(0.0);
@@ -159,11 +157,18 @@ void main() {
 		}
 	}
 
+	if (length(new_pos.xyz - sphereCenter) < sphereRadius) {
+
+		vec3 n = normalize(new_pos.xyz - sphereCenter);
+		new_pos.xyz = sphereCenter + n * sphereRadius;
+		new_vel = -vel[index].xyz;
+	}
+
 	forces[index] = vec4(force, length(force));
 	pos[index] = new_pos;
 	vel[index] = vec4(new_vel, 0.0);
 	normals[index] = vec4(0.0);
-	normal = normalize(norm);
+	normal = normalize(norm + normals[index].xyz);
 	v_index = index;
 	gl_Position = pos[index];
 }

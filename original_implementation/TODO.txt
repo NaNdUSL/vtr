@@ -1,5 +1,5 @@
 -> Interseções com objetos. -> working on it
 
-	-> implementação básica de interseções (vai ser só esferas, o reste envolve mais trabalho e complicação e não temos tempo pra isso)
-	-> Interseções com a própria cloth. (a implementação simples das marbels do mano) done
 	-> adicionar um chão e calcular as forças corretamente quando intersetar
+
+-> COMPUTE SHADER
