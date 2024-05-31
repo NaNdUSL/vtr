@@ -9,7 +9,7 @@
 
 	<textures>
 		<texture name="teapot" filename="Textures/crate.jpg" mipmap="true" />
-		<texture name="noise" filename="Textures/fractalNoise.jpg" mipmap="true" />
+		<texture name="noise" filename="Textures/fnoise.jpg" mipmap="true" />
 	</textures>
 
 	<buffers>
@@ -151,7 +151,7 @@
 				<values>
 					<valueof uniform="timer" type="RENDERER" component="TIMER" />
 					<valueof uniform="m_pvm" type="RENDERER" component="PROJECTION_VIEW_MODEL" />
-					<valueof uniform="noise" type="TEXTURE_BINDING" component="UNIT" id="4"/>
+					<valueof uniform="noise" type="TEXTURE_BINDING" component="UNIT" id="4" />
 					<valueof uniform="wind_x" type="RENDERER" component="wind_x" context="CURRENT" />
 					<valueof uniform="wind_y" type="RENDERER" component="wind_y" context="CURRENT" />
 					<valueof uniform="wind_z" type="RENDERER" component="wind_z" context="CURRENT" />

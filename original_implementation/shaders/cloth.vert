@@ -161,7 +161,7 @@ void main() {
 
 		vec3 n = normalize(new_pos.xyz - sphereCenter);
 		new_pos.xyz = sphereCenter + n * sphereRadius;
-		new_vel = -vel[index].xyz;
+		new_vel = -vel[index].xyz; // talvez calcular com base na força
 	}
 
 	forces[index] = vec4(force, length(force));

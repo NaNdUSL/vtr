@@ -223,9 +223,13 @@ class ClothGenerator:
 		tree_1 = etree.parse('../cloth.xml', parser)
 
 		for attribute in tree_1.iter('attribute'):
+
 			if attribute.attrib['name'] == 'width':
+
 				attribute.attrib['value'] = str(self.divisions_h)
+
 			elif attribute.attrib['name'] == 'height':
+
 				attribute.attrib['value'] = str(self.divisions_v)
 
 		for geometry in tree_1.iter('geometry'):
@@ -239,6 +243,26 @@ class ClothGenerator:
 
 				for translate in geometry.iter('TRANSLATE'):
 					translate.attrib.update(new_translate)
+		
+		for window in tree_1.iter('window'):
+
+			for var in window.iter('var'):
+
+				if var.attrib['label'] == 'Stiffness':
+
+					var.attrib['def'] = f"min=1 max={str(1000 * self.divisions_h)} step=10"
+
+				elif var.attrib['label'] == 'Damping':
+
+					var.attrib['def'] = f"min=0 max={str(self.divisions_h)} step=0.01"
+
+				elif var.attrib['label'] == 'Marbel':
+
+					var.attrib['def'] = f"min=0 max={str(1.5 * min(self.width / (self.divisions_h - 1), self.height / (self.divisions_v - 1)))} step=0.01"
+				
+				elif var.attrib['label'] == 'M':
+
+					var.attrib['def'] = f"min=0.1 max={str(self.divisions_h)} step=0.001"
 
 		# Write changes back to the XML file
 		tree_1.write('../cloth.xml', pretty_print=True)
