@@ -13,6 +13,7 @@ uniform float wind_y;
 uniform float wind_z;
 uniform sampler2D noise;
 uniform float timer;
+uniform float wind_scale;
 
 in vec4 position;
 
@@ -21,12 +22,12 @@ out vec4 wind_coords;
 
 void main() {
 
-	int index = gl_VertexID;
+	int index = int(position.y);
 	v_index = index;
 
 	float wind_intensity = length(texture(noise, vec2(text_coords[index].x + timer * 0.00001, text_coords[index].y + timer * 0.00001)));
 
-    wind_coords = vec4(normalize(vec3(wind_x, wind_y, wind_z)) * wind_intensity * wind_intensity * wind_intensity, 0.0);
+    wind_coords = vec4(normalize(vec3(wind_x, wind_y, wind_z)) * wind_intensity * wind_scale, 0.0);
 
 	gl_Position = pos[index];
 }

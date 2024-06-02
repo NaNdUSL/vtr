@@ -1,0 +1,6 @@
+-> Interseções com objetos. -> working on it
+
+	-> calcular melhor as velocidades quando bate em alguma cena
+	-> adicionar um chão e calcular as forças corretamente quando intersetar
+
+-> COMPUTE SHADER

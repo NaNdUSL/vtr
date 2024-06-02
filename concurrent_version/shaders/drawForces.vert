@@ -9,7 +9,7 @@ out int v_index;
 
 void main() {
 
-	int index = gl_VertexID;
+	int index = int(position.y);
 	v_index = index;
 
 	gl_Position = pos[index];

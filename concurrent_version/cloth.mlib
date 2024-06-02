@@ -4,16 +4,17 @@
 		<shader name="cloth" vs="shaders/cloth.vert" gs="shaders/cloth.geom" ps="shaders/cloth.frag" />
 		<shader name="drawForces" vs="shaders/drawForces.vert" gs="shaders/drawForces.geom" ps="shaders/drawForces.frag" />
 		<shader name="drawWind" vs="shaders/drawWind.vert" gs="shaders/drawWind.geom" ps="shaders/drawWind.frag" />
+		<shader name="drawNormals" vs="shaders/drawNormals.vert" gs="shaders/drawNormals.geom" ps="shaders/drawNormals.frag" />
 	</shaders>
 
 	<textures>
 		<texture name="teapot" filename="Textures/crate.jpg" mipmap="true" />
-		<texture name="noise" filename="Textures/fractalNoise.jpg" mipmap="true" />
+		<texture name="noise" filename="Textures/fnoise.jpg" mipmap="true" />
 	</textures>
 
 	<buffers>
 		<buffer name="clothBuffer">
-			<DIM x="9" y="1" z="1" />
+			<DIM x="625" y="1" z="1" />
 			<file name="buffers/cloth_buffer_info.txt" />
 			<structure>
 				<field value="VEC4" />
@@ -21,7 +22,7 @@
 		</buffer>
 
 		<buffer name="adjBuffer">
-			<DIM x="81" y="1" z="1" />
+			<DIM x="5625" y="1" z="1" />
 			<file name="buffers/cloth_adj_info.txt" />
 			<structure>
 				<field value="FLOAT" />
@@ -37,15 +38,15 @@
 		</buffer>
 
 		<buffer name="normalsBuffer">
-			<DIM x="9" y="1" z="1" />
+			<DIM x="625" y="1" z="1" />
 			<file name="buffers/cloth_normals_info.txt" />
 			<structure>
-				<field value="VEC3" />
+				<field value="VEC4" />
 			</structure>
 		</buffer>
 
 		<buffer name="textureBuffer">
-			<DIM x="9" y="1" z="1" />
+			<DIM x="625" y="1" z="1" />
 			<file name="buffers/cloth_texture_coords_info.txt" />
 			<structure>
 				<field value="VEC2" />
@@ -53,7 +54,7 @@
 		</buffer>
 		
 		<buffer name="forcesBuffer">
-			<DIM x="9" y="1" z="1" />
+			<DIM x="625" y="1" z="1" />
 			<file name="buffers/cloth_forces_buffer.txt" />
 			<structure>
 				<field value="VEC4" />
@@ -61,7 +62,7 @@
 		</buffer>
 
 		<buffer name="velocitiesBuffer">
-			<DIM x="9" y="1" z="1" />
+			<DIM x="625" y="1" z="1" />
 			<file name="buffers/cloth_velocities_buffer.txt" />
 			<structure>
 				<field value="VEC4" />
@@ -88,11 +89,12 @@
 					<valueof uniform="wind_x" type="RENDERER" component="wind_x" />
 					<valueof uniform="wind_y" type="RENDERER" component="wind_y" />
 					<valueof uniform="wind_z" type="RENDERER" component="wind_z" />
+					<valueof uniform="wind_scale" type="RENDERER" component="wind_scale" context="CURRENT" />
+					<valueof uniform="marbel_radius" type="RENDERER" component="marbel_radius" />
 				</values>
 			</shader>
 			<textures>
 				<texture name="teapot" UNIT="0" />
-				<texture name="noise" UNIT="0" />
 			</textures>
 			<buffers>
 				<buffer name="clothBuffer">
@@ -153,6 +155,7 @@
 					<valueof uniform="wind_x" type="RENDERER" component="wind_x" context="CURRENT" />
 					<valueof uniform="wind_y" type="RENDERER" component="wind_y" context="CURRENT" />
 					<valueof uniform="wind_z" type="RENDERER" component="wind_z" context="CURRENT" />
+					<valueof uniform="wind_scale" type="RENDERER" component="wind_scale" context="CURRENT" />
 				</values>
 			</shader>
 			<buffers>
@@ -168,6 +171,24 @@
 			<textures>
 				<texture name="noise" UNIT="0" />
 			</textures>
+		</material>
+
+		<material name="drawNormals">
+			<shader name="drawNormals">
+				<values>
+					<valueof uniform="m_pvm" type="RENDERER" component="PROJECTION_VIEW_MODEL" />
+				</values>
+			</shader>
+			<buffers>
+				<buffer name="clothBuffer">
+					<TYPE value="SHADER_STORAGE" />
+					<BINDING_POINT value="1" />
+				</buffer>
+				<buffer name="normalsBuffer">
+					<TYPE value="SHADER_STORAGE" />
+					<BINDING_POINT value="4" />
+				</buffer>
+			</buffers>
 		</material>
 	</materials>
 </materialLib>
