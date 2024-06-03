@@ -86,8 +86,7 @@ bool is_adjacent(int index, int is_adj) {
 }
 
 void main() {
-    uint index = gl_GlobalInvocationID.x + gl_GlobalInvocationID.y * width;
-    if (index >= width * height) return; // Ensure within bounds
+    int index = int(gl_GlobalInvocationID.x);
 
     // Sphere information
     vec3 sphereCenter = vec3(0.3, -1, 0.3);
