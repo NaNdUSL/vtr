@@ -2,7 +2,7 @@
 		
 	<shaders>
 		<shader name="cloth" vs="shaders/cloth.vert" gs="shaders/cloth.geom" ps="shaders/cloth.frag" />
-		<shader name="cloth_comp" cs="shaders/cloth.comp"/>
+		<shader name="cloth_comp" cs="shaders/cloth.comp" />
 		<shader name="drawForces" vs="shaders/drawForces.vert" gs="shaders/drawForces.geom" ps="shaders/drawForces.frag" />
 		<shader name="drawWind" vs="shaders/drawWind.vert" gs="shaders/drawWind.geom" ps="shaders/drawWind.frag" />
 		<shader name="drawNormals" vs="shaders/drawNormals.vert" gs="shaders/drawNormals.geom" ps="shaders/drawNormals.frag" />
@@ -92,6 +92,10 @@
 					<valueof uniform="wind_z" type="RENDERER" component="wind_z" />
 					<valueof uniform="wind_scale" type="RENDERER" component="wind_scale" context="CURRENT" />
 					<valueof uniform="marbel_radius" type="RENDERER" component="marbel_radius" />
+					<valueof uniform="sphere_x" type="RENDERER" component="sphere_x" />
+					<valueof uniform="sphere_y" type="RENDERER" component="sphere_y" />
+					<valueof uniform="sphere_z" type="RENDERER" component="sphere_z" />
+					<valueof uniform="sphere_radius" type="RENDERER" component="sphere_radius" />
 				</values>
 			</shader>
 			<textures>
@@ -149,6 +153,10 @@
 					<valueof uniform="wind_z" type="RENDERER" component="wind_z" />
 					<valueof uniform="wind_scale" type="RENDERER" component="wind_scale" context="CURRENT" />
 					<valueof uniform="marbel_radius" type="RENDERER" component="marbel_radius" />
+					<valueof uniform="sphere_x" type="RENDERER" component="sphere_x" />
+					<valueof uniform="sphere_y" type="RENDERER" component="sphere_y" />
+					<valueof uniform="sphere_z" type="RENDERER" component="sphere_z" />
+					<valueof uniform="sphere_radius" type="RENDERER" component="sphere_radius" />
 				</values>
 			</shader>
 			<buffers>

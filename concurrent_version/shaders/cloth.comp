@@ -1,6 +1,6 @@
 #version 430
 
-layout(local_size_x = 25, local_size_y = 1, local_size_z = 1) in; // Configure the workgroup size
+layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in; // Configure the workgroup size
 
 layout(std430, binding = 1) buffer clothBuffer {
     vec4 pos[]; // 1D array of positions
@@ -34,6 +34,11 @@ uniform float wind_x;
 uniform float wind_y;
 uniform float wind_z;
 
+uniform float sphere_x;
+uniform float sphere_y;
+uniform float sphere_z;
+uniform float sphere_radius;
+
 uniform mat4 m_pvm;
 uniform float timer;
 uniform int width;
@@ -47,6 +52,7 @@ uniform float marbel_radius;
 uniform float wind_scale;
 
 vec3 hookes_law(vec3 p1, vec3 p2, float stiffness, float edge_distance) {
+
     vec3 v = p1 - p2; // vector from p1 to p2
     float l = length(v); // length of the vector
     vec3 vec_dir = normalize(v); // normalized vector from p1 to p2 (direction)
@@ -55,6 +61,7 @@ vec3 hookes_law(vec3 p1, vec3 p2, float stiffness, float edge_distance) {
 }
 
 vec3 damping_force(vec3 p1, vec3 p2, vec4 vel1, vec4 vel2, float damping_coeff) {
+
     vec3 vec = p1 - p2; // vector from p1 to p2
     vec3 vel = vel1.xyz - vel2.xyz; // velocity difference
     vec3 vec_dir = normalize(vec); // normalized vector from p1 to p2 (direction)
@@ -63,25 +70,35 @@ vec3 damping_force(vec3 p1, vec3 p2, vec4 vel1, vec4 vel2, float damping_coeff) 
 }
 
 bool check_stuck(int index) {
+
     int size = int(info[0]);
+
     for (int i = 0; i < size; i++) {
+
         if (index == int(info[1 + i])) {
+
             return true;
         }
     }
+
     return false;
 }
 
 bool is_adjacent(int index, int is_adj) {
+
     int x = index % width;
     int z = index / width;
+
     for (int j = 0; j < 3; j++) {
+
         for (int i = 0; i < 3; i++) {
+
             if (adjacents[(index * 9) + i + j * 3] > 0 && x + i - 1 + ((z + j - 1) * width) == is_adj) {
                 return true;
             }
         }
     }
+
     return false;
 }
 
@@ -89,8 +106,8 @@ void main() {
     int index = int(gl_GlobalInvocationID.x);
 
     // Sphere information
-    vec3 sphereCenter = vec3(0.3, -1, 0.3);
-    float sphereRadius = 0.3;
+    vec3 sphereCenter = vec3(sphere_x, sphere_y, sphere_z);
+    float sphereRadius = sphere_radius;
 
     vec3 force = vec3(0.0);
     vec3 norm = vec3(0.0);
@@ -102,8 +119,11 @@ void main() {
     bool found = false;
 
     for (int j = 0; j < 3; j++) {
+
         for (int i = 0; i < 3; i++) {
+
             if (adjacents[(index * 9) + i + j * 3] > 0) {
+
                 norm += normals[x + i - 1 + ((z + j - 1) * width)].xyz;
                 vec3 f = hookes_law(pos[index].xyz, pos[x + i - 1 + ((z + j - 1) * width)].xyz, stiffness, adjacents[(index * 9) + i + j * 3]) + damping_force(pos[index].xyz, pos[x + i - 1 + ((z + j - 1) * width)].xyz, vel[index], vel[x + i - 1 + ((z + j - 1) * width)], damping_coeff);
                 force += f;
@@ -112,6 +132,7 @@ void main() {
     }
 
     if (length(vec3(wind_x, wind_y, wind_z)) != 0) {
+
         float wind_intensity = length(texture(noise, vec2(text_coords[index].x + timer * 0.00001, text_coords[index].y + timer * 0.00001)));
         force += normalize(vec3(wind_x, wind_y, wind_z)) * wind_intensity * wind_scale;
     }
@@ -123,17 +144,24 @@ void main() {
     vec4 new_pos = pos[index] + vec4(new_vel * time_interval, 0.0);
 
     for (int i = 0; i < height * width; i++) {
+
         if (i != index && !is_adjacent(index, i) && length(new_pos.xyz - pos[i].xyz) < 2 * marbel_radius) {
+
             vec3 n = normalize(new_pos.xyz - pos[i].xyz);
+            force = n * length(force) + force;
             new_pos.xyz = pos[i].xyz + n * 2 * marbel_radius;
-            new_vel = -vel[index].xyz;
+            vec3 new_a = force / M;
+            new_vel = vel[index].xyz + new_a * time_interval;
         }
     }
 
     if (length(new_pos.xyz - sphereCenter) < sphereRadius) {
+
         vec3 n = normalize(new_pos.xyz - sphereCenter);
+        force = n * length(force) + force;
         new_pos.xyz = sphereCenter + n * sphereRadius;
-        new_vel = -vel[index].xyz; // perhaps calculate based on the force
+        vec3 new_a = force / M;
+        new_vel = vel[index].xyz + new_a * time_interval;
     }
 
     forces[index] = vec4(force, length(force));
