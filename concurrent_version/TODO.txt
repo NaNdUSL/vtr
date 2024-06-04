@@ -1,6 +1,4 @@
--> Interseções com objetos. -> working on it
-
-	-> calcular melhor as velocidades quando bate em alguma cena
-	-> adicionar um chão e calcular as forças corretamente quando intersetar
-
--> COMPUTE SHADER
+Passar para cálculo com inteiros
+Aumentar os valores da stiffness e afins
+Vento aleatório
+Adicionar mais info nos buffers para não ter que fazer cálculos de nhanha

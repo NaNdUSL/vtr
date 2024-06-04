@@ -1,8 +1,8 @@
 <project name="Cloth" width="900" height="900">
   <assets>
     <attributes>
-      <attribute type="COLOR" name="width" data="INT" value="25"/>
-      <attribute type="COLOR" name="height" data="INT" value="25"/>
+      <attribute type="COLOR" name="width" data="INT" value="100"/>
+      <attribute type="COLOR" name="height" data="INT" value="100"/>
       <attribute type="COLOR" name="stiffness" data="FLOAT" value="100.0"/>
       <attribute type="COLOR" name="damping_coeff" data="FLOAT" value="10.0"/>
       <attribute type="COLOR" name="M" data="FLOAT" value="0.5"/>
@@ -18,7 +18,7 @@
         <file name="objects/cloth.obj"/>
       </scene>
       <scene name="Grid" params="SWAP_XY">
-        <geometry name="Grid" type="GRID" LENGTH="1.0" DIVISIONS="24">
+        <geometry name="Grid" type="GRID" LENGTH="1.0" DIVISIONS="99">
           <ROTATE x="0" y="1" z="0" w="-90"/>
           <TRANSLATE x="0.5" y="0.5" z="0.5"/>
         </geometry>
@@ -118,11 +118,11 @@
   </pipelines>
   <interface>
     <window label="Cloth options">
-      <var label="Stiffness" type="COLOR" context="cloth::cloth" component="stiffness" def="min=1 max=25000 step=10"/>
-      <var label="Damping" type="COLOR" context="cloth::cloth" component="damping_coeff" def="min=0 max=25 step=0.01"/>
-      <var label="M" type="COLOR" context="cloth::cloth" component="M" def="min=0.1 max=25 step=0.001"/>
+      <var label="Stiffness" type="COLOR" context="cloth::cloth" component="stiffness" def="min=1 max=100000 step=10"/>
+      <var label="Damping" type="COLOR" context="cloth::cloth" component="damping_coeff" def="min=0 max=100 step=0.01"/>
+      <var label="M" type="COLOR" context="cloth::cloth" component="M" def="min=0.1 max=100 step=0.001"/>
       <var label="Timer" type="COLOR" context="cloth::cloth" component="time_interval" def="min=0 max=0.01 step=0.001"/>
-      <var label="Marbel" type="RENDERER" context="cloth::cloth" component="marbel_radius" def="min=0 max=0.0625 step=0.01"/>
+      <var label="Marbel" type="RENDERER" context="cloth::cloth" component="marbel_radius" def="min=0 max=0.015151515151515152 step=0.01"/>
     </window>
     <window label="Wind options">
       <var label="WindX" type="RENDERER" context="cloth::cloth" component="wind_x" def="min=-1 max=1 step=0.01"/>
