@@ -268,8 +268,8 @@ class ClothGenerator:
 		tree_1.write('../cloth.xml', pretty_print=True)
 
 # Generate cloth mesh and write .obj file
-divisions_h = 250
-divisions_v = 250
+divisions_h = 25
+divisions_v = 25
 height = 1.0
 width = 1.0
 cloth_gen = ClothGenerator(height, width, divisions_h, divisions_v, [0, 99])

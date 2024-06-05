@@ -1,4 +1,2 @@
-Passar para cálculo com inteiros
-Aumentar os valores da stiffness e afins
-Vento aleatório
+Vento aleatório -> doing this
 Adicionar mais info nos buffers para não ter que fazer cálculos de nhanha
