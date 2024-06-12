@@ -4,6 +4,7 @@
       <attribute type="COLOR" name="width" data="INT" value="25"/>
       <attribute type="COLOR" name="height" data="INT" value="25"/>
       <attribute type="COLOR" name="stiffness" data="FLOAT" value="100.0"/>
+      <attribute type="COLOR" name="stiffness2" data="FLOAT" value="0.0"/>
       <attribute type="COLOR" name="damping_coeff" data="FLOAT" value="10.0"/>
       <attribute type="COLOR" name="M" data="FLOAT" value="0.5"/>
       <attribute type="COLOR" name="time_interval" data="FLOAT" value="0.0"/>
@@ -116,6 +117,20 @@
           <map fromMaterial="*" toMaterial="drawNormals" toLibrary="cloth"/>
         </materialMaps>
       </pass> -->
+      <!-- <pass name="drawForces" class="default">
+        <COLOR_CLEAR value="false"/>
+        <DEPTH_CLEAR value="false"/>
+        <scenes>
+          <scene name="Cloth"/>
+        </scenes>
+        <camera name="main"/>
+        <lights>
+          <light name="sun"/>
+        </lights>
+        <materialMaps>
+          <map fromMaterial="*" toMaterial="drawForces" toLibrary="cloth"/>
+        </materialMaps>
+      </pass> -->
       <pass name="axis" class="default">
         <COLOR_CLEAR value="false"/>
         <DEPTH_CLEAR value="false"/>
@@ -128,7 +143,8 @@
   </pipelines>
   <interface>
     <window label="Cloth options">
-      <var label="Stiffness" type="COLOR" context="cloth::cloth_comp" component="stiffness" def="min=1 max=25000 step=10"/>
+      <var label="Edge Stiffness" type="COLOR" context="cloth::cloth_comp" component="stiffness" def="min=1 max=25000 step=10"/>
+      <var label="Bending Stiffness" type="COLOR" context="cloth::cloth_comp" component="stiffness2" def="min=1 max=25000 step=10"/>
       <var label="Damping" type="COLOR" context="cloth::cloth_comp" component="damping_coeff" def="min=0 max=25 step=0.01"/>
       <var label="M" type="COLOR" context="cloth::cloth_comp" component="M" def="min=0.1 max=25 step=0.001"/>
       <var label="Timer" type="COLOR" context="cloth::cloth_comp" component="time_interval" def="min=0 max=0.01 step=0.001"/>

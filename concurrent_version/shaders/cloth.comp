@@ -48,7 +48,7 @@ uniform float timer;
 uniform int width;
 uniform int height;
 uniform float stiffness;
-uniform float stiffness_2;
+uniform float stiffness2;
 uniform float damping_coeff;
 uniform float M;
 uniform float time_interval;
@@ -138,25 +138,25 @@ void main() {
 
     if (adjacents2[index * 4] > 0) {
 
-        vec3 f = hookes_law(pos[index].xyz, pos[x - 2 + z * width].xyz, stiffness_2, adjacents2[index * 4]);
+        vec3 f = hookes_law(pos[index].xyz, pos[x - 2 + z * width].xyz, stiffness2, adjacents2[index * 4]);
         force += f;
     }
 
     if (adjacents2[index * 4 + 1] > 0) {
 
-        vec3 f = hookes_law(pos[index].xyz, pos[x + 2 + z * width].xyz, stiffness_2, adjacents2[index * 4 + 1]);
+        vec3 f = hookes_law(pos[index].xyz, pos[x + 2 + z * width].xyz, stiffness2, adjacents2[index * 4 + 1]);
         force += f;
     }
 
     if (adjacents2[index * 4 + 2] > 0) {
 
-        vec3 f = hookes_law(pos[index].xyz, pos[x + (z - 2) * width].xyz, stiffness_2, adjacents2[index * 4 + 2]);
+        vec3 f = hookes_law(pos[index].xyz, pos[x + (z - 2) * width].xyz, stiffness2, adjacents2[index * 4 + 2]);
         force += f;
     }
 
     if (adjacents2[index * 4 + 3] > 0) {
 
-        vec3 f = hookes_law(pos[index].xyz, pos[x + (z + 2) * width].xyz, stiffness_2, adjacents2[index * 4 + 3]);
+        vec3 f = hookes_law(pos[index].xyz, pos[x + (z + 2) * width].xyz, stiffness2, adjacents2[index * 4 + 3]);
         force += f;
     }
 

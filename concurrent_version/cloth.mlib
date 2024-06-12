@@ -92,6 +92,7 @@
 					<valueof uniform="width" type="COLOR" component="width" />
 					<valueof uniform="height" type="COLOR" component="height" />
 					<valueof uniform="stiffness" type="COLOR" component="stiffness" />
+					<valueof uniform="stiffness2" type="COLOR" component="stiffness2" />
 					<valueof uniform="damping_coeff" type="COLOR" component="damping_coeff" />
 					<valueof uniform="M" type="COLOR" component="M" />
 					<valueof uniform="time_interval" type="COLOR" component="time_interval" />
@@ -157,6 +158,7 @@
 					<valueof uniform="width" type="COLOR" component="width" />
 					<valueof uniform="height" type="COLOR" component="height" />
 					<valueof uniform="stiffness" type="COLOR" component="stiffness" />
+					<valueof uniform="stiffness2" type="COLOR" component="stiffness2" />
 					<valueof uniform="damping_coeff" type="COLOR" component="damping_coeff" />
 					<valueof uniform="M" type="COLOR" component="M" />
 					<valueof uniform="time_interval" type="COLOR" component="time_interval" />
