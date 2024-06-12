@@ -1,2 +1,1 @@
-Vento aleatório -> doing this
-Adicionar mais info nos buffers para não ter que fazer cálculos de nhanha
+Adicionar buffer dos "segundos adjacentes" e calcular hookes law pra esses

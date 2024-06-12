@@ -54,12 +54,47 @@ class ClothGenerator:
 		triangle_c_v = self.height / self.divisions_v
 		hipotenuse = (triangle_c_h ** 2 + triangle_c_v ** 2) ** 0.5
 		adj_list = []
+		adj_2_list = []
 
 		for j in range(self.divisions_v):
 			
 			for i in range(self.divisions_h):
 
 				indices = []
+				indices_2 = []
+
+
+				if i - 2 >= 0:
+
+					indices_2.append((i - 2 + j * self.divisions_h, 2 * triangle_c_h))
+				
+				else:
+						
+						indices_2.append((-1, -1))
+
+				if i + 2 < self.divisions_h:
+
+					indices_2.append((i + 2 + j * self.divisions_h, 2 * triangle_c_h))
+
+				else:
+						
+						indices_2.append((-1, -1))
+
+				if j - 2 >= 0:
+
+					indices_2.append((i + (j - 2) * self.divisions_h, 2 * triangle_c_v))
+
+				else:
+						
+						indices_2.append((-1, -1))
+
+				if j + 2 < self.divisions_v:
+
+					indices_2.append((i + (j + 2) * self.divisions_h, 2 * triangle_c_v))
+
+				else:
+						
+						indices_2.append((-1, -1))
 
 				for x in range(-1, 2):
 
@@ -103,11 +138,12 @@ class ClothGenerator:
 						
 						indices.append((-1, -1))
 
-				# indices.sort(key=lambda x: (x[1], x[0]))
 
 				adj_list.append(indices)
+				adj_2_list.append(indices_2)
 
-		return adj_list
+		return adj_list, adj_2_list
+		
 
 	# Function to write a .obj file
 	def write_obj_file(self, filepath_obj):
@@ -149,20 +185,21 @@ class ClothGenerator:
 				elem_count += 1
 
 		with open('../buffers/cloth_adj_info.txt', 'w') as f:
+ 
+			with open('../buffers/cloth_adj_2_info.txt', 'w') as f_2:
 
-			adj = self.generate_cloth_adj()
+				adj, adj_2 = self.generate_cloth_adj()
 
-			for index in range(self.divisions_v * self.divisions_h):
+				for index in range(self.divisions_v * self.divisions_h):
 
-				# print(adj[index])
+					for i in range(9):
 
-				for i in range(9):
+						f.write(f"{adj[index][i][1]}\n")
 
-					f.write(f"{adj[index][i][1]}\n")
-				
-				# f.write(f"\n")
+					for i in range(4):
 
-	
+						f_2.write(f"{adj_2[index][i][1]}\n")
+
 		with open('../buffers/cloth_normals_info.txt', 'w') as f:
 
 			for _ in self.vertices:
@@ -199,7 +236,7 @@ class ClothGenerator:
 		tree = ET.parse('../cloth.mlib')
 		root = tree.getroot()
 
-		values = {'clothBuffer': {'x': str(self.divisions_v * self.divisions_h), 'y': '1', 'z': '1'}, 'adjBuffer': {'x': str(self.divisions_v * self.divisions_h * 9), 'y': '1', 'z': '1'}, 'stuckVertBuffer': {'x': str(1 + len(self.vert_stuck)), 'y': '1', 'z': '1'}, 'normalsBuffer': {'x': str(self.divisions_v * self.divisions_h), 'y': '1', 'z': '1'}, 'textureBuffer': {'x': str(self.divisions_v * self.divisions_h), 'y': '1', 'z': '1'}, 'forcesBuffer': {'x': str(self.divisions_v * self.divisions_h), 'y': '1', 'z': '1'}, 'velocitiesBuffer': {'x': str(self.divisions_v * self.divisions_h), 'y': '1', 'z': '1'}}
+		values = {'clothBuffer': {'x': str(self.divisions_v * self.divisions_h), 'y': '1', 'z': '1'}, 'adjBuffer': {'x': str(self.divisions_v * self.divisions_h * 9), 'y': '1', 'z': '1'}, 'stuckVertBuffer': {'x': str(1 + len(self.vert_stuck)), 'y': '1', 'z': '1'}, 'normalsBuffer': {'x': str(self.divisions_v * self.divisions_h), 'y': '1', 'z': '1'}, 'textureBuffer': {'x': str(self.divisions_v * self.divisions_h), 'y': '1', 'z': '1'}, 'forcesBuffer': {'x': str(self.divisions_v * self.divisions_h), 'y': '1', 'z': '1'}, 'velocitiesBuffer': {'x': str(self.divisions_v * self.divisions_h), 'y': '1', 'z': '1'}, 'adjBuffer2': {'x': str(self.divisions_v * self.divisions_h * 4), 'y': '1', 'z': '1'}}
 
 		# Find the buffers element
 		buffers = root.find('buffers')

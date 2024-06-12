@@ -69,6 +69,14 @@
 				<field value="VEC4" />
 			</structure>
 		</buffer>
+
+		<buffer name="adjBuffer2">
+			<DIM x="2500" y="1" z="1" />
+			<file name="buffers/cloth_adj_2_info.txt" />
+			<structure>
+				<field value="FLOAT" />
+			</structure>
+		</buffer>
 	</buffers>
 
 	<materials>
@@ -130,6 +138,10 @@
 					<TYPE value="SHADER_STORAGE" />
 					<BINDING_POINT value="7" />
 				</buffer>
+				<buffer name="adjBuffer2">
+					<TYPE value="SHADER_STORAGE" />
+					<BINDING_POINT value="8" />
+				</buffer>
 			</buffers>
 		</material>
 
@@ -187,6 +199,10 @@
 				<buffer name="velocitiesBuffer">
 					<TYPE value="SHADER_STORAGE" />
 					<BINDING_POINT value="7" />
+				</buffer>
+				<buffer name="adjBuffer2">
+					<TYPE value="SHADER_STORAGE" />
+					<BINDING_POINT value="8" />
 				</buffer>
 			</buffers>
 		</material>
