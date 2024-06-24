@@ -20,10 +20,15 @@ layout(std430, binding = 4) buffer normalsBuffer {
 	vec4 normals[]; // 1D array of normals
 };
 
+layout(std430, binding = 5) buffer textureBuffer {
+	vec2 texture_coords[]; // 1D array of normals
+};
+
 uniform int width;
 uniform int height;
 
 out vec3 n;
+out vec2 text_c;
 
 in vec3 normal[3];
 in int v_index[3];
@@ -39,27 +44,33 @@ void main() {
 	normals[v_index[2]] += norm;
 
 	n = normalize(normal[0]);
+	text_c = texture_coords[v_index[0]];
 	gl_Position = m_pvm * pos[v_index[0]];
 	EmitVertex();
 
 	n = normalize(normal[1]);
+	text_c = texture_coords[v_index[1]];
 	gl_Position = m_pvm * pos[v_index[1]];
 	EmitVertex();
 
 	n = normalize(normal[2]);
+	text_c = texture_coords[v_index[2]];
 	gl_Position = m_pvm * pos[v_index[2]];
 	EmitVertex();
 	EndPrimitive();
 
 	n = -normalize(normal[0]);
+	text_c = texture_coords[v_index[0]];
 	gl_Position = m_pvm * pos[v_index[0]];
 	EmitVertex();
 
 	n = -normalize(normal[2]);
+	text_c = texture_coords[v_index[2]];
 	gl_Position = m_pvm * pos[v_index[2]];
 	EmitVertex();
 
 	n = -normalize(normal[1]);
+	text_c = texture_coords[v_index[1]];
 	gl_Position = m_pvm * pos[v_index[1]];
 	EmitVertex();
 	EndPrimitive();

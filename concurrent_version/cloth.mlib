@@ -9,7 +9,7 @@
 	</shaders>
 
 	<textures>
-		<texture name="teapot" filename="Textures/crate.jpg" mipmap="true" />
+		<texture name="teapot" filename="Textures/drapes.png" mipmap="true" />
 		<texture name="noise" filename="Textures/fractalNoise.jpg" mipmap="true" />
 	</textures>
 

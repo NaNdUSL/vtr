@@ -29,8 +29,8 @@ class ClothGenerator:
 
 				self.vertices.append([x * self.width / (self.divisions_h - 1), 0, z * self.height / (self.divisions_v - 1)])
 
-				text_coords_front.append([z / (self.divisions_v - 1), x / (self.divisions_h - 1)])
-				text_coords_back.append([((-z - 1) % self.divisions_v) / (self.divisions_v - 1), ((-x - 1) % self.divisions_h) / (self.divisions_h - 1)])
+				text_coords_front.append([z * self.height / (self.divisions_v - 1), x * self.width / (self.divisions_h - 1)])
+				# text_coords_back.append([((-z - 1) % self.divisions_v) / (self.divisions_v - 1), ((-x - 1) % self.divisions_h) / (self.divisions_h - 1)])
 
 		self.text_coords = text_coords_front + text_coords_back
 		self.normals = [[0, 1, 0], [0, -1, 0]]
@@ -309,7 +309,7 @@ divisions_h = 25
 divisions_v = 25
 height = 1.0
 width = 1.0
-cloth_gen = ClothGenerator(height, width, divisions_h, divisions_v, [0, 99])
-# cloth_gen = ClothGenerator(height, width, divisions_h, divisions_v, [0, divisions_h - 1, (divisions_v * divisions_h) - divisions_h, (divisions_v * divisions_h) - 1])
+# cloth_gen = ClothGenerator(height, width, divisions_h, divisions_v, [0, 99])
+cloth_gen = ClothGenerator(height, width, divisions_h, divisions_v, [0, divisions_h - 1])
 cloth_gen.generate_cloth_mesh()
 cloth_gen.write_obj_file('../objects/cloth.obj')

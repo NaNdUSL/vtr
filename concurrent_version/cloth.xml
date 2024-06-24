@@ -39,7 +39,7 @@
     </scenes>
     <viewports>
       <viewport name="MainViewport">
-        <CLEAR_COLOR r="0.4" b="0.2" g="0.1"/>
+        <CLEAR_COLOR r="0.7" b="0.7" g="0.73"/>
       </viewport>
     </viewports>
     <cameras>
@@ -89,7 +89,7 @@
           <map fromMaterial="*" toMaterial="cloth" toLibrary="cloth"/>
         </materialMaps>
       </pass>
-      <pass name="drawWind" class="default">
+      <!-- <pass name="drawWind" class="default">
         <COLOR_CLEAR value="false"/>
         <DEPTH_CLEAR value="false"/>
         <scenes>
@@ -102,7 +102,7 @@
         <materialMaps>
           <map fromMaterial="*" toMaterial="drawWind" toLibrary="cloth"/>
         </materialMaps>
-      </pass>
+      </pass> -->
       <!-- <pass name="drawNormals" class="default">
         <COLOR_CLEAR value="false"/>
         <DEPTH_CLEAR value="false"/>
