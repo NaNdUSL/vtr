@@ -23,9 +23,9 @@
         <file name="objects/cloth.obj"/>
       </scene>
       <scene name="Grid" params="SWAP_XY">
-        <geometry name="Grid" type="GRID" LENGTH="1.0" DIVISIONS="24">
+        <geometry name="Grid" type="GRID" LENGTH="5.0" DIVISIONS="24">
           <ROTATE x="0" y="1" z="0" w="-90"/>
-          <TRANSLATE x="0.5" y="0.5" z="0.5"/>
+          <TRANSLATE x="2.5" y="2.5" z="2.5"/>
         </geometry>
       </scene>
       <scene name="Sphere">
@@ -131,14 +131,14 @@
           <map fromMaterial="*" toMaterial="drawForces" toLibrary="cloth"/>
         </materialMaps>
       </pass> -->
-      <pass name="axis" class="default">
+      <!-- <pass name="axis" class="default">
         <COLOR_CLEAR value="false"/>
         <DEPTH_CLEAR value="false"/>
         <scenes>
           <scene name="Axis"/>
         </scenes>
         <camera name="main"/>
-      </pass>
+      </pass> -->
     </pipeline>
   </pipelines>
   <interface>
@@ -148,7 +148,7 @@
       <var label="Damping" type="COLOR" context="cloth::cloth_comp" component="damping_coeff" def="min=0 max=25 step=0.01"/>
       <var label="M" type="COLOR" context="cloth::cloth_comp" component="M" def="min=0.1 max=25 step=0.001"/>
       <var label="Timer" type="COLOR" context="cloth::cloth_comp" component="time_interval" def="min=0 max=0.01 step=0.001"/>
-      <var label="Marbel" type="RENDERER" context="cloth::cloth_comp" component="marbel_radius" def="min=0 max=0.0625 step=0.01"/>
+      <var label="Marbel" type="RENDERER" context="cloth::cloth_comp" component="marbel_radius" def="min=0 max=0.3125 step=0.01"/>
     </window>
     <window label="Sphere options">
       <var label="Sphere X" type="RENDERER" context="cloth::cloth_comp" component="sphere_x" def="min=-10 max=10 step=0.01"/>

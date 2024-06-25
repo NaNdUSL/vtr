@@ -16,7 +16,8 @@ out int v_index;
 void main() {
 
 	int index = int(position.y);
-	normal = normalize(normals[index].xyz);
+	normal = normals[index].xyz;
+	// normals[index] = vec4(0.0);
 	v_index = index;
 	gl_Position = pos[index];
 }

@@ -37,39 +37,39 @@ void main() {
 
 	vec4 edge1 = pos[v_index[1]] - pos[v_index[0]];
 	vec4 edge2 = pos[v_index[2]] - pos[v_index[0]];
-	vec4 norm = vec4(normalize(cross(edge1.xyz, edge2.xyz)), 0.0);
+	vec4 norm = vec4(cross(edge1.xyz, edge2.xyz), 0.0);
 
 	normals[v_index[0]] += norm;
 	normals[v_index[1]] += norm;
 	normals[v_index[2]] += norm;
 
-	n = normalize(normal[0]);
+	n = normal[0];
 	text_c = texture_coords[v_index[0]];
 	gl_Position = m_pvm * pos[v_index[0]];
 	EmitVertex();
 
-	n = normalize(normal[1]);
+	n = normal[1];
 	text_c = texture_coords[v_index[1]];
 	gl_Position = m_pvm * pos[v_index[1]];
 	EmitVertex();
 
-	n = normalize(normal[2]);
+	n = normal[2];
 	text_c = texture_coords[v_index[2]];
 	gl_Position = m_pvm * pos[v_index[2]];
 	EmitVertex();
 	EndPrimitive();
 
-	n = -normalize(normal[0]);
+	n = -normal[0];
 	text_c = texture_coords[v_index[0]];
 	gl_Position = m_pvm * pos[v_index[0]];
 	EmitVertex();
 
-	n = -normalize(normal[2]);
+	n = -normal[2];
 	text_c = texture_coords[v_index[2]];
 	gl_Position = m_pvm * pos[v_index[2]];
 	EmitVertex();
 
-	n = -normalize(normal[1]);
+	n = -normal[1];
 	text_c = texture_coords[v_index[1]];
 	gl_Position = m_pvm * pos[v_index[1]];
 	EmitVertex();
