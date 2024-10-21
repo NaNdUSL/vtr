@@ -22,3 +22,8 @@ This project is a basic implementation of cloth physics using the [NAU3D Engine]
 - Improve the cloth’s self-intersection handling for more realistic simulations.
 - Add more complex collision detection and response systems.
 - Implement more advanced physics properties, like tearing or stretching of the cloth.
+
+## Authors
+- [NaNdUSL](https://github.com/NaNdUSL)
+- [DavidsonMatz](https://github.com/DavidsonMatz)
+- [Rúben](https://github.com/cosinhar)
